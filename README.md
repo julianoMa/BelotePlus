@@ -4,11 +4,11 @@ L'**utilisation d'un vidéo-projecteur** est également possible grâce à une p
 
 ## Installation
 Vous devez avoir installé Flask sur votre système :
-```
+```shell
 pip install Flask
 ```
 Puis, une fois que cela est fait, vous pouvez installer ce projet :
-```
+```shell
 git clone https://github.com/julianoMa/BelotePlus.git
 cd BelotePlus
 python app.py

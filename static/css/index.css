@@ -15,20 +15,3 @@
     display: flex;
     gap: 5rem;
 }
-
-.links a {
-    border-color: black;
-    border-style: solid;
-    border-radius: 0.2rem;
-    border-width: 1px;
-
-    padding: 0.5rem;
-
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.links a:hover {
-    transform: scale(1.1);
-
-    background-color: rgb(220, 220, 220);
-}

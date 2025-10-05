@@ -16,14 +16,14 @@
     <main>
         <div class="container">
             <div class="tournament-list-container">
-                <form method="POST" action="/tournaments">
+                <form method="POST" action="/manage-tournaments">
                     <div>
                         {% for name in tournaments %}
                             <input type="radio" name="tournament" value="{{ name }}" required> {{ name }}<br>
                         {% endfor %}
                     </div>
-                    <button type="submit" name="action" value="open">Ouvrir le concours</button>
-                    <button type="submit" name="action" value="delete">Supprimer le concours</button>
+                    <button type="submit" name="action" value="open" class="button-4">Ouvrir le concours</button>
+                    <button type="submit" name="action" value="delete" class="button-4">Supprimer le concours</button>
                 </form>
             </div>
         </div>

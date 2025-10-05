@@ -102,3 +102,12 @@ def delete_tournament(name):
     cursor.execute("DELETE FROM tournaments WHERE name = ?", (name,))
     conn.commit()
     conn.close()
+
+def get_step(name):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT step FROM tournaments WHERE name = ?", (name,))
+    step = cursor.fetchone()
+    conn.close()
+
+    return step[0]
