@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon App</title>
+
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="tournament-list-container">
+                <form method="POST" action="/tournaments">
+                    <div>
+                        {% for name in tournaments %}
+                            <input type="radio" name="tournament" value="{{ name }}" required> {{ name }}<br>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" name="action" value="open">Ouvrir le concours</button>
+                    <button type="submit" name="action" value="delete">Supprimer le concours</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

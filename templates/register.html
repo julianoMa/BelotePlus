@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon App</title>
+
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="tournament-create-container">
+                <form method="POST" action="/register">
+                    <p>Nom du concours</p>
+                    <input class="input" type="text" name="tournament_name" id="tournament-name" required>
+                    <p>Nombre de parties</p>
+                    <input class="input" type="number" name="rounds_number" id="round-number" required>
+                    <p>Nombre de tables</p>
+                    <input class="input" type="number" name="table_number" id="table-number" required>
+                    <button type="submit">Créer le concours</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

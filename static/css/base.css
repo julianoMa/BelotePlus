@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Poppins';
+    font-weight: normal;
+    font-style: normal;
+
+    background-image: url(../img/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.container {
+    background-color: whitesmoke;
+
+    border-width: 0.2rem;
+    border-style: solid;
+    border-color: whitesmoke;
+    border-radius: 1rem;
+    box-shadow: -1px 1px 50px 6px rgb(170, 170, 170);
+    
+    padding: 5rem;
+    gap: 5rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
