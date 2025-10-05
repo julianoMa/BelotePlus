@@ -32,6 +32,7 @@ def init_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS teams (
         id INTEGER PRIMARY KEY,
+        tournament_id INTEGER NOT NULL,
         player1 TEXT NOT NULL,
         player2 TEXT NOT NULL
     )
@@ -96,18 +97,39 @@ def create_tournament(name, rounds_number, tables_number):
     conn.commit()
     conn.close()
 
-def delete_tournament(name):
+def get_tournament_id(tournament_name):
+    conn = get_connection()
+    cursor = conn.cursor ###########
+
+def delete_tournament(tournament_name):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM tournaments WHERE name = ?", (name,))
+    cursor.execute("DELETE FROM tournaments WHERE name = ?", (tournament_name,))
     conn.commit()
     conn.close()
 
-def get_step(name):
+def get_step(tournament_name):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT step FROM tournaments WHERE name = ?", (name,))
+    cursor.execute("SELECT step FROM tournaments WHERE name = ?", (tournament_name,))
     step = cursor.fetchone()
     conn.close()
 
     return step[0]
+
+def get_teams(tournament_name):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM teams where tournament_id = ?", (tournament_name,))
+    teams = cursor.fetchall()
+    conn.close()
+
+    return teams
+
+
+def add_team(tournament_name):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO teams (tournament_id)")
+    conn.commit()
+    conn.close()

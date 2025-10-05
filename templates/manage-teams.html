@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon App</title>
+
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/teams.css') }}">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="team-create-container">
+                <form method="POST" action="/manage-teams">
+                    <p>Premier joueur</p>
+                    <input class="input" type="text" name="player1" id="player1" required>
+                    <p>Deuxième joueur</p>
+                    <input class="input" type="number" name="player2" id="player2" required>
+                    <button type="submit" class="button-4" name="action" value="create">Créer l'équipe</button>
+                </form>
+            </div>
+            <div class="teams-list-container">
+                <form method="POST" action="/manage-teams">
+                    <p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p>
+                    <button type="submit" name="action" value="delete" class="button-4">Supprimer l'équipe</button>
+                </form>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

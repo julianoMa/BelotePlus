@@ -86,3 +86,12 @@ a {
 .button-4:focus {
   outline: 1px transparent;
 }
+
+form button {
+    margin-top: 1rem;
+}
+
+.input {
+    margin: 0.5rem;
+    font-size: 20px;
+}
