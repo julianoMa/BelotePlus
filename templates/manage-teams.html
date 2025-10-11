@@ -20,15 +20,26 @@
                     <p>Premier joueur</p>
                     <input class="input" type="text" name="player1" id="player1" required>
                     <p>Deuxième joueur</p>
-                    <input class="input" type="number" name="player2" id="player2" required>
+                    <input class="input" type="text" name="player2" id="player2" required>
+                    <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
                     <button type="submit" class="button-4" name="action" value="create">Créer l'équipe</button>
                 </form>
             </div>
-            <div class="teams-list-container">
+            <div>
                 <form method="POST" action="/manage-teams">
-                    <p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p><p>1 - Francois - Damien</p>
+                    <div class="teams-list-container">
+                        <br>
+                        {% for team in teams %}
+                            <label>
+                                <input type="radio" name="team" value="{{ team.id }}" required>
+                                {{ team.id }} - {{ team.player1 }} , {{ team.player2 }}
+                            </label>
+                            <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+                        {% endfor %}
+
+                    </div>
                     <button type="submit" name="action" value="delete" class="button-4">Supprimer l'équipe</button>
-                </form>
+                    <button type="submit" name="action" value="start" class="button-4">Commencer le concours</button>
                 </form>
             </div>
         </div>

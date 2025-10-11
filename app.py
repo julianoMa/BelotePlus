@@ -1,5 +1,5 @@
 import sys
-sys.dont_write_bytecode = True
+sys.dont_write_bytecode = True # To prevent creation of "__pycache__" folder
 
 from flask import Flask, render_template, request, redirect, url_for
 from utils.init import *
@@ -25,8 +25,11 @@ def tournaments():
         elif action == "delete":
             delete_tournament(tournament_name) 
 
-    tournament_names = get_tournaments_names()
-    return render_template("manage-tournaments.html", tournaments=tournament_names)
+    try:
+        tournament_names = get_tournaments_names()
+        return render_template("manage-tournaments.html", tournaments=tournament_names)
+    except sqlite3.OperationalError:
+        return redirect(url_for("index"))
 
 @app.route("/new-tournament", methods=["GET", "POST"])
 def register():
@@ -43,12 +46,39 @@ def register():
 @app.route("/manage-teams", methods=["GET", "POST"])
 def teams():
     tournament = request.args.get("tournament")
-    print(get_teams(tournament))
     
+    if request.method == "POST":
+        action = request.form.get("action")
 
+        if action == "create":
+            player1 = request.form['player1']
+            player2 = request.form['player2']
+            tournament = request.form['tournament']
+            
+            add_team(tournament, player1, player2)
 
-    
-    return render_template("manage-teams.html")
+            return redirect(url_for("teams", tournament=tournament))
+        
+        if action == "delete":
+            id = request.form['team']
+            tournament_name = request.form['tournament']
+
+            delete_team(id, tournament_name)
+
+            return redirect(url_for("teams", tournament=tournament_name))
+        
+        if action == "start":
+            tournament_name = request.form['tournament']
+
+            update_step(tournament_name, 1)
+
+    teams_list = get_teams(tournament)
+    teams = []
+
+    for id, tournament, player1, player2 in teams_list:
+        teams.append({"id": id, "player1": player1, "player2": player2})
+
+    return render_template("manage-teams.html", tournament=tournament, teams=teams)
 
 @app.route("/rounds", methods=["GET", "POST"])
 def rounds():
@@ -62,10 +92,13 @@ def editscores():
 def ranking():
     return True
 
+@app.route("/archives", methods=["GET", "POST"])
+def archives():
+    return True
+
 if __name__ == "__main__":
     print("🛠️  Starting checks...")
     if db_checks() == True:
         print("✅ Database ")
-
-    print("⏳ Starting Web Server")
-    app.run(debug=True)
+        
+    start_server(app)

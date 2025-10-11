@@ -44,3 +44,7 @@ form {
 .container {
     width: 50rem;
 }
+
+label {
+    margin-bottom: 1rem;
+}

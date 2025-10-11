@@ -6,6 +6,38 @@
     font-display: swap;
 }
 
+:root {
+  --bg-color: whitesmoke;
+  --bg-color-shadow: rgb(170, 170, 170);
+  --text-color: #000000;
+
+  --bg-image: url(../img/bg-light.jpg)
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --bg-color-shadow: #000000;
+  --text-color: whitesmoke;
+
+  --bg-image: url(../img/bg-dark.jpg)
+}
+
+#theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #000;
+  transition: transform 0.2s ease;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
+}
+
 html, body {
     height: 100%;
     display: flex;
@@ -16,7 +48,11 @@ html, body {
     font-weight: normal;
     font-style: normal;
 
-    background-image: url(../img/bg.jpg);
+    color: var(--text-color)
+}
+
+body {
+    background-image: var(--bg-image);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -24,17 +60,17 @@ html, body {
 
 a {
     text-decoration: none;
-    color: black;
+    color: var(--text-color)
 }
 
 .container {
-    background-color: whitesmoke;
+    background-color: var(--bg-color);
 
     border-width: 0.2rem;
     border-style: solid;
-    border-color: whitesmoke;
+    border-color: var(--bg-color);
     border-radius: 1rem;
-    box-shadow: -1px 1px 50px 6px rgb(170, 170, 170);
+    box-shadow: -1px 1px 50px 6px var(--bg-color-shadow);
     
     padding: 5rem;
     gap: 5rem;
@@ -47,12 +83,11 @@ a {
 
 .button-4 {
   appearance: none;
-  background-color: #FAFBFC;
+  background-color: var(--bg-color);
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-shadow: -1px 1px 50px 6px var(--bg-color-shadow);
   box-sizing: border-box;
-  color: #24292E;
   cursor: pointer;
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
