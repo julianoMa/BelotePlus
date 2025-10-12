@@ -1,11 +1,25 @@
+:root {
+  --bg-color: whitesmoke;
+  --bg-color-shadow: rgb(170, 170, 170);
+  --text-color: #000000;
+
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --bg-color-shadow: #000000;
+  --text-color: whitesmoke;
+
+}
+
 form {
     border-width: 0.1rem;
     border-style: solid;
-    border-color: rgb(220, 220, 220);
+    border-color: var(--bg-color);
     border-radius: 0.5rem;
-    box-shadow: 0px 0px 50px 5px rgb(180, 180, 180);
+    box-shadow: 0px 0px 50px 5px var(--bg-color-shadow);
 
-    background-color: rgb(230, 230, 230);
+    background-color: var(--bg-color);
 
     width: 20rem;
     height: 25rem;
@@ -18,11 +32,8 @@ form {
 
 form button {
     margin-top: 1rem;
-}
 
-.input {
-    margin: 0.5rem;
-    font-size: 20px;
+    color: var(--text-color);
 }
 
 .tournament-list-container {

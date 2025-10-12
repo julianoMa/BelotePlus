@@ -11,9 +11,9 @@ form {
 .teams-list-container {
     border-width: 0.1rem;
     border-style: solid;
-    border-color: rgb(220, 220, 220);
+    border-color: var(--bg-color);
     border-radius: 0.5rem;
-    box-shadow: 0px 0px 50px 5px rgb(180, 180, 180);
+    box-shadow: 0px 0px 50px 5px var(--bg-color-shadow);
 
     display: flex;
     flex-direction: column;
@@ -31,9 +31,9 @@ form {
 .team-create-container {
     border-width: 0.1rem;
     border-style: solid;
-    border-color: rgb(220, 220, 220);
+    border-color: var(--bg-color);
     border-radius: 0.5rem;
-    box-shadow: 0px 0px 50px 5px rgb(180, 180, 180);
+    box-shadow: 0px 0px 50px 5px var(--bg-color-shadow);
 
     display: flex;
     flex-direction: column;

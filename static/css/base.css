@@ -9,7 +9,9 @@
 :root {
   --bg-color: whitesmoke;
   --bg-color-shadow: rgb(170, 170, 170);
+  --hover-color: #e3e4e7;
   --text-color: #000000;
+  --text-color-hover: whitesmoke;
 
   --bg-image: url(../img/bg-light.jpg)
 }
@@ -17,7 +19,9 @@
 body.dark-mode {
   --bg-color: #121212;
   --bg-color-shadow: #000000;
+  --hover-color: #e3e4e7;
   --text-color: whitesmoke;
+  --text-color-hover: #000000;
 
   --bg-image: url(../img/bg-dark.jpg)
 }
@@ -107,7 +111,7 @@ a {
 }
 
 .button-4:hover {
-  background-color: #e3e4e7;
+  background-color: url(--hover-color);
   text-decoration: none;
   transition-duration: 0.1s;
 }
@@ -123,10 +127,14 @@ a {
 }
 
 form button {
+    color: var(--text-color);
     margin-top: 1rem;
 }
 
 .input {
     margin: 0.5rem;
     font-size: 20px;
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }

@@ -14,6 +14,7 @@
 
 <body>
     <main>
+        <button id="theme-toggle">🌙</button>
         <div class="container">
             <div class="team-create-container">
                 <form method="POST" action="/manage-teams">
@@ -47,3 +48,5 @@
 </body>
 
 </html>
+
+<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>

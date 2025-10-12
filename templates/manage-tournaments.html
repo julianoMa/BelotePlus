@@ -14,6 +14,7 @@
 
 <body>
     <main>
+        <button id="theme-toggle">🌙</button>
         <div class="container">
             <div class="tournament-list-container">
                 <form method="POST" action="/manage-tournaments">
@@ -31,3 +32,5 @@
 </body>
 
 </html>
+
+<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
