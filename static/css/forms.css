@@ -1,17 +1,3 @@
-:root {
-  --bg-color: whitesmoke;
-  --bg-color-shadow: rgb(170, 170, 170);
-  --text-color: #000000;
-
-}
-
-body.dark-mode {
-  --bg-color: #121212;
-  --bg-color-shadow: #000000;
-  --text-color: whitesmoke;
-
-}
-
 form {
     border-width: 0.1rem;
     border-style: solid;

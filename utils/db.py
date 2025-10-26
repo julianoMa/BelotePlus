@@ -59,21 +59,13 @@ def init_db():
     """)
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS tables (
-        id INTEGER PRIMARY KEY,
-        round_id INTEGER NOT NULL,
-        tablenumber INTEGER,
-        FOREIGN KEY (round_id) REFERENCES rounds(id)
-    )
-    """)
-
-    cursor.execute("""
     CREATE TABLE IF NOT EXISTS repartition (
-        table_id INTEGER NOT NULL,
-        team_id INTEGER NOT NULL,
-        PRIMARY KEY (table_id, team_id),
-        FOREIGN KEY (table_id) REFERENCES tables(id),
-        FOREIGN KEY (team_id) REFERENCES teams(id)
+        tournament_id INTEGER NOT NULL,
+        round INTEGER NOT NULL,
+        tablenumber INTEGER NOT NULL,
+        teams INTEGER NOT NULL,
+        FOREIGN KEY (round) REFERENCES rounds(id),
+        FOREIGN KEY (teams) REFERENCES teams(id)
     )
     """)
 
@@ -150,5 +142,29 @@ def update_step(tournament_name, step):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("UPDATE tournaments SET step = ? WHERE name = ?",(step, tournament_name,))
+    conn.commit()
+    conn.close()
+
+def get_rounds(tournament_name):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT rounds_number FROM tournaments WHERE name = ?",(tournament_name,))
+    rounds_number = cursor.fetchall()
+    conn.close()
+
+    return rounds_number[0][0]
+
+def update_repartition(tournament_name, round, table_number, teams):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO repartition (tournament_id, round, tablenumber, teams) VALUES (?, ?, ?, ?)",
+                   (tournament_name, round, table_number, teams,))
+    conn.commit()
+    conn.close()
+
+def clear_repartition():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM repartition")
     conn.commit()
     conn.close()

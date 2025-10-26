@@ -19,7 +19,7 @@
 body.dark-mode {
   --bg-color: #121212;
   --bg-color-shadow: #000000;
-  --hover-color: #e3e4e7;
+  --hover-color: #2c2c2c;
   --text-color: whitesmoke;
   --text-color-hover: #000000;
 
@@ -60,6 +60,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
 }
 
 a {
@@ -111,7 +112,7 @@ a {
 }
 
 .button-4:hover {
-  background-color: url(--hover-color);
+  background-color: var(--hover-color);
   text-decoration: none;
   transition-duration: 0.1s;
 }

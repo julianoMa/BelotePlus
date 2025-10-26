@@ -4,6 +4,7 @@ sys.dont_write_bytecode = True # To prevent creation of "__pycache__" folder
 from flask import Flask, render_template, request, redirect, url_for
 from utils.init import *
 from utils.db import * 
+from utils.belote import *
 
 app = Flask(__name__)
 
@@ -21,6 +22,8 @@ def tournaments():
             step = get_step(tournament_name)
             if step == 0:
                 return redirect(url_for("teams", tournament=tournament_name))
+            elif step == 1 or step == 2 or step == 3 or step == 4:
+                return redirect(url_for("rounds", tournament=tournament_name, round=step))
 
         elif action == "delete":
             delete_tournament(tournament_name) 
@@ -72,6 +75,8 @@ def teams():
 
             update_step(tournament_name, 1)
 
+            return redirect(url_for("rounds", tournament=tournament_name))
+
     teams_list = get_teams(tournament)
     teams = []
 
@@ -82,7 +87,13 @@ def teams():
 
 @app.route("/rounds", methods=["GET", "POST"])
 def rounds():
-    return True
+    current_round = request.args.get("round")
+    tournament_name = request.args.get("tournament")
+
+    if current_round == "1":
+        repartition = generate_repartition(current_round, tournament_name)
+    
+    return render_template("concours.html")
 
 @app.route("/edit-scores", methods=["GET", "POST"])
 def editscores():

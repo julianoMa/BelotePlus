@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BelotePlus - Concours</title>
+
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rounds.css') }}">
+</head>
+
+<body>
+    <main>
+        <button id="theme-toggle">🌙</button>
+
+            <div class="container">
+                <form method="POST" action="#">
+
+                {% for i in range(10) %}
+                <div class="round-line">
+                    <div class="team">
+                        <p>Equipe 1</p> <input type="number" name="points" id="points">
+                    </div>
+                    <div class="table">
+                        <p>Table 1</p>
+                    </div>
+                    <div class="team">
+                        <input type="number" name="points" id="points"><p>Equipe 2</p>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="button-4">Prochaine partie</button>
+
+                </form>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
