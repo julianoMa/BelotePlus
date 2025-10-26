@@ -152,6 +152,8 @@ def get_rounds(tournament_name):
     rounds_number = cursor.fetchall()
     conn.close()
 
+    print(tournament_name)
+
     return rounds_number[0][0]
 
 def update_repartition(tournament_name, round, table_number, teams):
@@ -162,9 +164,42 @@ def update_repartition(tournament_name, round, table_number, teams):
     conn.commit()
     conn.close()
 
+def check_repartition(tournament_name):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT round FROM repartition WHERE tournament_id = ?",(tournament_name,))
+    result = cursor.fetchone()
+    conn.close()
+
+    return result
+
 def clear_repartition():
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("DELETE FROM repartition")
+    conn.commit()
+    conn.close()
+
+def get_repartition(round):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM repartition WHERE round = ?",(round,))
+    repartition = cursor.fetchall()
+    conn.close()
+
+    return repartition
+
+def save_points(round, team, point):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO teams_points (round_id, team_id, points) VALUES (?, ?, ?)",
+                   (round, team, point,))
+    conn.commit()
+    conn.close()
+
+def clear_points():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM teams_points")
     conn.commit()
     conn.close()

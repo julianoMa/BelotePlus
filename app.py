@@ -2,6 +2,8 @@ import sys
 sys.dont_write_bytecode = True # To prevent creation of "__pycache__" folder
 
 from flask import Flask, render_template, request, redirect, url_for
+import ast
+
 from utils.init import *
 from utils.db import * 
 from utils.belote import *
@@ -88,12 +90,40 @@ def teams():
 @app.route("/rounds", methods=["GET", "POST"])
 def rounds():
     current_round = request.args.get("round")
-    tournament_name = request.args.get("tournament")
 
-    if current_round == "1":
-        repartition = generate_repartition(current_round, tournament_name)
+    if request.method == "POST":
+        points1 = request.form.getlist("points1[]")
+        points2 = request.form.getlist("points2[]")
+        current_round = request.form.get("round")
+        
+        tournament_name = request.form.get("tournament")
+        total_rounds = get_rounds(tournament_name)
+
+        clear_points()
+        process_points(current_round, points1, points2)
+
+        current_round = int(current_round) + 1
+
+        if current_round > total_rounds:
+            return # leaderboard
+
+        return redirect(url_for("rounds", tournament=tournament_name, round=current_round))
     
-    return render_template("concours.html")
+    tournament_name = request.args.get("tournament")
+    check = check_repartition(tournament_name)
+    r = []
+
+    if check is None:
+        generate_repartition(current_round, tournament_name)
+
+    repartition = get_repartition(current_round)
+
+    for _, cround, table, teams in repartition:
+        if isinstance(teams, str):
+            teams = ast.literal_eval(teams)
+        r.append({"table": table, "team1": teams[0], "team2": teams[1], "round": cround})
+   
+    return render_template("concours.html", tournament=tournament_name, round=current_round, repartition=r)
 
 @app.route("/edit-scores", methods=["GET", "POST"])
 def editscores():

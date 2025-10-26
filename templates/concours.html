@@ -19,22 +19,24 @@
         <button id="theme-toggle">🌙</button>
 
             <div class="container">
-                <form method="POST" action="#">
+                <form method="POST" action="/rounds">
 
-                {% for i in range(10) %}
+                {% for team in repartition %}
                 <div class="round-line">
                     <div class="team">
-                        <p>Equipe 1</p> <input type="number" name="points" id="points">
+                        <p>Equipe {{ team.team1 }}</p> <input type="number" name="points1[]" required>
                     </div>
                     <div class="table">
-                        <p>Table 1</p>
+                        <p>Table {{ team.table }}</p>
                     </div>
                     <div class="team">
-                        <input type="number" name="points" id="points"><p>Equipe 2</p>
+                        <input type="number" name="points2[]" required><p>Equipe {{ team.team2 }}</p>
                     </div>
                 </div>
+                <input type="text" name="round" style="display: none" value="{{ team.round }}">
                 {% endfor %}
 
+                <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
                 <button type="submit" class="button-4">Prochaine partie</button>
 
                 </form>
