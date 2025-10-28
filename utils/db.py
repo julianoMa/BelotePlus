@@ -39,20 +39,22 @@ def init_db():
     """)
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS rounds (
-        id INTEGER PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS ranking (
         tournament_id INTEGER NOT NULL,
-        number INTEGER NOT NULL,
+        team_id INTEGER NOT NULL,
+        points INTEGER NOT NULL,
         FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
+        FOREIGN KEY (team_id) REFERENCES teams(id)
     )
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS teams_points (
+        tournament_id INTEGER NOT NULL,
         round_id INTEGER NOT NULL,
         team_id INTEGER NOT NULL,
         points INTEGER,
-        PRIMARY KEY (round_id, team_id),
+        FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
         FOREIGN KEY (round_id) REFERENCES rounds(id),
         FOREIGN KEY (team_id) REFERENCES teams(id)
     )
@@ -152,8 +154,6 @@ def get_rounds(tournament_name):
     rounds_number = cursor.fetchall()
     conn.close()
 
-    print(tournament_name)
-
     return rounds_number[0][0]
 
 def update_repartition(tournament_name, round, table_number, teams):
@@ -189,11 +189,11 @@ def get_repartition(round):
 
     return repartition
 
-def save_points(round, team, point):
+def save_points(tournament, round, team, point):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO teams_points (round_id, team_id, points) VALUES (?, ?, ?)",
-                   (round, team, point,))
+    cursor.execute("INSERT INTO teams_points (tournament_id, round_id, team_id, points) VALUES (?, ?, ?, ?)",
+                   (tournament, round, team, point,))
     conn.commit()
     conn.close()
 
@@ -201,5 +201,39 @@ def clear_points():
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("DELETE FROM teams_points")
+    conn.commit()
+    conn.close()
+
+def get_points(tournament, team):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT points FROM teams_points WHERE tournament_id = ? AND team_id = ?",(tournament, team,))
+    result = cursor.fetchall()
+    conn.close()
+
+    return result
+
+def save_ranking(tournament, team, points):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO ranking (tournament_id, team_id, points) VALUES (?, ?, ?)",
+                   (tournament, team, points))
+    conn.commit()
+    conn.close()
+
+def get_ranking(tournament):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""SELECT team_id FROM ranking WHERE tournament_id = ? ORDER BY points DESC""", (tournament,))
+    result = cursor.fetchall()
+    conn.close()
+
+    ranking = [row[0] for row in result]
+    return ranking
+
+def clear_previous_ranking(tournament):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""DELETE FROM ranking WHERE tournament_id = ?""",(tournament,))
     conn.commit()
     conn.close()

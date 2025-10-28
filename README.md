@@ -1,6 +1,6 @@
 # BelotePlus
 
-## Language
+# Language
 
 - 🇫🇷 [Français](#-français)
     * [Aperçu](#aperçu)
@@ -13,16 +13,16 @@
     * [Installation](#installation-1)
     * [Usage](#usage)
 
-## 🇫🇷 Français
+# 🇫🇷 Français
 
-### Aperçu
+## Aperçu
 
 BelotePlus est une application web locale OpenSource développée avec **Flask** permettant de **gérer facilement des concours de belote** : création de concours, ajout d’équipes, gestion des manches, répartition automatique sur les tables. 
 L'**utilisation d'un vidéo-projecteur** est également possible grâce à une page, permettant d'afficher le détail des points par parties aux joueurs, ainsi que la répartition des tables pour eux.
 
-### Fonctionnalités
+## Fonctionnalités
 
-### Installation
+## Installation
 
 Vous devez avoir installé Flask sur votre système :
 ```shell
@@ -35,14 +35,14 @@ cd BelotePlus
 python app.py
 ```
 
-### Utilisation
+## Utilisation
 
-## 🇺🇸 English
+# 🇺🇸 English
 
-### Overview
+## Overview
 
-### Features
+## Features
 
-### Installation
+## Installation
 
-### Usage
+## Usage

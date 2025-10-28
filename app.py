@@ -26,6 +26,8 @@ def tournaments():
                 return redirect(url_for("teams", tournament=tournament_name))
             elif step == 1 or step == 2 or step == 3 or step == 4:
                 return redirect(url_for("rounds", tournament=tournament_name, round=step))
+            else:
+                return redirect(url_for("ranking", tournament=tournament_name))
 
         elif action == "delete":
             delete_tournament(tournament_name) 
@@ -59,7 +61,7 @@ def teams():
             player1 = request.form['player1']
             player2 = request.form['player2']
             tournament = request.form['tournament']
-            
+
             add_team(tournament, player1, player2)
 
             return redirect(url_for("teams", tournament=tournament))
@@ -77,7 +79,7 @@ def teams():
 
             update_step(tournament_name, 1)
 
-            return redirect(url_for("rounds", tournament=tournament_name))
+            return redirect(url_for("rounds", tournament=tournament_name, round=1))
 
     teams_list = get_teams(tournament)
     teams = []
@@ -89,27 +91,30 @@ def teams():
 
 @app.route("/rounds", methods=["GET", "POST"])
 def rounds():
-    current_round = request.args.get("round")
-
     if request.method == "POST":
         points1 = request.form.getlist("points1[]")
         points2 = request.form.getlist("points2[]")
         current_round = request.form.get("round")
-        
+
         tournament_name = request.form.get("tournament")
         total_rounds = get_rounds(tournament_name)
 
-        clear_points()
-        process_points(current_round, points1, points2)
+        process_points(tournament_name, current_round, points1, points2)
 
         current_round = int(current_round) + 1
 
-        if current_round > total_rounds:
-            return # leaderboard
+        update_step(tournament_name, current_round)
+
+        if int(current_round) > int(total_rounds):
+            return redirect(url_for("ranking", tournament=tournament_name))
 
         return redirect(url_for("rounds", tournament=tournament_name, round=current_round))
     
+
+    current_round = request.args.get("round")
+
     tournament_name = request.args.get("tournament")
+    total_rounds = get_rounds(tournament_name)
     check = check_repartition(tournament_name)
     r = []
 
@@ -123,6 +128,9 @@ def rounds():
             teams = ast.literal_eval(teams)
         r.append({"table": table, "team1": teams[0], "team2": teams[1], "round": cround})
    
+    if int(current_round) > int(total_rounds):
+        return redirect(url_for("ranking", tournament=tournament_name))
+        
     return render_template("concours.html", tournament=tournament_name, round=current_round, repartition=r)
 
 @app.route("/edit-scores", methods=["GET", "POST"])
@@ -131,7 +139,11 @@ def editscores():
 
 @app.route("/ranking", methods=["GET", "POST"])
 def ranking():
-    return True
+    tournament_name = request.args.get("tournament")
+
+    ranking = generate_leaderboard(tournament_name)
+
+    return render_template("leaderboard.html", tournament=tournament_name, ranking=ranking)
 
 @app.route("/archives", methods=["GET", "POST"])
 def archives():

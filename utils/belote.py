@@ -1,10 +1,8 @@
-from utils.db import get_teams, get_rounds, update_repartition, clear_repartition, get_repartition, save_points
-
+from utils.db import *
 from random import shuffle
 import ast
 
 def generate_repartition(round, tournament_name):
-    print(f"Test : {tournament_name}")
     teams = get_teams(tournament_name)
     shuffle(teams)
     
@@ -33,7 +31,7 @@ def generate_repartition(round, tournament_name):
 
     return True
 
-def process_points(round, points1, points2):
+def process_points(tournament, round, points1, points2):
     repartition = get_repartition(round)
     n = -1
 
@@ -41,7 +39,25 @@ def process_points(round, points1, points2):
         n += 1
         if isinstance(teams, str):
             teams = ast.literal_eval(teams)
-            save_points(round, teams[0], points1[n])
-            save_points(round, teams[1], points2[n])
+            save_points(tournament, round, teams[0], points1[n])
+            save_points(tournament, round, teams[1], points2[n])
 
     return
+
+def generate_leaderboard(tournament_name):
+    teams = len(get_teams(tournament_name))
+
+    clear_previous_ranking(tournament_name)
+    
+    for i in range(teams):
+        points = get_points(tournament_name, i+1)
+        total = 0
+
+        for point in points:
+            total = total + point[0]
+
+        save_ranking(tournament_name, i+1, total)
+    
+    leaderboard = get_ranking(tournament_name)
+
+    return leaderboard

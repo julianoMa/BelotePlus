@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BelotePlus - Accueil</title>
+
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ranking.css') }}">
+
+</head>
+
+<body>
+    <main>
+        <button id="theme-toggle">🌙</button>
+
+        <div class="container">
+            {% for i in ranking %}
+                <div class="rank">Place n°{{ loop.index }} - Equipe n°{{ i }}</div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
