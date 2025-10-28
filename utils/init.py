@@ -9,12 +9,12 @@ def start_server(app):
     print("✅ Web server started")
     print("💻 App is launched on http://127.0.0.1:5000/")
 
-    app.run(debug=True)
+    app.run()
 
 
 def db_checks():
-    if not os.path.exists('data/belote.db'):
-        open("data/belote.db", "x")
+    if not os.path.exists('belote.db'):
+        open("belote.db", "x")
         time.sleep(0.8)
         print("⏳ Creating Database...")
 
