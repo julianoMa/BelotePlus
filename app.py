@@ -63,7 +63,7 @@ def register():
         table_number = request.form['table_number']
 
         create_tournament(tournament_name, rounds_number, table_number)
-        return redirect("/")
+        return redirect(url_for("tournaments"))
 
     return render_template("new-tournament.html")
 
