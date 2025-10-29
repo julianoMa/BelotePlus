@@ -36,14 +36,15 @@ def tournaments():
     if request.method == "POST":
         tournament_name = request.form.get("tournament")
         action = request.form.get("action")
+        total_rounds = get_rounds(tournament_name)
 
         if action == "open":
             step = get_step(tournament_name)
             if step == 0:
                 return redirect(url_for("teams", tournament=tournament_name))
-            elif step == 1 or step == 2 or step == 3 or step == 4:
+            elif step <= total_rounds:
                 return redirect(url_for("rounds", tournament=tournament_name, round=step))
-            else:
+            elif step > total_rounds:
                 return redirect(url_for("ranking", tournament=tournament_name))
 
         elif action == "delete":
