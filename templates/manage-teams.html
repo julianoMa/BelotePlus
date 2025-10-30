@@ -27,6 +27,10 @@
                     <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
                     <button type="submit" class="button-4" name="action" value="create">Créer l'équipe</button>
                 </form>
+                <form method="POST" action="/manage-teams">
+                        <input type="text" name="tournament" style="display: none" value="{{ tournament }}">
+                        <button type="submit" name="action" value="start" class="button-4" id="startBtn">Commencer le concours</button>
+                </form>
             </div>
             <div>
                 <form method="POST" action="/manage-teams">
@@ -42,7 +46,6 @@
 
                     </div>
                     <button type="submit" name="action" value="delete" class="button-4" id="startBtn">Supprimer l'équipe</button>
-                    <button type="submit" name="action" value="start" class="button-4" id="deleteBtn">Commencer le concours</button>
                 </form>
             </div>
         </div>

@@ -41,6 +41,11 @@ form {
     justify-content: center;
 }
 
+.team-create-container form {
+    height: auto;
+    margin-bottom: 1rem;
+}
+
 .container {
     width: 50rem;
 }
