@@ -76,10 +76,11 @@ def register():
 @app.route("/manage-teams", methods=["GET", "POST"])
 def teams():
     tournament = request.args.get("tournament")
-    teams_list = get_teams(tournament)
     
     if request.method == "POST":
         action = request.form.get("action")
+        tournament = request.form['tournament']
+        teams_list = get_teams(tournament)
 
         if (action in ["start", "delete"] and not teams_list):
             flash("Vous devez créer une équipe avant d utiliser ce bouton", "error")
