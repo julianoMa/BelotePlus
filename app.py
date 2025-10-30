@@ -18,7 +18,7 @@
 import sys
 sys.dont_write_bytecode = True # To prevent creation of "__pycache__" folder
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import ast
 
 from utils.init import *
@@ -26,6 +26,7 @@ from utils.db import *
 from utils.belote import *
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 @app.route("/")
 def index():
@@ -36,6 +37,10 @@ def tournaments():
     if request.method == "POST":
         tournament_name = request.form.get("tournament")
         action = request.form.get("action")
+
+        if tournament_name == None:
+            return redirect(url_for("tournaments"))
+
         total_rounds = get_rounds(tournament_name)
 
         if action == "open":
@@ -71,9 +76,14 @@ def register():
 @app.route("/manage-teams", methods=["GET", "POST"])
 def teams():
     tournament = request.args.get("tournament")
+    teams_list = get_teams(tournament)
     
     if request.method == "POST":
         action = request.form.get("action")
+
+        if (action in ["start", "delete"] and not teams_list):
+            flash("Vous devez créer une équipe avant d utiliser ce bouton", "error")
+            return redirect(url_for("index"))
 
         if action == "create":
             player1 = request.form['player1']
@@ -87,7 +97,7 @@ def teams():
         if action == "delete":
             id = request.form['team']
             tournament_name = request.form['tournament']
-
+            
             delete_team(id, tournament_name)
 
             return redirect(url_for("teams", tournament=tournament_name))
