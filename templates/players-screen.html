@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BelotePlus - Accueil</title>
+
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/players.css') }}">
+
+</head>
+
+<body>
+    <main>
+        <button id="theme-toggle">🌙</button>
+
+        <div class="container">
+            <div>
+                <table class="teams-table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Equipe</th>
+                        <th scope="col">Partie 1</th>
+                        <th scope="col">Partie 2</th>
+                        <th scope="col">Partie 3</th>
+                        <th scope="col">Partie 4</th>
+                        <th scope="col">Points totaux</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>919</td>
+                            <td>1128</td>
+                            <td>478</td>
+                            <td>783</td>
+                            <td>18939</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <table class="repartition-table">
+                    <thead>
+                        <th scope="col">Equipe</th>
+                        <th scope="col">Table</th>
+                        <th scope="col">Equipe</th>
+                    </thead>
+
+                    <tbody>
+                        <td>5</td>
+                        <th scope="col">1</th>
+                        <td>8</td>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="options">
+                <form method="POST" action="/players-screen">
+                    <label for="tournament-select">Choisissez un tournois</label>
+
+                    <select name="tournaments" id="tournament-select">
+                        <option value="">-- Merci de choisir une option --</option>
+                        {% for tournament in tournaments %}
+                            <option value="{{ tournament }}">{{ tournament }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button type="submit" name="action" value="tournaments">Choisir le tournois</button>
+                </form>
+
+                <form method="POST" action="/players-screen">
+                    <label for="round-select">Choisissez une partie</label>
+
+                    <select name="rounds-select" id="round-select">
+                        <option value="">-- Merci de choisir une option --</option>
+                        {% for i in range(rounds) %}
+                            <option value="{{ i + 1 }}">Partie n°{{ i + 1 }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+                    <input type="text" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
+
+                    <button type="submit" name="action" value="rounds">Choisir la partie</button>
+                </form>
+
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>

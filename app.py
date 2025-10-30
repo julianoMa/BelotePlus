@@ -162,10 +162,6 @@ def rounds():
         
     return render_template("concours.html", tournament=tournament_name, round=current_round, repartition=r)
 
-@app.route("/edit-scores", methods=["GET", "POST"])
-def editscores():
-    return True
-
 @app.route("/ranking", methods=["GET", "POST"])
 def ranking():
     tournament_name = request.args.get("tournament")
@@ -174,9 +170,43 @@ def ranking():
 
     return render_template("leaderboard.html", tournament=tournament_name, ranking=ranking)
 
-@app.route("/archives", methods=["GET", "POST"])
-def archives():
+@app.route("/players-screen", methods=["GET", "POST"])
+def players():
+    tournaments = get_tournaments_names()
+    tournament = "none"
+    rounds = 0
+    round_selected = 0 
+
+    if request.method == "POST":
+        action = request.form.get("action")
+
+        if action == "tournaments":
+            tournament = request.form.get('tournaments', '')
+
+            if tournament == "":
+                return redirect(url_for("players"))
+            else:
+                rounds = get_rounds(tournament)
+
+        elif action == "rounds":
+            tournament = request.form.get('tournament', '')
+            round_selected = request.form.get('rounds-select', 0)
+            rounds = request.form.get('rounds-a', 0)
+
+            if not round_selected:
+                return redirect(url_for("players"))
+            else:
+                teams = get_teams(tournament)
+
+    return render_template("players-screen.html", tournaments=tournaments, tournament=tournament, rounds=int(rounds), round=round_selected)
+
+@app.route("/edit-scores", methods=["GET", "POST"])
+def editscores():
     return True
+
+#@app.route("/archives", methods=["GET", "POST"])
+#def archives():
+#    return True
 
 if __name__ == "__main__":
     print("🛠️  Starting checks...")

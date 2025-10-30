@@ -1,0 +1,39 @@
+.container {
+    flex-wrap: wrap;
+
+    padding: 1rem;
+}
+
+.container > div {
+    flex: 1 1 25%
+}
+
+.container :first-child {
+    width: 75%;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid var(--text-color);
+
+    text-align: center;
+    font-size: 2.4rem;
+}
+
+th, td {
+    border: 2px solid var(--text-color);
+
+    padding: 1rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    flex: 1 1 100%;
+}
+
+.options select {
+    width: 15rem;
+}
