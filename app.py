@@ -172,7 +172,7 @@ def rounds():
     if check is None:
         generate_repartition(current_round, tournament_name)
 
-    repartition = get_repartition(tournament_name, current_round)
+    repartition = get_repartition(get_tournament_id(tournament_name), current_round)
 
     for _, cround, table, teams in repartition:
         if isinstance(teams, str):
@@ -199,6 +199,7 @@ def players():
     rounds = 0
     round_selected = 0 
     teams_points = []
+    r = []
 
     if request.method == "POST":
         action = request.form.get("action")
@@ -242,9 +243,9 @@ def players():
 
             # Getting repartition 
 
-            r = []
-            repartition = get_repartition(tournament, round_selected)
+            repartition = get_repartition(get_tournament_id(tournament), round_selected)
 
+            r = []
             for _, _, table, teams in repartition:
                 if isinstance(teams, str):
                     teams = ast.literal_eval(teams)

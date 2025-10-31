@@ -189,10 +189,10 @@ def clear_repartition():
         session.query(Repartition).delete()
 
 
-def get_repartition(round_num):
-    """Récupère la répartition pour un round spécifique"""
+def get_repartition(tournament, round_num):
+    """Récupère la répartition d'un tournois pour un round"""
     with get_session() as session:
-        repartitions = session.query(Repartition).filter_by(round=round_num).all()
+        repartitions = session.query(Repartition).filter_by(tournament_id=tournament, round=round_num).all()
         # convert to tuples for compatibility with previous implementation
         return [(r.tournament_id, r.round, r.tablenumber, r.teams) for r in repartitions]
 

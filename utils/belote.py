@@ -32,7 +32,7 @@ def generate_repartition(round, tournament_name):
     return True
 
 def process_points(tournament, round, points1, points2):
-    repartition = get_repartition(tournament, round)
+    repartition = get_repartition(get_tournament_id(tournament), round)
     n = -1
 
     for _, _, _, teams in repartition:
