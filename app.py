@@ -150,7 +150,7 @@ def rounds():
     if check is None:
         generate_repartition(current_round, tournament_name)
 
-    repartition = get_repartition(current_round)
+    repartition = get_repartition(tournament_name, current_round)
 
     for _, cround, table, teams in repartition:
         if isinstance(teams, str):
@@ -176,6 +176,7 @@ def players():
     tournament = "none"
     rounds = 0
     round_selected = 0 
+    teams_points = []
 
     if request.method == "POST":
         action = request.form.get("action")
@@ -195,10 +196,39 @@ def players():
 
             if not round_selected:
                 return redirect(url_for("players"))
-            else:
-                teams = get_teams(tournament)
+            
+            # Getting teams points
 
-    return render_template("players-screen.html", tournaments=tournaments, tournament=tournament, rounds=int(rounds), round=round_selected)
+            teams_points = []
+            teams = get_teams(tournament)
+            
+            for team in teams:
+                team_id = team[0]
+                points = get_points(tournament, team_id)
+                selected_points = points[:int(round_selected)]
+
+                total = 0
+                for point in selected_points:
+                    total = total + point[0]
+
+                
+                teams_points.append({
+                    "team_id": team_id,
+                    "points": selected_points,
+                    "total": total
+                })
+
+            # Getting repartition 
+
+            r = []
+            repartition = get_repartition(tournament, round_selected)
+
+            for _, _, table, teams in repartition:
+                if isinstance(teams, str):
+                    teams = ast.literal_eval(teams)
+                r.append({"table": table, "team1": teams[0], "team2": teams[1]})
+                
+    return render_template("players-screen.html", tournaments=tournaments, tournament=tournament, rounds=int(rounds), round=int(round_selected), teams_points=teams_points, repartition=r)
 
 @app.route("/edit-scores", methods=["GET", "POST"])
 def editscores():

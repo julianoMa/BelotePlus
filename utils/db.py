@@ -180,10 +180,10 @@ def clear_repartition():
     conn.commit()
     conn.close()
 
-def get_repartition(round):
+def get_repartition(tournament, round):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM repartition WHERE round = ?",(round,))
+    cursor.execute("SELECT * FROM repartition WHERE tournament_id = ? AND round = ?",(tournament, round,))
     repartition = cursor.fetchall()
     conn.close()
 
