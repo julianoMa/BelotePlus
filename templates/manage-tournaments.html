@@ -1,43 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate="page_title_manage">BelotePlus - Gérer les concours</title>
+{% set title_key = "page_title_manage" %}
 
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
-</head>
-
-<body>
-    <main>
-        <select id="language-selector">
-            <option value="fr">🇫🇷 Français</option>
-            <option value="en">🇬🇧 English</option>
-        </select>
-        <button id="theme-toggle">🌙</button>
-        <div class="container">
-            <div class="tournament-list-container">
-                <form method="POST" action="/manage-tournaments">
-                    <div>
-                        {% for name in tournaments %}
-                            <input type="radio" name="tournament" value="{{ name }}" required> {{ name }}<br>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" name="action" value="open" class="button-4" data-translate="open">Ouvrir le concours</button>
-                    <button type="submit" name="action" value="delete" class="button-4" data-translate="delete">Supprimer le concours</button>
-                </form>
+{% block content %}
+<div class="container">
+    <div class="tournament-list-container">
+        <form method="POST" action="/manage-tournaments">
+            <div>
+                {% for name in tournaments %}
+                    <input type="radio" name="tournament" value="{{ name }}" required> {{ name }}<br>
+                {% endfor %}
             </div>
-        </div>
-    </main>
-</body>
-
-</html>
-
-<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
-<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+            <button type="submit" name="action" value="open" class="button-4">{{ t.open }}</button>
+            <button type="submit" name="action" value="delete" class="button-4">{{ t.delete }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

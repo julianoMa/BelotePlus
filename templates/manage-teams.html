@@ -1,63 +1,41 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate="page_title_teams">BelotePlus - Gérer les équipes</title>
+{% set title_key = "page_title_teams" %}
 
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/teams.css') }}">
+{% endblock %}
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/teams.css') }}">
-</head>
-
-<body>
-    <main>
-        <select id="language-selector">
-            <option value="fr">🇫🇷 Français</option>
-            <option value="en">🇬🇧 English</option>
-        </select>
-        <button id="theme-toggle">🌙</button>
-        <div class="container">
-            <div class="team-create-container">
-                <form method="POST" action="/manage-teams">
-                    <p data-translate="player1">Premier joueur</p>
-                    <input class="input" type="text" name="player1" id="player1" required>
-                    <p data-translate="player2">Deuxième joueur</p>
-                    <input class="input" type="text" name="player2" id="player2" required>
+{% block content %}
+<div class="container">
+    <div class="team-create-container">
+        <form method="POST" action="/manage-teams">
+            <p>{{ t.player1 }}</p>
+            <input class="input" type="text" name="player1" id="player1" required>
+            <p>{{ t.player2 }}</p>
+            <input class="input" type="text" name="player2" id="player2" required>
+            <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+            <button type="submit" class="button-4" name="action" value="create">{{ t.add_team }}</button>
+        </form>
+        <form method="POST" action="/manage-teams">
+            <input type="text" name="tournament" style="display: none" value="{{ tournament }}">
+            <button type="submit" name="action" value="start" class="button-4" id="startBtn">{{ t.start_tournament }}</button>
+        </form>
+    </div>
+    <div>
+        <form method="POST" action="/manage-teams">
+            <div class="teams-list-container">
+                <br>
+                {% for team in teams %}
+                    <label>
+                        <input type="radio" name="team" value="{{ team.id }}" required>
+                        {{ team.id }} - {{ team.player1 }} , {{ team.player2 }}
+                    </label>
                     <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-                    <button type="submit" class="button-4" name="action" value="create" data-translate="add_team">Créer l'équipe</button>
-                </form>
-                <form method="POST" action="/manage-teams">
-                        <input type="text" name="tournament" style="display: none" value="{{ tournament }}">
-                        <button type="submit" name="action" value="start" class="button-4" id="startBtn" data-translate="start_tournament">Commencer le concours</button>
-                </form>
+                {% endfor %}
             </div>
-            <div>
-                <form method="POST" action="/manage-teams">
-                    <div class="teams-list-container">
-                        <br>
-                        {% for team in teams %}
-                            <label>
-                                <input type="radio" name="team" value="{{ team.id }}" required>
-                                {{ team.id }} - {{ team.player1 }} , {{ team.player2 }}
-                            </label>
-                            <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-                        {% endfor %}
-
-                    </div>
-                    <button type="submit" name="action" value="delete" class="button-4" id="startBtn" data-translate="delete">Supprimer l'équipe</button>
-                </form>
-            </div>
-        </div>
-    </main>
-
-</body>
-
-</html>
-
-<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
-<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+            <button type="submit" name="action" value="delete" class="button-4" id="startBtn">{{ t.delete }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
