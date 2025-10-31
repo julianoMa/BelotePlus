@@ -1,239 +1,272 @@
-import sqlite3
 import os
+from sqlalchemy import create_engine, inspect
+from sqlalchemy.orm import sessionmaker, scoped_session
+from contextlib import contextmanager
+from .models import Base, Tournament, Team, Ranking, TeamPoints, Repartition
 
-DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'belote.db')
 
-def get_connection():
-    return sqlite3.connect(DB_PATH)
+# config db
+DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'instance', 'belote.db')
+DATABASE_URL = f'sqlite:///{DB_PATH}'
 
-def get_tables():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    tables = cursor.fetchall()
-    conn.close()
+# engine et session
+engine = create_engine(DATABASE_URL, echo=False)
+session_factory = sessionmaker(bind=engine)
+Session = scoped_session(session_factory)
 
-    return tables
+
+@contextmanager
+def get_session():
+    """Context manager pour gérer automatiquement les sessions"""
+    session = Session()
+    try:
+        yield session
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        raise e
+    finally:
+        session.close()
+
 
 def init_db():
-    conn = get_connection()
-    cursor = conn.cursor()
-    
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS tournaments (
-        id INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
-        rounds_number INTEGER,
-        tables_number INTEGER,
-        step INTEGER
-    )
-    """)
+    """Initialise la base de données en créant toutes les tables"""
+    Base.metadata.create_all(engine)
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS teams (
-        id INTEGER PRIMARY KEY,
-        tournament_id INTEGER NOT NULL,
-        player1 TEXT NOT NULL,
-        player2 TEXT NOT NULL
-    )
-    """)
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS ranking (
-        tournament_id INTEGER NOT NULL,
-        team_id INTEGER NOT NULL,
-        points INTEGER NOT NULL,
-        FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
-        FOREIGN KEY (team_id) REFERENCES teams(id)
-    )
-    """)
+def get_tables():
+    """Retourne la liste des tables dans la base de données"""
+    inspector = inspect(engine)
+    return [(table,) for table in inspector.get_table_names()]
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS teams_points (
-        tournament_id INTEGER NOT NULL,
-        round_id INTEGER NOT NULL,
-        team_id INTEGER NOT NULL,
-        points INTEGER,
-        FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
-        FOREIGN KEY (round_id) REFERENCES rounds(id),
-        FOREIGN KEY (team_id) REFERENCES teams(id)
-    )
-    """)
 
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS repartition (
-        tournament_id INTEGER NOT NULL,
-        round INTEGER NOT NULL,
-        tablenumber INTEGER NOT NULL,
-        teams INTEGER NOT NULL,
-        FOREIGN KEY (round) REFERENCES rounds(id),
-        FOREIGN KEY (teams) REFERENCES teams(id)
-    )
-    """)
-
-    conn.commit()
-    conn.close()
+# ======================
+# TOURNAMENTS
+# ======================
 
 def get_tournaments_names():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT name FROM tournaments ORDER BY id")
-    names = [row[0] for row in cursor.fetchall()]
-    conn.close()
+    """Récupère tous les noms de tournois"""
+    with get_session() as session:
+        tournaments = session.query(Tournament.name).order_by(Tournament.id).all()
+        return [t.name for t in tournaments]
 
-    return names
 
 def create_tournament(name, rounds_number, tables_number):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO tournaments (name, rounds_number, tables_number, step) VALUES (?, ?, ?, ?)",
-                   (name, rounds_number, tables_number, 0))
-    conn.commit()
-    conn.close()
+    """Crée un nouveau tournoi"""
+    with get_session() as session:
+        tournament = Tournament(
+            name=name,
+            rounds_number=rounds_number,
+            tables_number=tables_number,
+            step=0
+        )
+        session.add(tournament)
+
 
 def get_tournament_id(tournament_name):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT id from tournaments WHERE name = ?", (tournament_name,))
-    tournament_id = cursor.fetchone()
-    conn.close()
+    """Récupère l'ID d'un tournoi par son nom"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        return tournament.id if tournament else None
 
-    return tournament_id[0]
+
+def get_tournament_by_name(tournament_name):
+    """Récupère un tournoi par son nom"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            # detach object from session before returning, so it can be used outside
+            session.expunge(tournament)
+        return tournament
+
 
 def delete_tournament(tournament_name):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM tournaments WHERE name = ?", (tournament_name,))
-    conn.commit()
-    conn.close()
+    """Supprime un tournoi par son nom"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            session.delete(tournament)
+
 
 def get_step(tournament_name):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT step FROM tournaments WHERE name = ?", (tournament_name,))
-    step = cursor.fetchone()
-    conn.close()
+    """Récupère l'étape actuelle d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        return tournament.step if tournament else 0
 
-    return step[0]
-
-def get_teams(tournament_name):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM teams WHERE tournament_id = ?", (tournament_name,))
-    teams = cursor.fetchall()
-    conn.close()
-
-    return teams
-
-def add_team(tournament_name, player1, player2):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO teams (tournament_id, player1, player2) VALUES (?, ?, ?)",
-                   (tournament_name, player1, player2))
-    conn.commit()
-    conn.close()
-
-def delete_team(id, tournament_name):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM teams WHERE id = ? AND tournament_id = ?", (id, tournament_name,))
-    conn.commit()
-    conn.close()
 
 def update_step(tournament_name, step):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("UPDATE tournaments SET step = ? WHERE name = ?",(step, tournament_name,))
-    conn.commit()
-    conn.close()
+    """Met à jour l'étape d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            tournament.step = step
+
 
 def get_rounds(tournament_name):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT rounds_number FROM tournaments WHERE name = ?",(tournament_name,))
-    rounds_number = cursor.fetchall()
-    conn.close()
+    """Récupère le nombre de rounds d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        return tournament.rounds_number if tournament else 0
 
-    return rounds_number[0][0]
 
-def update_repartition(tournament_name, round, table_number, teams):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO repartition (tournament_id, round, tablenumber, teams) VALUES (?, ?, ?, ?)",
-                   (tournament_name, round, table_number, teams,))
-    conn.commit()
-    conn.close()
+# ======================
+# TEAMS
+# ======================
+
+def get_teams(tournament_name):
+    """Récupère toutes les équipes d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if not tournament:
+            return []
+        
+        teams = session.query(Team).filter_by(tournament_id=tournament.id).all()
+        # convert to tuples for compatibility with previous implementation
+        return [(t.id, tournament_name, t.player1, t.player2) for t in teams]
+
+
+def add_team(tournament_name, player1, player2):
+    """Ajoute une équipe à un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            team = Team(
+                tournament_id=tournament.id,
+                player1=player1,
+                player2=player2
+            )
+            session.add(team)
+
+
+def delete_team(team_id, tournament_name):
+    """Supprime une équipe d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            team = session.query(Team).filter_by(
+                id=team_id,
+                tournament_id=tournament.id
+            ).first()
+            if team:
+                session.delete(team)
+
+
+# ======================
+# REPARTITION
+# ======================
+
+def update_repartition(tournament_name, round_num, table_number, teams):
+    """Met à jour la répartition des équipes pour un round"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            repartition = Repartition(
+                tournament_id=tournament.id,
+                round=round_num,
+                tablenumber=table_number,
+                teams=teams
+            )
+            session.add(repartition)
+
 
 def check_repartition(tournament_name):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT round FROM repartition WHERE tournament_id = ?",(tournament_name,))
-    result = cursor.fetchone()
-    conn.close()
+    """Vérifie si une répartition existe pour un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if not tournament:
+            return None
+        
+        repartition = session.query(Repartition).filter_by(
+            tournament_id=tournament.id
+        ).first()
+        return (repartition.round,) if repartition else None
 
-    return result
 
 def clear_repartition():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM repartition")
-    conn.commit()
-    conn.close()
+    """Supprime toutes les répartitions"""
+    with get_session() as session:
+        session.query(Repartition).delete()
 
-def get_repartition(tournament, round):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM repartition WHERE tournament_id = ? AND round = ?",(tournament, round,))
-    repartition = cursor.fetchall()
-    conn.close()
 
-    return repartition
+def get_repartition(round_num):
+    """Récupère la répartition pour un round spécifique"""
+    with get_session() as session:
+        repartitions = session.query(Repartition).filter_by(round=round_num).all()
+        # convert to tuples for compatibility with previous implementation
+        return [(r.tournament_id, r.round, r.tablenumber, r.teams) for r in repartitions]
 
-def save_points(tournament, round, team, point):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO teams_points (tournament_id, round_id, team_id, points) VALUES (?, ?, ?, ?)",
-                   (tournament, round, team, point,))
-    conn.commit()
-    conn.close()
+
+# ======================
+# POINTS
+# ======================
+
+def save_points(tournament_name, round_num, team_id, points):
+    """Sauvegarde les points d'une équipe pour un round"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            team_points = TeamPoints(
+                tournament_id=tournament.id,
+                round_id=round_num,
+                team_id=team_id,
+                points=points
+            )
+            session.add(team_points)
 
 def clear_points():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM teams_points")
-    conn.commit()
-    conn.close()
+    """Supprime tous les points"""
+    with get_session() as session:
+        session.query(TeamPoints).delete()
 
-def get_points(tournament, team):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT points FROM teams_points WHERE tournament_id = ? AND team_id = ?",(tournament, team,))
-    result = cursor.fetchall()
-    conn.close()
 
-    return result
+def get_points(tournament_name, team_id):
+    """Récupère tous les points d'une équipe dans un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if not tournament:
+            return []
+        
+        points = session.query(TeamPoints.points).filter_by(
+            tournament_id=tournament.id,
+            team_id=team_id
+        ).all()
+        return points
 
-def save_ranking(tournament, team, points):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO ranking (tournament_id, team_id, points) VALUES (?, ?, ?)",
-                   (tournament, team, points))
-    conn.commit()
-    conn.close()
 
-def get_ranking(tournament):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("""SELECT team_id FROM ranking WHERE tournament_id = ? ORDER BY points DESC""", (tournament,))
-    result = cursor.fetchall()
-    conn.close()
+# ======================
+# RANKING
+# ======================
 
-    ranking = [row[0] for row in result]
-    return ranking
+def save_ranking(tournament_name, team_id, points):
+    """Sauvegarde le classement d'une équipe"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            ranking = Ranking(
+                tournament_id=tournament.id,
+                team_id=team_id,
+                points=points
+            )
+            session.add(ranking)
 
-def clear_previous_ranking(tournament):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("""DELETE FROM ranking WHERE tournament_id = ?""",(tournament,))
-    conn.commit()
-    conn.close()
+
+def get_ranking(tournament_name):
+    """Récupère le classement d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if not tournament:
+            return []
+        
+        rankings = session.query(Ranking.team_id).filter_by(
+            tournament_id=tournament.id
+        ).order_by(Ranking.points.desc()).all()
+        return [r.team_id for r in rankings]
+
+
+def clear_previous_ranking(tournament_name):
+    """Supprime le classement précédent d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            session.query(Ranking).filter_by(tournament_id=tournament.id).delete()

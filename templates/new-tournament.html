@@ -1,38 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Créer un concours</title>
+{% set title_key = "page_title_new" %}
 
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
-</head>
-
-<body>
-    <main>
-        <button id="theme-toggle">🌙</button>
-        <div class="container">
-            <div class="tournament-create-container">
-                <form method="POST" action="/new-tournament">
-                    <p>Nom du concours</p>
-                    <input class="input" type="text" name="tournament_name" id="tournament-name" required>
-                    <p>Nombre de parties</p>
-                    <input class="input" type="number" name="rounds_number" id="round-number" required>
-                    <p>Nombre de tables</p>
-                    <input class="input" type="number" name="table_number" id="table-number" required>
-                    <button type="submit" class="button-4">Créer le concours</button>
-                </form>
-            </div>
-        </div>
-    </main>
-</body>
-
-</html>
-
-<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+{% block content %}
+<div class="container">
+    <div class="tournament-create-container">
+        <form method="POST" action="/new-tournament">
+            <p>{{ t.tournament_name }}</p>
+            <input class="input" type="text" name="tournament_name" id="tournament-name" required>
+            <p>{{ t.rounds_number }}</p>
+            <input class="input" type="number" name="rounds_number" id="round-number" required>
+            <p>{{ t.tables_number }}</p>
+            <input class="input" type="number" name="table_number" id="table-number" required>
+            <button type="submit" class="button-4">{{ t.create_tournament_button }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

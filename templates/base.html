@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title_key %}{{ t[title_key] }}{% else %}{% block title %}BelotePlus{% endblock %}{% endif %}</title>
+
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <main>
+        <select id="language-selector">
+            <option value="fr" {% if current_lang == 'fr' %}selected{% endif %}>🇫🇷 Français</option>
+            <option value="en" {% if current_lang == 'en' %}selected{% endif %}>🇬🇧 English</option>
+        </select>
+        <button id="theme-toggle">🌙</button>
+
+        {% block content %}{% endblock %}
+    </main>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <script>
+                    alert("{{ message }}");
+                </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

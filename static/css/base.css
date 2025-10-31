@@ -30,16 +30,71 @@ body.dark-mode {
   position: fixed;
   top: 1rem;
   right: 1rem;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #000;
-  transition: transform 0.2s ease;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
 }
 
 #theme-toggle:hover {
   transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+#language-selector {
+  position: fixed;
+  top: 1rem;
+  right: 5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  padding-right: 2rem;
+  min-width: 140px;
+}
+
+body.dark-mode #language-selector {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+#language-selector:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#language-selector:focus {
+  border-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+#language-selector option {
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 0.5rem;
+  font-size: 0.95rem;
 }
 
 html, body {

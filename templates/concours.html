@@ -1,50 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Partie n°{{ round }}</title>
+{% set title_key = "page_title_round" %}
 
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/rounds.css') }}">
+{% endblock %}
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/rounds.css') }}">
-</head>
-
-<body>
-    <main>
-        <button id="theme-toggle">🌙</button>
-
-            <div class="container">
-                <form method="POST" action="/rounds">
-
-                {% for team in repartition %}
-                <div class="round-line">
-                    <div class="team">
-                        <p>Equipe {{ team.team1 }}</p> <input type="number" name="points1[]" required>
-                    </div>
-                    <div class="table">
-                        <p>Table {{ team.table }}</p>
-                    </div>
-                    <div class="team">
-                        <input type="number" name="points2[]" required><p>Equipe {{ team.team2 }}</p>
-                    </div>
-                </div>
-                <input type="text" name="round" style="display: none" value="{{ team.round }}">
-                {% endfor %}
-
-                <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-                <button type="submit" class="button-4">Prochaine partie</button>
-                <a href="/players-screen" target="_blank">Ouvrir l'écran des joueurs</a>
-
-                </form>
+{% block content %}
+<div class="container">
+    <form method="POST" action="/rounds">
+        {% for team in repartition %}
+        <div class="round-line">
+            <div class="team">
+                <p><span>{{ t.team }}</span> {{ team.team1 }}</p> <input type="number" name="points1[]" required>
+            </div>
+            <div class="table">
+                <p><span>{{ t.table }}</span> {{ team.table }}</p>
+            </div>
+            <div class="team">
+                <input type="number" name="points2[]" required><p><span>{{ t.team }}</span> {{ team.team2 }}</p>
+            </div>
         </div>
-    </main>
-</body>
+        <input type="text" name="round" style="display: none" value="{{ team.round }}">
+        {% endfor %}
 
-</html>
-
-<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+        <button type="submit" class="button-4">{{ t.next_round }}</button>
+        <a href="/players-screen" target="_blank">{{ t.players_screen }}</a>
+    </form>
+</div>
+{% endblock %}

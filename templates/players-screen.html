@@ -1,108 +1,84 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Accueil</title>
+{% set title_key = "page_title_home" %}
 
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/players.css') }}">
+{% endblock %}
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
+{% block content %}
+<div class="container">
+    <div>
+        <table class="teams-table">
+            <thead>
+            <tr>
+                <th scope="col">{{ t.team }}</th>
+                <th scope="col"><span>{{ t.round }}</span> 1</th>
+                <th scope="col"><span>{{ t.round }}</span> 2</th>
+                <th scope="col"><span>{{ t.round }}</span> 3</th>
+                <th scope="col"><span>{{ t.round }}</span> 4</th>
+                <th scope="col">{{ t.points }}</th>
+            </tr>
+            </thead>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/players.css') }}">
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>919</td>
+                    <td>1128</td>
+                    <td>478</td>
+                    <td>783</td>
+                    <td>18939</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-</head>
+    <div>
+        <table class="repartition-table">
+            <thead>
+                <th scope="col">{{ t.team }}</th>
+                <th scope="col">{{ t.table }}</th>
+                <th scope="col">{{ t.team }}</th>
+            </thead>
 
-<body>
-    <main>
-        <button id="theme-toggle">🌙</button>
+            <tbody>
+                <td>5</td>
+                <th scope="col">1</th>
+                <td>8</td>
+            </tbody>
+        </table>
+    </div>
 
-        <div class="container">
-            <div>
-                <table class="teams-table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Equipe</th>
-                        {% for i in range(1, round + 1) %}
-                            <th>Partie {{ i }}</th>
-                        {% endfor %}
-                        <th scope="col">Points totaux</th>
-                    </tr>
-                    </thead>
+    <div class="options">
+        <form method="POST" action="/players-screen">
+            <label for="tournament-select">Choisissez un tournois</label>
 
-                    <tbody>
-                        {% for team in teams_points %}
-                        <tr>
-                            <th scope="row">{{ team.team_id }}</th>
-                            {% for pts in team.points %}
-                                <td>{{ pts[0] }}</td>
-                            {% endfor %}
-                            <td>{{ team.total }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            <select name="tournaments" id="tournament-select">
+                <option value="">-- Merci de choisir une option --</option>
+                {% for tournament in tournaments %}
+                    <option value="{{ tournament }}">{{ tournament }}</option>
+                {% endfor %}
+            </select>
 
-            <div>
-                <table class="repartition-table">
-                    <thead>
-                        <th scope="col">Equipe</th>
-                        <th scope="col">Table</th>
-                        <th scope="col">Equipe</th>
-                    </thead>
+            <button type="submit" name="action" value="tournaments">Choisir le tournois</button>
+        </form>
 
-                    <tbody>
-                        {% for item in repartition %}
-                            <tr>
-                                <td>{{ item.team1 }}</td>
-                                <th scope="col">{{ item.table }}</th>
-                                <td>{{ item.team2 }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <form method="POST" action="/players-screen">
+            <label for="round-select">Choisissez une partie</label>
 
-            <div class="options">
-                <form method="POST" action="/players-screen">
-                    <label for="tournament-select">Choisissez un tournois</label>
+            <select name="rounds-select" id="round-select">
+                <option value="">-- Merci de choisir une option --</option>
+                {% for i in range(rounds) %}
+                    <option value="{{ i + 1 }}"><span>{{ t.round }}</span> n°{{ i + 1 }}</option>
+                {% endfor %}
+            </select>
+            
+            <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+            <input type="text" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
 
-                    <select name="tournaments" id="tournament-select">
-                        <option value="">-- Merci de choisir une option --</option>
-                        {% for tournament in tournaments %}
-                            <option value="{{ tournament }}">{{ tournament }}</option>
-                        {% endfor %}
-                    </select>
-
-                    <button type="submit" name="action" value="tournaments">Choisir le tournois</button>
-                </form>
-
-                {% if tournament != "none" and tournament != "" %}
-                <form method="POST" action="/players-screen">
-                    <label for="round-select">Choisissez une partie</label>
-
-                    <select name="rounds-select" id="round-select">
-                        <option value="">-- Merci de choisir une option --</option>
-                        {% for i in range(rounds) %}
-                            <option value="{{ i + 1 }}">Partie n°{{ i + 1 }}</option>
-                        {% endfor %}
-                    </select>
-                    
-                    <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-                    <input type="text" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
-
-                    <button type="submit" name="action" value="rounds">Choisir la partie</button>
-                </form>
-                {% endif %}
-
-            </div>
-        </div>
-    </main>
-</body>
-
-</html>
-
-<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+            <button type="submit" name="action" value="rounds">Choisir la partie</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

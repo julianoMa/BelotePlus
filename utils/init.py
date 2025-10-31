@@ -13,8 +13,9 @@ def start_server(app):
 
 
 def db_checks():
-    if not os.path.exists('belote.db'):
-        open("belote.db", "x")
+    if not os.path.exists(DB_PATH):
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+        open(DB_PATH, "x")
         time.sleep(0.8)
         print("⏳ Creating Database...")
 

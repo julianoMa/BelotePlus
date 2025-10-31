@@ -16,17 +16,39 @@
 
 
 import sys
-sys.dont_write_bytecode = True # To prevent creation of "__pycache__" folder
+sys.dont_write_bytecode = True
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session, make_response
 import ast
 
 from utils.init import *
 from utils.db import * 
 from utils.belote import *
+from utils.translations import load_translations, get_all_translations
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+load_translations()
+
+@app.context_processor
+def inject_language():
+    """inject lang in all templates"""
+    lang = request.cookies.get('language', 'fr')
+    return {
+        'current_lang': lang,
+        't': get_all_translations(lang)
+    }
+
+@app.route("/set-language/<lang>")
+def set_language(lang):
+    """change user lang"""
+    if lang not in ['fr', 'en']:
+        lang = 'fr'
+    
+    resp = make_response(redirect(request.referrer or url_for('index')))
+    resp.set_cookie('language', lang, max_age=31536000)
+    return resp
 
 @app.route("/")
 def index():
@@ -58,7 +80,7 @@ def tournaments():
     try:
         tournament_names = get_tournaments_names()
         return render_template("manage-tournaments.html", tournaments=tournament_names)
-    except sqlite3.OperationalError:
+    except Exception:
         return redirect(url_for("index"))
 
 @app.route("/new-tournament", methods=["GET", "POST"])

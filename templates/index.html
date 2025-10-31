@@ -1,45 +1,17 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Accueil</title>
+{% set title_key = "page_title_home" %}
 
-    <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-
-</head>
-
-<body>
-    <main>
-        <button id="theme-toggle">🌙</button>
-
-        <div class="container">
-            <p>Bienvenue dans votre gestionnaire de concours de belote</p>
-            <div class="links">
-                <a href="/new-tournament" class="button-4">Créer un concours</a>
-                <a href="/manage-tournaments" class="button-4">Ouvrir un concours</a>
-            </div>
-        </div>
-    </main>
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <script>
-        alert("{{ message }}");
-      </script>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
-</body>
-
-</html>
-
-<script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+{% block content %}
+<div class="container">
+    <p>{{ t.welcome }}</p>
+    <div class="links">
+        <a href="/new-tournament" class="button-4">{{ t.create_tournament }}</a>
+        <a href="/manage-tournaments" class="button-4">{{ t.open_tournament }}</a>
+    </div>
+</div>
+{% endblock %}
