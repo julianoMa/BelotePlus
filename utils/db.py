@@ -214,7 +214,6 @@ def save_points(tournament_name, round_num, team_id, points):
             )
             session.add(team_points)
 
-
 def clear_points():
     """Supprime tous les points"""
     with get_session() as session:
