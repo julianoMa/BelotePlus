@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Accueil</title>
+    <title data-translate="page_title_home">BelotePlus - Accueil</title>
 
     <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
 
@@ -17,6 +17,10 @@
 
 <body>
     <main>
+        <select id="language-selector">
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+        </select>
         <button id="theme-toggle">🌙</button>
 
         <div class="container">
@@ -24,12 +28,12 @@
                 <table class="teams-table">
                     <thead>
                     <tr>
-                        <th scope="col">Equipe</th>
-                        <th scope="col">Partie 1</th>
-                        <th scope="col">Partie 2</th>
-                        <th scope="col">Partie 3</th>
-                        <th scope="col">Partie 4</th>
-                        <th scope="col">Points totaux</th>
+                        <th scope="col" data-translate="team">Equipe</th>
+                        <th scope="col"><span data-translate="round">Partie</span> 1</th>
+                        <th scope="col"><span data-translate="round">Partie</span> 2</th>
+                        <th scope="col"><span data-translate="round">Partie</span> 3</th>
+                        <th scope="col"><span data-translate="round">Partie</span> 4</th>
+                        <th scope="col" data-translate="points">Points totaux</th>
                     </tr>
                     </thead>
 
@@ -49,9 +53,9 @@
             <div>
                 <table class="repartition-table">
                     <thead>
-                        <th scope="col">Equipe</th>
-                        <th scope="col">Table</th>
-                        <th scope="col">Equipe</th>
+                        <th scope="col" data-translate="team">Equipe</th>
+                        <th scope="col" data-translate="table">Table</th>
+                        <th scope="col" data-translate="team">Equipe</th>
                     </thead>
 
                     <tbody>
@@ -82,7 +86,7 @@
                     <select name="rounds-select" id="round-select">
                         <option value="">-- Merci de choisir une option --</option>
                         {% for i in range(rounds) %}
-                            <option value="{{ i + 1 }}">Partie n°{{ i + 1 }}</option>
+                            <option value="{{ i + 1 }}"><span data-translate="round">Partie</span> n°{{ i + 1 }}</option>
                         {% endfor %}
                     </select>
                     
@@ -100,3 +104,4 @@
 </html>
 
 <script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>

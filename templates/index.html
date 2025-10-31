@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Accueil</title>
+    <title data-translate="page_title_home">BelotePlus - Accueil</title>
 
     <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
 
@@ -17,13 +17,17 @@
 
 <body>
     <main>
+        <select id="language-selector">
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+        </select>
         <button id="theme-toggle">🌙</button>
 
         <div class="container">
-            <p>Bienvenue dans votre gestionnaire de concours de belote</p>
+            <p data-translate="welcome">Bienvenue dans votre gestionnaire de concours de belote</p>
             <div class="links">
-                <a href="/new-tournament" class="button-4">Créer un concours</a>
-                <a href="/manage-tournaments" class="button-4">Ouvrir un concours</a>
+                <a href="/new-tournament" class="button-4" data-translate="create_tournament">Créer un concours</a>
+                <a href="/manage-tournaments" class="button-4" data-translate="open_tournament">Ouvrir un concours</a>
             </div>
         </div>
     </main>
@@ -43,3 +47,4 @@
 </html>
 
 <script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Accueil</title>
+    <title data-translate="page_title_ranking">BelotePlus - Classement</title>
 
     <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
 
@@ -17,11 +17,15 @@
 
 <body>
     <main>
+        <select id="language-selector">
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+        </select>
         <button id="theme-toggle">🌙</button>
 
         <div class="container">
             {% for i in ranking %}
-                <div class="rank">Place n°{{ loop.index }} - Equipe n°{{ i }}</div>
+                <div class="rank"><span data-translate="position">Place</span> n°{{ loop.index }} - <span data-translate="team">Equipe</span> n°{{ i }}</div>
             {% endfor %}
         </div>
     </main>
@@ -30,3 +34,4 @@
 </html>
 
 <script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>

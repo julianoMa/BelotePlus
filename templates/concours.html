@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BelotePlus - Partie n°{{ round }}</title>
+    <title>BelotePlus - <span data-translate="round">Partie</span> n°{{ round }}</title>
 
     <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
 
@@ -16,6 +16,10 @@
 
 <body>
     <main>
+        <select id="language-selector">
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+        </select>
         <button id="theme-toggle">🌙</button>
 
             <div class="container">
@@ -24,21 +28,21 @@
                 {% for team in repartition %}
                 <div class="round-line">
                     <div class="team">
-                        <p>Equipe {{ team.team1 }}</p> <input type="number" name="points1[]" required>
+                        <p><span data-translate="team">Equipe</span> {{ team.team1 }}</p> <input type="number" name="points1[]" required>
                     </div>
                     <div class="table">
-                        <p>Table {{ team.table }}</p>
+                        <p><span data-translate="table">Table</span> {{ team.table }}</p>
                     </div>
                     <div class="team">
-                        <input type="number" name="points2[]" required><p>Equipe {{ team.team2 }}</p>
+                        <input type="number" name="points2[]" required><p><span data-translate="team">Equipe</span> {{ team.team2 }}</p>
                     </div>
                 </div>
                 <input type="text" name="round" style="display: none" value="{{ team.round }}">
                 {% endfor %}
 
                 <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-                <button type="submit" class="button-4">Prochaine partie</button>
-                <a href="/players-screen" target="_blank">Ouvrir l'écran des joueurs</a>
+                <button type="submit" class="button-4" data-translate="next_round">Prochaine partie</button>
+                <a href="/players-screen" target="_blank" data-translate="players_screen">Ouvrir l'écran des joueurs</a>
 
                 </form>
         </div>
@@ -48,3 +52,4 @@
 </html>
 
 <script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
