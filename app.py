@@ -80,7 +80,7 @@ def tournaments():
     try:
         tournament_names = get_tournaments_names()
         return render_template("manage-tournaments.html", tournaments=tournament_names)
-    except sqlite3.OperationalError:
+    except Exception:
         return redirect(url_for("index"))
 
 @app.route("/new-tournament", methods=["GET", "POST"])
