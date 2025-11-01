@@ -45,9 +45,9 @@
             <tbody>
                 {% for item in repartition %}
                 <tr>
-                    <td>{{ item.team1 }}</td>
+                    <td>{{ t.team }} {{ item.team1 }}</td>
                     <th scope="col">{{ item.table }}</th>
-                    <td>{{ item.team2 }}</td>
+                    <td>{{ t.team }} {{ item.team2 }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

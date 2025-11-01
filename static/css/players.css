@@ -6,13 +6,12 @@ html, body {
 .container {
     display: flex;
     flex-direction: row;
-    height: 100vh; /* full screen */
+    height: 100vh; 
     padding: 1rem;
     box-sizing: border-box;
     gap: 1rem;
 }
 
-/* Tables side by side */
 .container > div {
     display: flex;
     justify-content: center;
@@ -22,14 +21,13 @@ html, body {
 }
 
 .container > div:first-child {
-    flex: 3; /* 75% width */
+    flex: 3; 
 }
 
 .container > div:nth-child(2) {
-    flex: 1; /* 25% width */
+    flex: 1;
 }
 
-/* Tables fill all available space */
 table {
     width: 100%;
     height: 100%;
@@ -48,7 +46,6 @@ th, td {
     white-space: nowrap;
 }
 
-/* Options at bottom (can overflow, not important) */
 .options {
     position: absolute;
     bottom: -60vh;

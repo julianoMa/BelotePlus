@@ -21,10 +21,9 @@ sys.dont_write_bytecode = True
 from flask import Flask, render_template, request, redirect, url_for, flash, session, make_response
 import ast
 
-from utils.init import *
-from utils.db import * 
-from utils.belote import *
-from utils.translations import load_translations, get_all_translations
+from common import *
+from data import db
+from core import *
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
