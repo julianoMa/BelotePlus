@@ -24,9 +24,10 @@ def start_server(app):
     print("⏳ Starting web server...")
 
     print("✅ Web server started")
-    print("💻 App is launched on http://127.0.0.1:5000/")
+    print("💻 App is launched on http://127.0.0.1:8080/")
 
-    app.run()
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080, threads=5)
 
 
 def db_checks():

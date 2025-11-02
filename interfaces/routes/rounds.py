@@ -51,7 +51,7 @@ def rounds():
     r = []
 
     if check is None:
-        generate_repartition(current_round, tournament_name)
+        generate_repartition(tournament_name)
 
     repartition = get_repartition(get_tournament_id(tournament_name), current_round)
 
