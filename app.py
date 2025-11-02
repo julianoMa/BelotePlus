@@ -26,7 +26,7 @@ from interfaces import *
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.debug = True
+# app.debug = True
 
 # Register routes
 register_bps(app)
