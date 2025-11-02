@@ -36,9 +36,9 @@ Pour les utilisateurs débutants et pas à l'aise avec le développement, vous p
 ### Avancé 
 Pour les utilisateurs avancés uniquement, ouvrez un terminal de commande et entrez la suite de commandes ci-dessous pour lancer BelotePlus :
 ```shell
-git clone -b stable https://github.com/julianoMa/BelotePlus.git # For latest stable release. No known bugs
-# OR
-git clone -b latest https://github.com/julianoMa/BelotePlus.git # For latest release, potential bugs !
+git clone -b stable https://github.com/julianoMa/BelotePlus.git # Pour la dernière version stable, devrait fonctionner normalement
+# OU
+git clone -b latest https://github.com/julianoMa/BelotePlus.git # Pour la dernière version, des bugs peuvent être présents !
 cd BelotePlus
 
 pip install -r requirements.txt
@@ -74,7 +74,9 @@ For beginner users who are not familiar with development, you can simply downloa
 ### Advanced
 For advanced users, open a command terminal and run the following commands to start BelotePlus :
 ```shell
-git clone https://github.com/julianoMa/BelotePlus.git
+git clone -b stable https://github.com/julianoMa/BelotePlus.git # For latest STABLE release, should work properly
+# OR
+git clone -b latest https://github.com/julianoMa/BelotePlus.git # For the latest release, bugs can take place
 cd BelotePlus
 
 pip install -r requirements.txt
