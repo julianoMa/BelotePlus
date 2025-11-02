@@ -1,3 +1,19 @@
+# BelotePlus - Gestionnaire de concours de belote
+# Copyright (C) 2025  Juliano Martins - Un Ange pour Juliano
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import os
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -197,15 +213,26 @@ def get_repartition(tournament, round_num):
         return [(r.tournament_id, r.round, r.tablenumber, r.teams) for r in repartitions]
 
 
-# ======================
-# POINTS
-# ======================
+# ====================== #
+#        POINTS          #
+# ====================== #
 
 def save_points(tournament_name, round_num, team_id, points):
-    """Sauvegarde les points d'une équipe pour un round"""
+    """Sauvegarde les points d'une équipe pour un round, en remplaçant si déjà existant"""
     with get_session() as session:
         tournament = session.query(Tournament).filter_by(name=tournament_name).first()
-        if tournament:
+        if not tournament:
+            return
+
+        existing = session.query(TeamPoints).filter_by(
+            tournament_id=tournament.id,
+            round_id=round_num,
+            team_id=team_id
+        ).first()
+
+        if existing:
+            existing.points = points 
+        else:
             team_points = TeamPoints(
                 tournament_id=tournament.id,
                 round_id=round_num,
@@ -213,6 +240,8 @@ def save_points(tournament_name, round_num, team_id, points):
                 points=points
             )
             session.add(team_points)
+
+        session.commit()
 
 def clear_points():
     """Supprime tous les points"""

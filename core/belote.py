@@ -1,8 +1,25 @@
-from utils.db import *
+# BelotePlus - Gestionnaire de concours de belote
+# Copyright (C) 2025  Juliano Martins - Un Ange pour Juliano
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from data import *
 from random import shuffle
 import ast
 
-def generate_repartition(round, tournament_name):
+def generate_repartition(tournament_name):
+    """Crée la répartition des équipes pour un tournois entier"""
     teams = get_teams(tournament_name)
     shuffle(teams)
     
@@ -32,6 +49,7 @@ def generate_repartition(round, tournament_name):
     return True
 
 def process_points(tournament, round, points1, points2):
+    """Sauvegarde les points d'une partie"""
     repartition = get_repartition(get_tournament_id(tournament), round)
     n = -1
 
@@ -45,6 +63,7 @@ def process_points(tournament, round, points1, points2):
     return
 
 def generate_leaderboard(tournament_name):
+    """Calcule le classement d'un tournois"""
     teams = len(get_teams(tournament_name))
 
     clear_previous_ranking(tournament_name)

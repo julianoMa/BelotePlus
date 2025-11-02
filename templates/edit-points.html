@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% set title_key = "page_title_edit" %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="/edit-points">
+        <label for="tournament-select">{{ t.choose_tournament }}</label>
+
+        <select name="tournaments" id="tournament-select">
+            <option value="">-- {{ t.please_choose }} --</option>
+            {% for tournament in tournaments %}
+                <option value="{{ tournament }}">{{ tournament }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" name="action" value="tournaments">{{ t.choose_tournament_btn }}</button>
+    </form>
+
+    {% if tournament != "none" and tournament != "" %}
+    <form method="POST" action="/edit-points">
+        <label for="round-select">{{ t.choose_round }}</label>
+
+        <select name="rounds-select" id="round-select">
+            <option value="">-- {{ t.please_choose }} --</option>
+            {% for i in range(rounds) %}
+                <option value="{{ i + 1 }}">{{ t.round }} {{ i + 1 }}</option>
+            {% endfor %}
+        </select>
+            
+        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+        <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
+
+        <button type="submit" name="action" value="rounds">{{ t.choose_round_btn }}</button>
+    </form>
+    {% endif %}
+
+    {% if round_selected != 0 %}
+    <form method="POST" action="/edit-points">
+        <label for="team-select">{{ t.choose_team }}</label>
+
+        <select name="team-select" id="team-select">
+            <option value="">-- {{ t.please_choose }} --</option>
+            {% for team in teams %}
+                <option value="{{ team }}">{{ team }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+        <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
+        <input type="number" name="round_selected" id="round_selected" style="display: none" value="{{ round_selected }}">
+
+        <button type="submit" name="action" value="team">{{ t.choose_team_btn }}</button>
+    </form>
+    {% endif %}
+
+    {% if team_selected != [] %}
+    <form method="POST" action="/edit-points">
+        <label for="point-input">{{ t.input_points }}</label>
+
+        <input type="number" name="point-input" id="point-input">
+
+        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+        <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
+        <input type="number" name="round_selected" id="round_selected" style="display: none" value="{{ round_selected }}">
+        <input type="text" name="team_selected" id="team_selected" style="display: none" value="{{ team_selected }}">
+
+        <button type="submit" name="action" value="points">{{ t.input_points_btn }}</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

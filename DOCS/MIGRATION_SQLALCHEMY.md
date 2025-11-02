@@ -8,14 +8,14 @@ BelotePlus utilise SQLAlchemy ORM pour gérer sa base de données. Ce système p
 
 ### Fichiers principaux
 
-1. **`utils/models.py`** : Définit tous les modèles de données
+1. **`data/models.py`** : Définit tous les modèles de données
    - `Tournament` : Représente un tournoi
    - `Team` : Représente une équipe de joueurs
    - `Ranking` : Stocke le classement des équipes
    - `TeamPoints` : Enregistre les points par round
    - `Repartition` : Gère la répartition des équipes sur les tables
 
-2. **`utils/db.py`** : Contient toutes les fonctions d'accès à la base de données
+2. **`data/db.py`** : Contient toutes les fonctions d'accès à la base de données
    - Gère les sessions SQLAlchemy
    - Fournit un context manager pour les transactions
    - Expose des fonctions de haut niveau pour manipuler les données
@@ -93,10 +93,10 @@ Gère la répartition des équipes sur les tables pour chaque round.
 
 ### Fonctions de haut niveau
 
-Le fichier `utils/db.py` expose des fonctions simples pour manipuler les données sans avoir à écrire de requêtes SQL :
+Le fichier `data/db.py` expose des fonctions simples pour manipuler les données sans avoir à écrire de requêtes SQL :
 
 ```python
-from utils import db
+from data import db
 
 # créer un tournoi
 db.create_tournament("Mon Tournoi", rounds=5, tables=3)
@@ -115,7 +115,7 @@ Ces fonctions gèrent automatiquement les transactions et la fermeture des sessi
 Pour des opérations plus complexes, vous pouvez utiliser directement les modèles SQLAlchemy :
 
 ```python
-from utils.db import get_session, Tournament, Team
+from data.db import get_session, Tournament, Team
 
 # ex: récup un tournoi avec toutes ses équipes
 with get_session() as session:
@@ -131,7 +131,7 @@ Le context manager `get_session()` garantit que la session est correctement ferm
 SQLAlchemy permet de construire des requêtes avancées de manière intuitive :
 
 ```python
-from utils.db import get_session, Team, Ranking
+from data.db import get_session, Team, Ranking
 
 with get_session() as session:
     # récup les 3 meilleures équipes tous tournois confondus

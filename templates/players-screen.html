@@ -45,9 +45,9 @@
             <tbody>
                 {% for item in repartition %}
                 <tr>
-                    <td>{{ item.team1 }}</td>
+                    <td>{{ t.team }} {{ item.team1 }}</td>
                     <th scope="col">{{ item.table }}</th>
-                    <td>{{ item.team2 }}</td>
+                    <td>{{ t.team }} {{ item.team2 }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -56,25 +56,25 @@
 
     <div class="options">
         <form method="POST" action="/players-screen">
-            <label for="tournament-select">Choisissez un tournois</label>
+            <label for="tournament-select">{{ t.choose_tournament }}</label>
 
             <select name="tournaments" id="tournament-select">
-                <option value="">-- Merci de choisir une option --</option>
+                <option value="">-- {{ t.please_choose }} --</option>
                 {% for tournament in tournaments %}
                     <option value="{{ tournament }}">{{ tournament }}</option>
                 {% endfor %}
             </select>
 
-            <button type="submit" name="action" value="tournaments">Choisir le tournois</button>
+            <button type="submit" name="action" value="tournaments">{{ t.choose_tournament_btn }}</button>
         </form>
 
         {% if tournament != "none" and tournament != "" %}
 
         <form method="POST" action="/players-screen">
-            <label for="round-select">Choisissez une partie</label>
+            <label for="round-select">{{ t.choose_round }}</label>
 
             <select name="rounds-select" id="round-select">
-                <option value="">-- Merci de choisir une option --</option>
+                <option value="">-- {{ t.please_choose }} --</option>
                 {% for i in range(rounds) %}
                     <option value="{{ i + 1 }}"><span>{{ t.round }}</span> n°{{ i + 1 }}</option>
                 {% endfor %}
@@ -83,7 +83,7 @@
             <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
             <input type="text" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
 
-            <button type="submit" name="action" value="rounds">Choisir la partie</button>
+            <button type="submit" name="action" value="rounds">{{ t.choose_round_btn }}</button>
         </form>
         {% endif %}
     </div>

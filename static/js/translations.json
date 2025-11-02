@@ -29,6 +29,15 @@
     "next_round": "Prochaine partie",
     "finish_tournament": "Terminer le concours",
     "players_screen": "Ouvrir l'écran des joueurs",
+    "choose_tournament": "Choisissez un concours",
+    "choose_tournament_btn": "Choisir le concours",
+    "choose_round": "Choisissez une partie",
+    "choose_round_btn": "Choisir la partie",
+    "choose_team": "Choisissez une équipe",
+    "choose_team_btn": "Choisir l'équipe",
+    "please_choose": "Merci de choisir une option",
+    "input_points": "Entrez la rectification des points",
+    "input_points_btn": "Mettre à jour les points",
     "current_round": "Partie en cours",
     "waiting": "En attente...",
     "page_title_home": "BelotePlus - Accueil",
@@ -36,7 +45,8 @@
     "page_title_manage": "BelotePlus - Gérer les concours",
     "page_title_teams": "BelotePlus - Gestion des équipes",
     "page_title_ranking": "BelotePlus - Classement",
-    "page_title_round": "BelotePlus - Partie"
+    "page_title_round": "BelotePlus - Partie",
+    "page_title_edit": "BelotePlus - Modifier les points"
   },
   "en": {
     "welcome": "Welcome to your belote tournament manager",
@@ -68,6 +78,15 @@
     "next_round": "Next round",
     "finish_tournament": "Finish tournament",
     "players_screen": "Open players screen",
+    "choose_tournament": "Choose a tournament",
+    "choose_tournament_btn": "Choisir the concours",
+    "choose_round": "Choose a round",
+    "choose_round_btn": "Choose the round",
+    "choose_team": "Choose a team",
+    "choose_team_btn": "Choose the team",
+    "please_choose": "Please select an option",
+    "input_points": "Input the points",
+    "input_points_btn": "Update the points",
     "current_round": "Current round",
     "waiting": "Waiting...",
     "page_title_home": "BelotePlus - Home",
@@ -75,6 +94,7 @@
     "page_title_manage": "BelotePlus - Manage tournaments",
     "page_title_teams": "BelotePlus - Team management",
     "page_title_ranking": "BelotePlus - Ranking",
-    "page_title_round": "BelotePlus - Round"
+    "page_title_round": "BelotePlus - Round",
+    "page_title_edit": "BelotePlus - Edit points"
   }
 }
