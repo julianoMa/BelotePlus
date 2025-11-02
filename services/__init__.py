@@ -3,4 +3,3 @@
 # - edit_points_service.py   :     Helpers needed for edit points screen
 
 from .player_service import *
-from .edit_points_service import *
