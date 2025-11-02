@@ -18,7 +18,7 @@ from data import *
 from random import shuffle
 import ast
 
-def generate_repartition(round, tournament_name):
+def generate_repartition(tournament_name):
     """Crée la répartition des équipes pour un tournois entier"""
     teams = get_teams(tournament_name)
     shuffle(teams)

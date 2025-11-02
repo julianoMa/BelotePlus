@@ -5,6 +5,7 @@ from .routes import *
 
 def register_bps(app):
     """Importe et enregistre tous les Blueprints du projet"""
+    app.register_blueprint(edit_bp)
     app.register_blueprint(index_bp)
     app.register_blueprint(teams_bp)
     app.register_blueprint(manage_tournaments_bp)

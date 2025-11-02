@@ -18,16 +18,15 @@
 import sys
 sys.dont_write_bytecode = True
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session, make_response
+from flask import Flask, request, redirect, url_for, make_response
 
 from common import *
 from core import *
-from data import *
-from services import *
 from interfaces import *
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+app.debug = True
 
 # Register routes
 register_bps(app)
@@ -54,6 +53,8 @@ def set_language(lang):
     resp.set_cookie('language', lang, max_age=31536000)
     return resp
 
+
+# Starting server
 if __name__ == "__main__":
     print("🛠️  Starting checks...")
     if db_checks() == True:

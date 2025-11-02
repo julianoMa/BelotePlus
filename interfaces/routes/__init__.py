@@ -1,5 +1,6 @@
 # This package contains Flask's routes
 
+from .edit_points import *
 from .index import *
 from .manage_teams import *
 from .manage_tournaments import *
