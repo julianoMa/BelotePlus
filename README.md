@@ -26,7 +26,7 @@ Elle a été conçue à la base pour l'association "Un Ange pour Juliano".
 - Répartition automatique des équipes sur les tables, pour qu'elles ne jouent jamais deux fois ensemble.
 - Calcul des scores et classement.
 - Page à vidéo-projeter pour les joueurs, afin de suivre leurs scores en détail et où ils jouent.
-- (A VENIR) Modification des scores avant classement en cas d'erreur de frappe
+- Modification des scores avant classement en cas d'erreur de frappe
 
 ## Installation
 
@@ -62,7 +62,7 @@ The project was originally created for the association "Un Ange pour Juliano".
 - Automatically distribute teams across tables so they never play together twice
 - Calculate scores and rankings
 - A projector-friendly page for players to follow detailed scores and table assignments
-- (WIP) Ability to edit scores before ranking in case of typing errors
+- Ability to edit scores before ranking in case of typing errors
 
 ## Installation
 
