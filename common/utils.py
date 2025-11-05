@@ -15,6 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import ast
+import os
+import sys
 
 def repartition_ast(repartition):
     """Convertis des strings en objets Python"""
@@ -25,3 +27,11 @@ def repartition_ast(repartition):
         r.append({"tournament": tournament, "round": cround, "table": table, "team1": teams[0], "team2": teams[1]})
 
     return r 
+
+def ressource_path(path):
+    """Renvoi le chemin ressource à partir d'un chemin de fichier absolu"""
+    try:
+        base_path = sys._MEIPASS # Temporary folder when .exe is running
+    except AttributeError: # The error means the file is launched in .py 
+        base_path = os.path.abspath(".") 
+    return os.path.join(base_path, path)

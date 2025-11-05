@@ -24,7 +24,7 @@ from common import *
 from core import *
 from interfaces import *
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=ressource_path("templates"))
 app.secret_key = os.urandom(24)
 # app.debug = True
 
