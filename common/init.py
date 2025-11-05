@@ -26,6 +26,9 @@ def start_server(app):
     print("✅ Web server started")
     print("💻 App is launched on http://127.0.0.1:8080/")
 
+    import webbrowser
+    webbrowser.open("http://127.0.0.1:8080")
+
     from waitress import serve
     serve(app, host="0.0.0.0", port=8080, threads=5)
 
