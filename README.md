@@ -38,7 +38,7 @@ Pour les utilisateurs avancés uniquement, ouvrez un terminal de commande et ent
 ```shell
 git clone -b stable https://github.com/julianoMa/BelotePlus.git # Pour la dernière version stable, devrait fonctionner normalement
 # OU
-git clone -b latest https://github.com/julianoMa/BelotePlus.git # Pour la dernière version, des bugs peuvent être présents !
+git clone -b dev https://github.com/julianoMa/BelotePlus.git # Pour la dernière version, des bugs peuvent être présents !
 cd BelotePlus
 
 pip install -r requirements.txt
@@ -76,7 +76,7 @@ For advanced users, open a command terminal and run the following commands to st
 ```shell
 git clone -b stable https://github.com/julianoMa/BelotePlus.git # For latest STABLE release, should work properly
 # OR
-git clone -b latest https://github.com/julianoMa/BelotePlus.git # For the latest release, bugs can take place
+git clone -b dev https://github.com/julianoMa/BelotePlus.git # For the latest release, bugs can take place
 cd BelotePlus
 
 pip install -r requirements.txt
