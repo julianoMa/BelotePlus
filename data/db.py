@@ -294,10 +294,10 @@ def get_ranking(tournament_name):
         if not tournament:
             return []
         
-        rankings = session.query(Ranking.team_id).filter_by(
+        rankings = session.query(Ranking.team_id, Ranking.points).filter_by(
             tournament_id=tournament.id
         ).order_by(Ranking.points.desc()).all()
-        return [r.team_id for r in rankings]
+        return [(r.team_id, r.points) for r in rankings]
 
 
 def clear_previous_ranking(tournament_name):

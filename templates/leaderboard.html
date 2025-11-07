@@ -9,7 +9,7 @@
 {% block content %}
 <div class="container">
     {% for i in ranking %}
-        <div class="rank"><span>{{ t.position }}</span> n°{{ loop.index }} - <span>{{ t.team }}</span> n°{{ i }}</div>
+        <div class="rank"><span>{{ t.position }}</span> n°{{ loop.index }} - <span>{{ t.team }}</span> n°{{ i[0] }} - {{ i[1] }} points</div>
     {% endfor %}
 </div>
 {% endblock %}
