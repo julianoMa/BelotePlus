@@ -21,8 +21,15 @@ from contextlib import contextmanager
 from .models import Base, Tournament, Team, Ranking, TeamPoints, Repartition
 
 
+def get_db_path():
+    """Retourne le chemin d'accès à la BDD dans le %AppData%"""
+    appdata_dir = os.path.join(os.environ['APPDATA'], 'BelotePlus')
+    os.makedirs(appdata_dir, exist_ok=True)
+    
+    return os.path.join(appdata_dir, 'belote.db')
+
 # config db
-DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'instance', 'belote.db')
+DB_PATH = get_db_path()
 DATABASE_URL = f'sqlite:///{DB_PATH}'
 
 # engine et session
