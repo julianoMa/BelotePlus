@@ -1,17 +1,28 @@
-# BelotePlus
+<p align="center">
+   <img width="512" height="239" alt="logo" src="https://github.com/user-attachments/assets/0e419cf5-c0a2-4858-bf06-010db1bc0cb8"/>
+</p>
 
-# Language
+<p align="center">
+   <img src="https://img.shields.io/github/license/julianoMa/BelotePlus">
+   <img src="https://img.shields.io/github/v/release/julianoMa/BelotePlus?color=blue">
+   <img src="https://img.shields.io/github/commit-activity/t/julianoMa/BelotePlus">
+   <img src="https://img.shields.io/github/issues-closed/julianoMa/BelotePlus">
+</p>
+
+## Language
 
 - 🇫🇷 [Français](#-français)
     * [Aperçu](#aperçu)
     * [Fonctionnalités](#fonctionnalités)
     * [Installation](#installation)
     * [Conditions d'utilisation](#conditions-dutilisation)
+    * [Remerciements](#remerciements)
 - 🇺🇸 [English](#-english)
     * [Overview](#overview)
     * [Features](#features)
     * [Installation](#installation-1)
     * [Terms of Use](#terms-of-use)
+    * [Thanks](#thanks)
 
 # 🇫🇷 Français
 
@@ -50,6 +61,9 @@ Ce projet est distribué sous la license **GNU GPL v3**.
 Vous êtes libre de modifier, redistribuer ou utiliser le code, tant que les versions dérivéees restent open source.
 Voir le [fichier LICENSE](https://github.com/julianoMa/BelotePlus/blob/main/LICENSE) pour plus d'informations.
 
+## Remerciements
+Merci à @Tarkhubal et @OmegaStator pour leurs contributions.
+
 # 🇺🇸 English
 
 ## Overview
@@ -87,3 +101,6 @@ py app.py
 This project is distributed under the **GNU GPL v3 license**.
 You are free to modify, redistribute, or use the code, as long as derivative versions remain open source.
 See the [LICENSE file](https://github.com/julianoMa/BelotePlus/blob/main/LICENSE) for more information.
+
+## Thanks
+Thanks to @Tarkhubal and @OmegaStator for their contributions.

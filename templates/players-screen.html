@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="container">
-    <div>
+    <div class="teams-wrapper">
         <table class="teams-table">
             <thead>
             <tr>
@@ -34,7 +34,7 @@
         </table>
     </div>
 
-    <div>
+    <div class="repartition-wrapper">
         <table class="repartition-table">
             <thead>
                 <th scope="col">{{ t.team }}</th>
@@ -45,9 +45,9 @@
             <tbody>
                 {% for item in repartition %}
                 <tr>
-                    <td>{{ t.team }} {{ item.team1 }}</td>
+                    <td>{{ item.team1 }}</td>
                     <th scope="col">{{ item.table }}</th>
-                    <td>{{ t.team }} {{ item.team2 }}</td>
+                    <td>{{ item.team2 }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
