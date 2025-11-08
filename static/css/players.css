@@ -14,10 +14,9 @@ html, body {
 
 .container > div {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .container > div:first-child {
@@ -34,7 +33,7 @@ table {
     border-collapse: collapse;
     border: 2px solid var(--text-color);
     text-align: center;
-    font-size: 2.4rem;
+    font-size: 1.69rem;
     table-layout: fixed;
 }
 
@@ -48,7 +47,7 @@ th, td {
 
 .options {
     position: absolute;
-    bottom: -60vh;
+    bottom: -120vh;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -56,4 +55,12 @@ th, td {
 
 .options select {
     width: 15rem;
+}
+
+.teams-table {
+    justify-content: flex-start;
+}
+
+#language-selector, #theme-toggle {
+    display: none;
 }

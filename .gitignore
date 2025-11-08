@@ -261,5 +261,8 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,flask
 
-belote.db
 compile.bat
+setup.iss
+
+compile/
+setup/
