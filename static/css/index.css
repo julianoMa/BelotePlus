@@ -1,17 +1,117 @@
-.container {
-    flex-direction: column;
+.home-container {
+    margin-top: 10vh;
+    text-align: center;
+}
 
+.home-github {
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #f5f5f5;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s;
+
+    margin-right: 1.5rem;
 }
 
-.container p {
-    width: 100%;
-    margin: 0;
+.home-coffee {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #FFDD00;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ccb100;
+    transition: background-color 0.2s;
 
-    font-size: 1.5rem;
+    margin-top: 1rem;
 }
 
-.links {
+
+.home-github:hover {
+    background-color: #e9e9e9;
+}
+
+.home-coffee:hover {
+    background-color: #e9ca00;
+}
+
+.quick-title {
+    margin-top: 13vh;
+}
+
+.quick-container {
     display: flex;
-    gap: 5rem;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1rem;
+
+    margin-top: 2vh;
+}
+
+.actions a, .stats a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 1.5rem;
+    background-color: #f5f5f5;
+    color: #333;
+    text-decoration: none;
+    border: 2px solid #9c9c9c;
+    transition: 0.2s;
+    width: 10rem;
+    height: 100%;
+}
+
+.right-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+
+.actions a:hover {
+    background-color: #e9e9e9;
+    scale: 1.05;
+}
+
+.actions img {
+    height: 3rem;
+}
+
+a.disabled {
+    text-decoration: line-through;
+    pointer-events: none;
+    cursor: default;
+    opacity: 50%;
+}
+
+.stats-title {
+    margin-top: 17vh;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1rem;
+
+    margin-top: 2vh;
+}
+
+.stats a {
+    width: 20rem;
+}
+
+.stats img {
+    height: 3rem;
 }

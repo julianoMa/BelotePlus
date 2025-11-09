@@ -30,7 +30,7 @@ def start_server(app):
     webbrowser.open("http://127.0.0.1:8080")
 
     from waitress import serve
-    serve(app, host="0.0.0.0", port=8080, threads=5)
+    serve(app, host="0.0.0.0", port=8080, threads=4)
 
 
 def db_checks():

@@ -7,11 +7,63 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <p>{{ t.welcome }}</p>
-    <div class="links">
-        <a href="/new-tournament" class="button-4">{{ t.create_tournament }}</a>
-        <a href="/manage-tournaments" class="button-4">{{ t.open_tournament }}</a>
+<div class="home-container">
+    <h1>Bienvenue sur BelotePlus !</h1>
+    <p>Gérez vos tournois de belote, suivez les scores, les équipes et le classement facilement !</p>
+
+    <a href="https://github.com/julianoMa/BelotePlus" class="home-github" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height=20px alt="Github">
+        Voir sur Github
+    </a>
+    <a href="https://buymeacoffee.com/julianoma?new=1" class="home-coffee" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/coffeescript/coffeescript-original.svg" height=20px alt="">
+        Soutenez moi
+    </a>
+</div>
+
+<h1 align="center" class="quick-title">Accès rapide</h1>
+<div class="quick-container">
+    <div class="actions"><a href="/new-tournament">
+        <img src="../static/img/plus.svg" alt="">
+        Créer un concours
+    </a></div>
+
+    <div class="right-group">
+        <div class="actions"><a href="" class="disabled"> <!-- Last ranking -->
+            <img src="../static/img/graph.svg" alt="">
+            Dernier classement
+        </a></div>
+        <div class="actions"><a href="/edit-points">
+            <img src="../static/img/edit.svg" alt="">
+            Modifier des points
+        </a></div>
     </div>
 </div>
+
+<h1 align="center" class="stats-title">Statistiques</h1>
+<div class="stats-container">
+    <div class="right-group">
+        <div class="stats"><a href="#">
+            <img src="../static/img/people.svg" alt="">
+            ~X joueurs par concours
+        </a>
+        </div>
+        <div class="stats"><a href="#">
+            <img src="../static/img/card.svg" alt="">
+            ~X tables par concours
+        </a>
+        </div>
+    </div>
+
+    <div class="stats"><a href="#" class="disabled">
+        <img src="../static/img/money.svg" alt="">
+        X€ d'entrées au total
+    </a>
+    </div>
+
+    <div class="graph">
+        <!-- Players per tournament for X previous -->
+    </div>
+</div>
+
 {% endblock %}
