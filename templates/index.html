@@ -8,56 +8,56 @@
 
 {% block content %}
 <div class="home-container">
-    <h1>Bienvenue sur BelotePlus !</h1>
-    <p>Gérez vos tournois de belote, suivez les scores, les équipes et le classement facilement !</p>
+    <h1>{{ t.home_title }}</h1>
+    <p>{{ t.home_description }}</p>
 
     <a href="https://github.com/julianoMa/BelotePlus" class="home-github" target="_blank">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height=20px alt="Github">
-        Voir sur Github
+        {{ t.github_button }}
     </a>
     <a href="https://buymeacoffee.com/julianoma?new=1" class="home-coffee" target="_blank">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/coffeescript/coffeescript-original.svg" height=20px alt="">
-        Soutenez moi
+        {{ t.coffee_button }}
     </a>
 </div>
 
-<h1 align="center" class="quick-title">Accès rapide</h1>
+<h1 align="center" class="quick-title">{{ t.quick_access }}</h1>
 <div class="quick-container">
     <div class="actions"><a href="/new-tournament">
         <img src="../static/img/plus.svg" alt="">
-        Créer un concours
+        {{ t.nav_create_tournaments }}
     </a></div>
 
     <div class="right-group">
         <div class="actions"><a href="" class="disabled"> <!-- Last ranking -->
             <img src="../static/img/graph.svg" alt="">
-            Dernier classement
+            {{ t.quick_last_ranking }}
         </a></div>
         <div class="actions"><a href="/edit-points">
             <img src="../static/img/edit.svg" alt="">
-            Modifier des points
+            {{ t.quick_edit_points }}
         </a></div>
     </div>
 </div>
 
-<h1 align="center" class="stats-title">Statistiques</h1>
+<h1 align="center" class="stats-title">{{ t.stats_title }}</h1>
 <div class="stats-container">
     <div class="right-group">
         <div class="stats"><a href="#">
             <img src="../static/img/people.svg" alt="">
-            ~X joueurs par concours
+            ~X {{ t.stats_players }}
         </a>
         </div>
         <div class="stats"><a href="#">
             <img src="../static/img/card.svg" alt="">
-            ~X tables par concours
+            ~X {{ t.stats_tables }}
         </a>
         </div>
     </div>
 
     <div class="stats"><a href="#" class="disabled">
         <img src="../static/img/money.svg" alt="">
-        X€ d'entrées au total
+        X {{ t.stats_money }}
     </a>
     </div>
 

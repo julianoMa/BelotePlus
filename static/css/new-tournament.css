@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height: 100vh;
+}
+
+.tournament-create-container {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 5vh;
+}
+
+.input, .button-submit {
+    display: block;
+    margin: 0.5rem auto;
+}
+
+.button-submit {
+    border: 2px solid #9c9c9c;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+
+    font-family: 'Poppins';
+
+    padding: 10px;
+    margin-top: 2rem;
+
+    transition: 0.2s
+}
+
+form p {
+    margin-top: 2rem;
+}
+
+.input {
+    outline: none;
+    font-size: 1.25rem;
+    font-family: 'Poppins';
+    height: 2rem;
+}
+
+.button-submit:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-dark);
+    scale: 1.05;
+    color: white;
+    transform: rotate(5deg);
+}
+
+.input:focus {
+    border-radius: 5px;
+    border: 2px solid var(--accent)
+}

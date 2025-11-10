@@ -13,7 +13,27 @@
     "page_title_teams": "BelotePlus - Gestion des équipes",
     "page_title_ranking": "BelotePlus - Classement",
     "page_title_round": "BelotePlus - Partie",
-    "page_title_edit": "BelotePlus - Modifier les points"
+    "page_title_edit": "BelotePlus - Modifier les points",
+
+    "home_title": "Bienvenue sur BelotePlus !",
+    "home_description": "Gérez vos tournois de belote, suivez les scores, les équipes et le classement facilement !",
+    "github_button": "Voir sur Github",
+    "coffee_button": "Soutenez moi",
+
+    "quick_access": "Accès rapide",
+    "quick_last_ranking": "Dernier classement",
+    "quick_edit_points": "Modifier des points",
+
+    "stats_title": "Statistiques",
+    "stats_players": "joueurs par tournois",
+    "stats_tables": "tables par concours",
+    "stats_money": "€ d'entrées au total",
+
+    "new_tournament_title": "Créer un nouveau tournois",
+    "input_tournament_name": "Nom du concours",
+    "input_rounds_number": "Nombre de parties",
+    "input_tables_number": "Nombre de tables",
+    "create_tournament_button": "Créer le concours"
   },
   "en": {
     "nav_home": "Home",
@@ -29,6 +49,26 @@
     "page_title_teams": "BelotePlus - Team management",
     "page_title_ranking": "BelotePlus - Ranking",
     "page_title_round": "BelotePlus - Round",
-    "page_title_edit": "BelotePlus - Edit points"
+    "page_title_edit": "BelotePlus - Edit points",
+
+    "home_title": "Welcome to BelotePlus !",
+    "home_description": "Manage your belote tournaments, follow up scores, teams and ranking easily !",
+    "github_button": "See on Github",
+    "coffee_button": "Buy me a coffee",
+
+    "quick_access": "Quick actions",
+    "quick_last_ranking": "Last ranking",
+    "quick_edit_points": "Edit some points",
+
+    "stats_title": "Statistics",
+    "stats_players": "players per tournament",
+    "stats_tables": "tables per tournament",
+    "stats_money": "€ for total admissions",
+
+    "new_tournament_title": "Create a new tournament",
+    "input_tournament_name": "Tournament's name",
+    "input_rounds_number": "Number of rounds",
+    "input_tables_number": "Number of tables",
+    "create_tournament_button": "Create tournament"
   }
 }

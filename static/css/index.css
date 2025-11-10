@@ -13,7 +13,7 @@
     color: #333;
     text-decoration: none;
     border: 1px solid #ddd;
-    transition: background-color 0.2s;
+    transition: 0.2s;
 
     margin-right: 1.5rem;
 }
@@ -28,18 +28,21 @@
     color: #333;
     text-decoration: none;
     border: 1px solid #ccb100;
-    transition: background-color 0.2s;
+    transition: 0.2s;
 
     margin-top: 1rem;
 }
 
 
 .home-github:hover {
+    scale: 1.03;
     background-color: #e9e9e9;
 }
 
 .home-coffee:hover {
+    scale: 1.03;
     background-color: #e9ca00;
+    
 }
 
 .quick-title {
@@ -80,8 +83,11 @@
 
 
 .actions a:hover {
-    background-color: #e9e9e9;
+    border-color: var(--accent);
+    background-color: var(--accent-dark);
     scale: 1.05;
+    color: white;
+    transform: rotate(-5deg);
 }
 
 .actions img {
@@ -110,6 +116,13 @@ a.disabled {
 
 .stats a {
     width: 20rem;
+
+    transition: 0.2s;
+}
+
+.stats a:hover {
+    border-color: var(--accent);
+    scale: 1.05;
 }
 
 .stats img {

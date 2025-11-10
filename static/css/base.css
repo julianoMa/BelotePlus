@@ -43,6 +43,8 @@ h1, p {
 :root {
     --bg-color: rgb(236, 236, 236);
     --bg-color-shadow: rgb(170, 170, 170);
+    --accent: #3B82F6;
+    --accent-dark: #2563EB;
     --hover-color: #e3e4e7;
     --text-color: #000000;
     --text-color-hover: whitesmoke;
