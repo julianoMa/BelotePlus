@@ -65,6 +65,11 @@
 
     <script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+    <script type="module" src="https://unpkg.com/wired-elements?module"></script>
+
+    <script>
+        import * as name from "wired-elements"
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 

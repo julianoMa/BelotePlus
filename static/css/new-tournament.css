@@ -8,6 +8,16 @@
     height: 100vh;
 }
 
+/* 
+
+#=======================================#
+#                                       #
+#                 FORM                  #
+#                                       #
+#=======================================#
+
+*/
+
 .tournament-create-container {
     display: flex;
     justify-content: center;
@@ -44,12 +54,22 @@ form p {
     height: 2rem;
 }
 
+/* 
+
+#=======================================#
+#                                       #
+#                 ANIM                  #
+#                                       #
+#=======================================#
+
+*/
+
 .button-submit:hover {
     border-color: var(--accent);
     background-color: var(--accent-dark);
     scale: 1.05;
     color: white;
-    transform: rotate(5deg);
+    transform: rotate(2deg);
 }
 
 .input:focus {

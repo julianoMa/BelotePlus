@@ -8,58 +8,59 @@
 
 {% block content %}
 <div class="home-container">
-    <h1>{{ t.home_title }}</h1>
+    <wired-link elevation="2"><h1>{{ t.home_title }}</h1></wired-link>
     <p>{{ t.home_description }}</p>
 
-    <a href="https://github.com/julianoMa/BelotePlus" class="home-github" target="_blank">
+    <wired-button class="home-github"><a href="https://github.com/julianoMa/BelotePlus" target="_blank">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height=20px alt="Github">
         {{ t.github_button }}
-    </a>
-    <a href="https://buymeacoffee.com/julianoma?new=1" class="home-coffee" target="_blank">
+    </a></wired-button>
+    <wired-button class="home-coffee"><a href="https://buymeacoffee.com/julianoma?new=1" target="_blank">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/coffeescript/coffeescript-original.svg" height=20px alt="">
         {{ t.coffee_button }}
-    </a>
+    </a></wired-button>
 </div>
 
-<h1 align="center" class="quick-title">{{ t.quick_access }}</h1>
+<wired-divider elevation="2" style="margin-top: 10vh; z-index: 0; position: relative;"></wired-divider>
+
+<h1 class="quick-title"><wired-link elevation="1">{{ t.quick_access }}</wired-link></h1>
 <div class="quick-container">
-    <div class="actions"><a href="/new-tournament">
+    <div class="actions"><wired-button><a href="/new-tournament">
         <img src="../static/img/plus.svg" alt="">
         {{ t.nav_create_tournaments }}
-    </a></div>
+    </a></wired-button></div>
 
     <div class="right-group">
-        <div class="actions"><a href="" class="disabled"> <!-- Last ranking -->
+        <div class="actions"><wired-button><a href="" class="disabled"> <!-- Last ranking -->
             <img src="../static/img/graph.svg" alt="">
             {{ t.quick_last_ranking }}
-        </a></div>
-        <div class="actions"><a href="/edit-points">
+        </a></wired-button></div>
+        <div class="actions"><wired-button><a href="/edit-points">
             <img src="../static/img/edit.svg" alt="">
             {{ t.quick_edit_points }}
-        </a></div>
+        </a></wired-button></div>
     </div>
 </div>
 
-<h1 align="center" class="stats-title">{{ t.stats_title }}</h1>
+<wired-divider elevation="2" style="margin-top: 10vh; z-index: 0; position: relative;"></wired-divider>
+
+<h1 align="center" class="stats-title"><wired-link elevation="1">{{ t.stats_title }}</wired-link></h1>
 <div class="stats-container">
     <div class="right-group">
-        <div class="stats"><a href="#">
+        <div class="stats"><wired-button><a href="#">
             <img src="../static/img/people.svg" alt="">
             ~X {{ t.stats_players }}
-        </a>
-        </div>
-        <div class="stats"><a href="#">
+        </a></div></wired-button>
+        <div class="stats"><wired-button><a href="#">
             <img src="../static/img/card.svg" alt="">
             ~X {{ t.stats_tables }}
-        </a>
-        </div>
+        </a></div></wired-button>
     </div>
 
-    <div class="stats"><a href="#" class="disabled">
+    <div class="stats"><wired-button><a href="#" class="disabled">
         <img src="../static/img/money.svg" alt="">
         X {{ t.stats_money }}
-    </a>
-    </div>
+    </a></div></wired-button>
 
     <div class="graph">
         <!-- Players per tournament for X previous -->
