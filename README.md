@@ -62,7 +62,7 @@ Vous êtes libre de modifier, redistribuer ou utiliser le code, tant que les ver
 Voir le [fichier LICENSE](https://github.com/julianoMa/BelotePlus/blob/main/LICENSE) pour plus d'informations.
 
 ## Remerciements
-Merci à @Tarkhubal , @OmegaStator et @fluxlab pour leurs aide et contributions.
+Merci à @Tarkhubal , @OmegaStator et @fluxylab pour leurs aide et contributions.
 
 # 🇺🇸 English
 
