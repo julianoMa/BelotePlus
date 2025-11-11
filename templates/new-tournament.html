@@ -9,16 +9,18 @@
 {% block content %}
 <div class="container">
     <h1>{{ t.new_tournament_title }}</h1>
+    <wired-card elevation="2">
     <div class="tournament-create-container">
         <form method="POST" action="/new-tournament">
             <p>{{ t.input_tournament_name }}</p>
-            <input class="input" type="text" name="tournament_name" id="tournament-name" required>
+            <wired-input placeholder="Ex: 7 Octobre"><input class="input" type="text" name="tournament_name" id="tournament-name" required></wired-input>
             <p>{{ t.input_rounds_number }}</p>
-            <input class="input" type="number" name="rounds_number" id="round-number" required>
+            <wired-input placeholder="Ex: 4"><input class="input" type="number" name="rounds_number" id="round-number" required></wired-input>
             <p>{{ t.input_tables_number }}</p>
-            <input class="input" type="number" name="table_number" id="table-number" required>
-            <button type="submit" class="button-submit">{{ t.create_tournament_button }}</button>
+            <wired-input placeholder="Ex: 18"><input class="input" type="number" name="table_number" id="table-number" required></wired-input>
+            <button type="submit" class="button-submit"><wired-button elevation="2">{{ t.create_tournament_button }}</wired-button></button>
         </form>
     </div>
+    </wired-card>
 </div>
 {% endblock %}

@@ -6,6 +6,8 @@
 
     <title>{% if title_key %}{{ t[title_key] }}{% else %}{% block title %}BelotePlus{% endblock %}{% endif %}</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="static/css/base.css">
     {% block extra_css %}{% endblock %}
 
@@ -15,6 +17,7 @@
 </head>
 
 <header>
+    <wired-card elevation="1">
     <nav>
         <ul>
             <li class="nav_index">
@@ -40,6 +43,7 @@
             </li>
         </ul>
     </nav>
+    </wired-card>
 </header>
 
 <body>

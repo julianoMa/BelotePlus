@@ -8,6 +8,10 @@
 
 */
 
+wired-link {
+    transition: 0.2s;
+}
+
 .home-container {
     margin-top: 10vh;
     text-align: center;
@@ -172,6 +176,10 @@ a.disabled {
     scale: 1.03;
     background-color: #e9ca00;
     
+}
+
+wired-link:hover {
+    --wired-link-decoration-color: var(--accent)
 }
 
 .actions wired-button:hover {
