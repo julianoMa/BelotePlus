@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height: 100vh;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 FORM                  #
+#                                       #
+#=======================================#
+
+*/
+
+.tournament-create-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button-submit {
+    border-width: 0;
+    border-radius: 2px;
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+
+    display: block;
+    margin: 2rem auto 0 auto;
+
+    margin-top: 2rem;
+
+    transition: 0.2s
+}
+
+.input {
+    outline: none;
+    border-width: 0px;
+
+    font-size: 1.25rem;
+    font-family: 'Poppins';
+
+    background-color: var(--hover-color);
+    color: var(--text-color);
+
+    height: 2rem;
+    width: 15rem;
+}
+
+.container > wired-card {
+    margin-top: 5vh;
+    padding: 5rem;
+
+    background-color: var(--hover-color);
+}
+
+form p:not(:first-child) {
+    margin-top: 2rem;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 ANIM                  #
+#                                       #
+#=======================================#
+
+*/
+
+.button-submit:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-dark);
+    scale: 1.05;
+    color: var(--text-color);
+    transform: rotate(2deg);
+}

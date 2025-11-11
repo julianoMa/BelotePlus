@@ -3,21 +3,24 @@
 {% set title_key = "page_title_new" %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/new-tournament.css') }}">
 {% endblock %}
 
 {% block content %}
 <div class="container">
+    <h1>{{ t.new_tournament_title }}</h1>
+    <wired-card elevation="2">
     <div class="tournament-create-container">
         <form method="POST" action="/new-tournament">
-            <p>{{ t.tournament_name }}</p>
-            <input class="input" type="text" name="tournament_name" id="tournament-name" required>
-            <p>{{ t.rounds_number }}</p>
-            <input class="input" type="number" name="rounds_number" id="round-number" required>
-            <p>{{ t.tables_number }}</p>
-            <input class="input" type="number" name="table_number" id="table-number" required>
-            <button type="submit" class="button-4">{{ t.create_tournament_button }}</button>
+            <p>{{ t.input_tournament_name }}</p>
+            <wired-card><input class="input" type="text" name="tournament_name" id="tournament-name" required></wired-card>
+            <p>{{ t.input_rounds_number }}</p>
+            <wired-card><input class="input" type="number" name="rounds_number" id="round-number" required></wired-card>
+            <p>{{ t.input_tables_number }}</p>
+            <wired-card><input class="input" type="number" name="table_number" id="table-number" required></wired-card>
+            <button type="submit" class="button-submit"><wired-button elevation="2">{{ t.create_tournament_button }}</wired-button></button>
         </form>
     </div>
+    </wired-card>
 </div>
 {% endblock %}

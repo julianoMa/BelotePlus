@@ -1,17 +1,202 @@
-.container {
-    flex-direction: column;
+/* 
 
+#=======================================#
+#                                       #
+#                TITLE                  #
+#                                       #
+#=======================================#
+
+*/
+
+wired-link {
+    transition: 0.2s;
+}
+
+.home-container {
+    padding-top: 10vh;
+    text-align: center;
+}
+
+.home-container p {
+    margin-top: 1vh;
+}
+
+.home-github {
+    background-color: var(--btn-bg);
+    border: 1px solid var(--hover-color);
+    transition: 0.2s;
+
+    margin-top: 1rem;
+    margin-right: 2rem;
+}
+
+.home-coffee {
+    background-color: #FFDD00;
+    border: 1px solid #ccb100;
+    transition: 0.2s;
+}
+
+.home-github a, .home-coffee a {
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
+
+    padding: 8px;
 }
 
-.container p {
-    width: 100%;
-    margin: 0;
-
-    font-size: 1.5rem;
+.home-github a {
+    color: var(--text-color);
 }
 
-.links {
+/* 
+
+#=======================================#
+#                                       #
+#              QUICK ACCESS             #
+#                                       #
+#=======================================#
+
+*/
+
+.quick-title {
+    margin-top: 4vh;
+    text-align: center;
+}
+
+.quick-container > .actions {
     display: flex;
-    gap: 5rem;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quick-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-top: 4vh;
+}
+
+.actions a, .stats a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: 0.2s;
+
+    width: 10rem;
+}
+
+.actions wired-button {
+    background-color: var(--btn-bg);
+    transition: 0.2s;
+}
+
+.stats wired-button {
+    background-color: var(--btn-bg);
+    transition: 0.2s;
+}
+
+.right-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.actions img {
+    height: 3rem;
+}
+
+a.disabled {
+    text-decoration: line-through;
+    pointer-events: none;
+    cursor: default;
+    opacity: 50%;
+    animation: none;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                STATS                  #
+#                                       #
+#=======================================#
+
+*/
+
+.stats-title {
+    margin-top: 4vh;
+}
+
+.stats-container > .stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stats-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-top: 4vh;
+}
+
+.stats a {
+    width: 20rem;
+
+    transition: 0.2s;
+}
+
+.stats img {
+    height: 3rem;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 ANIM                  #
+#                                       #
+#=======================================#
+
+*/
+
+.home-github:hover {
+    scale: 1.03;
+    background-color: var(--btn-bg);
+}
+
+.home-coffee:hover {
+    scale: 1.03;
+    background-color: var(--btn-coffee);
+    
+}
+
+wired-link:hover {
+    --wired-link-decoration-color: var(--accent)
+}
+
+.actions wired-button:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-dark);
+    scale: 1.05;
+    transform: rotate(-2deg);
+}
+
+.actions a:hover {
+    color: var(--hover-color);
+}
+
+.stats wired-button:hover {
+    border-color: var(--accent);
+    scale: 1.05;
 }

@@ -1,0 +1,54 @@
+.container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 FORM                  #
+#                                       #
+#=======================================#
+
+*/
+
+form {
+    padding: 2rem;
+}
+
+button {
+    border-width: 0;
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+    margin-left: 5rem;
+
+    transition: 0.2s;
+}
+
+select, input {
+    margin-left: 5rem;
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+
+    padding: 10px;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 ANIM                  #
+#                                       #
+#=======================================#
+
+*/
+
+button:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-dark);
+    scale: 1.05;
+    color: var(--text-color);
+    transform: rotate(-2deg);
+}

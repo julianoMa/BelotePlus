@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html lang="{{ current_lang }}">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% if title_key %}{{ t[title_key] }}{% else %}{% block title %}BelotePlus{% endblock %}{% endif %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="static/css/base.css">
+    {% block extra_css %}{% endblock %}
 
     <link rel="preload" href="{{ url_for('static', filename='fonts/Poppins-Regular.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icon.png') }}" />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    {% block extra_css %}{% endblock %}
 </head>
+
+<header>
+    <wired-card elevation="1">
+    <nav>
+        <ul>
+            <li class="nav_index">
+                <a href="/"><img src="static/img/home.png">{{ t.nav_home }}</a>
+            </li>
+            <li class="nav_create-tournament">
+                <a href="/new-tournament"><img src="static/img/trophy.png">{{ t.nav_create_tournaments }}</a>
+            </li>
+            <li class="nav_manage-tournaments">
+                <a href="/manage-tournaments"><img src="static/img/folder.png">{{ t.nav_my_tournaments }}</a>
+            </li>
+            <li class="nav_edit">
+                <a href="/edit-points"><img src="static/img/edit.png">{{ t.nav_edit }}</a>
+            </li>
+
+            <li class="spacer"></li>
+
+            <li class="nav_rules">
+                <a href="/rules"><img src="static/img/book.png">{{ t.nav_rules }}</a>
+            </li>
+            <li class="nav_settings">
+                <a href="/settings"><img src="static/img/gear.png">{{ t.nav_settings }}</a>
+            </li>
+        </ul>
+    </nav>
+    </wired-card>
+</header>
 
 <body>
     <main>
@@ -36,6 +69,11 @@
 
     <script src="{{ url_for('static', filename='js/color-mode.js') }}"></script>
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+    <script type="module" src="https://unpkg.com/wired-elements?module"></script>
+
+    <script>
+        import * as name from "wired-elements"
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 

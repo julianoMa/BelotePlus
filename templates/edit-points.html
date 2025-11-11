@@ -2,8 +2,13 @@
 
 {% set title_key = "page_title_edit" %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit-points.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="container">
+<div class="container" align="center">
+    <wired-card elevation="2">
     <form method="POST" action="/edit-points">
         <label for="tournament-select">{{ t.choose_tournament }}</label>
 
@@ -14,7 +19,7 @@
             {% endfor %}
         </select>
 
-        <button type="submit" name="action" value="tournaments">{{ t.choose_tournament_btn }}</button>
+        <button type="submit" name="action" value="tournaments"><wired-button>{{ t.choose_tournament_btn }}</wired-button></button>
     </form>
 
     {% if tournament != "none" and tournament != "" %}
@@ -31,7 +36,7 @@
         <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
         <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
 
-        <button type="submit" name="action" value="rounds">{{ t.choose_round_btn }}</button>
+        <button type="submit" name="action" value="rounds"><wired-button>{{ t.choose_round_btn }}</wired-button></button>
     </form>
     {% endif %}
 
@@ -50,7 +55,7 @@
         <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
         <input type="number" name="round_selected" id="round_selected" style="display: none" value="{{ round_selected }}">
 
-        <button type="submit" name="action" value="team">{{ t.choose_team_btn }}</button>
+        <button type="submit" name="action" value="team"><wired-button>{{ t.choose_team_btn }}</wired-button></button>
     </form>
     {% endif %}
 
@@ -65,8 +70,9 @@
         <input type="number" name="round_selected" id="round_selected" style="display: none" value="{{ round_selected }}">
         <input type="text" name="team_selected" id="team_selected" style="display: none" value="{{ team_selected }}">
 
-        <button type="submit" name="action" value="points">{{ t.input_points_btn }}</button>
+        <button type="submit" name="action" value="points"><wired-button>{{ t.input_points_btn }}</wired-button></button>
     </form>
     {% endif %}
+    </wired-card>
 </div>
 {% endblock %}

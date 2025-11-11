@@ -1,0 +1,68 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height: 100vh;
+}
+
+.container > wired-card {
+    margin-top: 5vh;
+
+    background-color: var(--hover-color);
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 FORM                  #
+#                                       #
+#=======================================#
+
+*/
+
+.tournament-list-container {
+    display: flex;
+    justify-content: center;
+
+    padding: 3rem;
+}
+
+.list {
+    padding: 5rem;
+}
+
+.btn {
+    border-width: 0;
+
+    margin-top: 5vh;
+    transition: 0.2s;
+
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+}
+
+.btn:first-child {
+    margin-right: 3rem;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 ANIM                  #
+#                                       #
+#=======================================#
+
+*/
+
+.btn:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-dark);
+    scale: 1.05;
+    color: var(--text-color);
+    transform: rotate(2deg);
+}

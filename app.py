@@ -14,9 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import sys
 sys.dont_write_bytecode = True
+
+import logging
+logging.getLogger('waitress.queue').setLevel(logging.CRITICAL) # To prevent queue error message to flood the console
 
 from flask import Flask, request, redirect, url_for, make_response
 
@@ -26,7 +28,7 @@ from interfaces import *
 
 app = Flask(__name__, template_folder=ressource_path("templates"))
 app.secret_key = os.urandom(24)
-# app.debug = True
+app.debug = True
 
 # Register routes
 register_bps(app)

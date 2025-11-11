@@ -3,21 +3,29 @@
 {% set title_key = "page_title_manage" %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manage-tournaments.css') }}">
 {% endblock %}
 
 {% block content %}
 <div class="container">
+    <h1>{{ t.manage_tournaments_title }}</h1>
+    <wired-card elevation="2">
     <div class="tournament-list-container">
         <form method="POST" action="/manage-tournaments">
-            <div>
+            <div class="list">
+                <wired-card>
                 {% for name in tournaments %}
                     <input type="radio" name="tournament" value="{{ name }}" required> {{ name }}<br>
                 {% endfor %}
+                </wired-card>
             </div>
-            <button type="submit" name="action" value="open" class="button-4">{{ t.open }}</button>
-            <button type="submit" name="action" value="delete" class="button-4">{{ t.delete }}</button>
+
+            <div class="form-buttons" align="center">
+                <button type="submit" name="action" value="open" class="btn"><wired-button elevation="2">{{ t.open }}</wired-button></button>
+                <button type="submit" name="action" value="delete" class="btn"><wired-button elevation="1">{{ t.delete }}</wired-button></button>
+            </div>
         </form>
     </div>
+    </wired-card>
 </div>
 {% endblock %}
