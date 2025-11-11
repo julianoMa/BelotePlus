@@ -13,7 +13,7 @@ wired-link {
 }
 
 .home-container {
-    margin-top: 10vh;
+    padding-top: 10vh;
     text-align: center;
 }
 
@@ -22,8 +22,8 @@ wired-link {
 }
 
 .home-github {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
+    background-color: var(--btn-bg);
+    border: 1px solid var(--hover-color);
     transition: 0.2s;
 
     margin-top: 1rem;
@@ -42,8 +42,10 @@ wired-link {
     gap: 8px;
 
     padding: 8px;
+}
 
-    color: #333;
+.home-github a {
+    color: var(--text-color);
 }
 
 /* 
@@ -83,7 +85,7 @@ wired-link {
     gap: 8px;
     padding: 8px 14px;
     border-radius: 1.5rem;
-    color: #333;
+    color: var(--text-color);
     text-decoration: none;
     transition: 0.2s;
 
@@ -91,12 +93,12 @@ wired-link {
 }
 
 .actions wired-button {
-    background-color: #f5f5f5;
+    background-color: var(--btn-bg);
     transition: 0.2s;
 }
 
 .stats wired-button {
-    background-color: #f5f5f5;
+    background-color: var(--btn-bg);
     transition: 0.2s;
 }
 
@@ -170,12 +172,12 @@ a.disabled {
 
 .home-github:hover {
     scale: 1.03;
-    background-color: #e9e9e9;
+    background-color: var(--btn-bg);
 }
 
 .home-coffee:hover {
     scale: 1.03;
-    background-color: #e9ca00;
+    background-color: var(--btn-coffee);
     
 }
 
@@ -191,7 +193,7 @@ wired-link:hover {
 }
 
 .actions a:hover {
-    color: white;
+    color: var(--hover-color);
 }
 
 .stats wired-button:hover {

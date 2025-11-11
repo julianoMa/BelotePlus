@@ -5,7 +5,7 @@ html, header, body {
 
     color: var(--text-color);
 
-    background-color: rgb(233, 233, 233);
+    background-color: var(--bg-color);
 }
 
 body {
@@ -49,26 +49,27 @@ a {
 */
 
 :root {
-    --bg-color: rgb(236, 236, 236);
-    --bg-color-shadow: rgb(170, 170, 170);
     --accent: #3B82F6;
     --accent-dark: #2563EB;
-    --hover-color: #e3e4e7;
+    --hover-color: #fff;
     --text-color: #000000;
-    --text-color-hover: whitesmoke;
     --wired-link-decoration-color: black;
 
-    --bg-image: url("../img/bg-light.jpg")
+    --bg-color: rgb(233, 233, 233);
+    --btn-bg: #f5f5f5;
+    --btn-coffee: #e9ca00;
 }
 
 body.dark-mode {
-    --bg-color: #121212;
-    --bg-color-shadow: #000000;
-    --hover-color: #2c2c2c;
-    --text-color: whitesmoke;
-    --text-color-hover: #000000;
+    --accent: #3B82F6;
+    --accent-dark: #2563EB;
+    --hover-color: #111111;
+    --text-color: #ffffff;
+    --wired-link-decoration-color: rgb(240, 240, 240);
 
-    --bg-image: url("../img/bg-dark.jpg")
+    --bg-color: rgb(27, 27, 27);
+    --btn-bg: #292929;
+    --btn-coffee: #e9ca00;
 }
 
 /* 

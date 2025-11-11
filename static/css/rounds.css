@@ -19,8 +19,17 @@ form > .btn {
     width: auto;
 }
 
+form a {
+    color: var(--text-color);
+    padding: 8px;
+    background-color: var(--btn-bg);
+    transition: 0.2s;
+
+    width: 10rem;
+}
+
 .container {
-    margin-top: 2rem;
+    padding-top: 2rem;
     display: flex;
     
     flex-direction: column; 
@@ -35,6 +44,9 @@ input {
     font-size: 1.25rem;
     font-family: 'Poppins';
 
+    background-color: var(---btn-bg);
+    color: var(--text-color);
+
     height: 1rem;
     width: 6rem;
 }
@@ -43,7 +55,7 @@ input {
     margin-top: 5vh;
     padding: 5rem;
 
-    background-color: #fff;
+    background-color: var(---btn-bg);
 }
 
 .round-line {
@@ -54,7 +66,7 @@ input {
 }
 
 wired-card {
-    background-color: #fff;
+    background-color: var(--hover-color);
 }
 
 p span {
@@ -62,10 +74,13 @@ p span {
 }
 
 .btn {
-    border: 0px solid #fff;
+    border-width: 0;
 
     margin-top: 5vh;
     transition: 0.2s;
+
+    background-color: var(--btn-bg);
+    color: var(--text-color);
 }
 
 .team, .table {
@@ -101,6 +116,14 @@ input[type="number"] {
     border-color: var(--accent);
     background-color: var(--accent-dark);
     scale: 1.05;
-    color: white;
+    color: var(--text-color);
     transform: rotate(2deg);
+}
+
+form > a:hover {
+    border-color: var(--accent);
+    background-color: var(--accent-dark);
+    scale: 1.05;
+    color: var(--text-color);
+    transform: rotate(-2deg);
 }

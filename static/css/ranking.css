@@ -38,7 +38,7 @@ header {
 
 .card {
     margin-top: 3vw;
-    background-color: #fff;
+    background-color: var(--hover-color);
 }
 
 .container {
@@ -63,7 +63,7 @@ header {
 }
 
 .rank-card {
-    background-color: #fff;
+    background-color: var(--hover-color);
 
     transition: 0.2s;
 }
@@ -118,5 +118,5 @@ header {
 .rank-card:hover {
     scale: 1.05;
     background-color: var(--accent);
-    color: white;
+    color: var(--hover-color);
 }
