@@ -30,10 +30,29 @@
     "stats_money": "€ d'entrées au total",
 
     "new_tournament_title": "Créer un nouveau tournois",
+    "manage_tournaments_title": "Gérer les tournois",
+
     "input_tournament_name": "Nom du concours",
     "input_rounds_number": "Nombre de parties",
     "input_tables_number": "Nombre de tables",
-    "create_tournament_button": "Créer le concours"
+    "create_tournament_button": "Créer le concours",
+
+    "open": "Ouvrir",
+    "delete": "Supprimer",
+
+    "next_round": "Prochaine partie",
+    "players_screen": "Ecran des joueurs",
+
+    "choose_tournament": "Choisissez un concours",
+    "choose_tournament_btn": "Choisir le concours",
+    "choose_round": "Choisissez une partie",
+    "choose_round_btn": "Choisir la partie",
+    "please_choose": "Merci de choisir",
+
+    "team": "Equipe",
+    "round": "Partie",
+    "table": "Table", 
+    "points": "Points totaux"
   },
   "en": {
     "nav_home": "Home",
@@ -66,9 +85,28 @@
     "stats_money": "€ for total admissions",
 
     "new_tournament_title": "Create a new tournament",
+    "manage_tournaments_title": "Manage tournaments",
+    
     "input_tournament_name": "Tournament's name",
     "input_rounds_number": "Number of rounds",
     "input_tables_number": "Number of tables",
-    "create_tournament_button": "Create tournament"
+    "create_tournament_button": "Create tournament",
+
+    "open": "Open",
+    "delete": "Delete",
+
+    "next_round": "Next round",
+    "players_screen": "Players's screen",
+
+    "choose_tournament": "Choose a tournament",
+    "choose_tournament_btn": "Choose the tournament",
+    "choose_round": "Choose a round",
+    "choose_round_btn": "Choose the round",
+    "please_choose": "Please choose",
+
+    "team": "Team",
+    "round": "Round",
+    "table": "Table", 
+    "points": "Total points"
   }
 }

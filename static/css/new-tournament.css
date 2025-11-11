@@ -36,10 +36,9 @@
     transition: 0.2s
 }
 
-wired-input {
+.input {
     outline: none;
-
-    padding-bottom: 10px;
+    border-width: 0px;
 
     font-size: 1.25rem;
     font-family: 'Poppins';

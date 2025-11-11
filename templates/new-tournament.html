@@ -13,11 +13,11 @@
     <div class="tournament-create-container">
         <form method="POST" action="/new-tournament">
             <p>{{ t.input_tournament_name }}</p>
-            <wired-input placeholder="Ex: 7 Octobre"><input class="input" type="text" name="tournament_name" id="tournament-name" required></wired-input>
+            <wired-card><input class="input" type="text" name="tournament_name" id="tournament-name" required></wired-card>
             <p>{{ t.input_rounds_number }}</p>
-            <wired-input placeholder="Ex: 4"><input class="input" type="number" name="rounds_number" id="round-number" required></wired-input>
+            <wired-card><input class="input" type="number" name="rounds_number" id="round-number" required></wired-card>
             <p>{{ t.input_tables_number }}</p>
-            <wired-input placeholder="Ex: 18"><input class="input" type="number" name="table_number" id="table-number" required></wired-input>
+            <wired-card><input class="input" type="number" name="table_number" id="table-number" required></wired-card>
             <button type="submit" class="button-submit"><wired-button elevation="2">{{ t.create_tournament_button }}</wired-button></button>
         </form>
     </div>
