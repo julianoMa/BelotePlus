@@ -116,6 +116,7 @@ a.disabled {
     pointer-events: none;
     cursor: default;
     opacity: 50%;
+    animation: none;
 }
 
 /* 

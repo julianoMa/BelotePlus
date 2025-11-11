@@ -7,6 +7,10 @@ header {
     display: none
 }
 
+#language-selector, #theme-toggle {
+    display: none;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -15,6 +19,16 @@ header {
     box-sizing: border-box;
     gap: 1rem;
 }
+
+/* 
+
+#=======================================#
+#                                       #
+#                TABLE                  #
+#                                       #
+#=======================================#
+
+*/
 
 .container > div {
     display: flex;
@@ -49,6 +63,16 @@ th, td {
     white-space: nowrap;
 }
 
+/* 
+
+#=======================================#
+#                                       #
+#                 FORM                  #
+#                                       #
+#=======================================#
+
+*/
+
 .options {
     position: absolute;
     bottom: -120vh;
@@ -63,8 +87,4 @@ th, td {
 
 .teams-table {
     justify-content: flex-start;
-}
-
-#language-selector, #theme-toggle {
-    display: none;
 }

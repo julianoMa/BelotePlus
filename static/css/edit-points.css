@@ -1,17 +1,7 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: column;
-
+    display: grid;
+    place-items: center;
     height: 100vh;
-}
-
-.container > wired-card {
-    margin-top: 5vh;
-
-    background-color: #fff;
 }
 
 /* 
@@ -24,26 +14,20 @@
 
 */
 
-.tournament-list-container {
-    display: flex;
-    justify-content: center;
-
-    padding: 3rem;
+form {
+    padding: 2rem;
 }
 
-.list {
-    padding: 5rem;
-}
+button {
+    border-width: 0;
+    background-color: #fff;
+    margin-left: 5rem;
 
-.btn {
-    border: 0px solid #fff;
-
-    margin-top: 5vh;
     transition: 0.2s;
 }
 
-.btn:first-child {
-    margin-right: 3rem;
+select, input {
+    margin-left: 5rem;
 }
 
 /* 
@@ -56,10 +40,10 @@
 
 */
 
-.btn:hover {
+button:hover {
     border-color: var(--accent);
     background-color: var(--accent-dark);
     scale: 1.05;
     color: white;
-    transform: rotate(2deg);
+    transform: rotate(-2deg);
 }

@@ -1,3 +1,13 @@
+/* 
+
+#=======================================#
+#                                       #
+#                 FORM                  #
+#                                       #
+#=======================================#
+
+*/
+
 form {
     display: flex;
     flex-direction: column;
@@ -5,8 +15,8 @@ form {
 }
 
 form > .btn {
-    align-self: center;   /* center horizontally */
-    width: auto;          /* shrink to fit content */
+    align-self: center;
+    width: auto;
 }
 
 .container {

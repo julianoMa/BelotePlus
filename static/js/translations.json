@@ -47,6 +47,10 @@
     "choose_tournament_btn": "Choisir le concours",
     "choose_round": "Choisissez une partie",
     "choose_round_btn": "Choisir la partie",
+    "choose_team": "Choisissez une équipe",
+    "choose_team_btn": "Choisir l'équipe",
+    "input_points": "Correction de points",
+    "input_points_btn": "Corriger les points",
     "please_choose": "Merci de choisir",
 
     "team": "Equipe",
@@ -102,6 +106,10 @@
     "choose_tournament_btn": "Choose the tournament",
     "choose_round": "Choose a round",
     "choose_round_btn": "Choose the round",
+    "choose_team": "Choose a team",
+    "choose_team_btn": "Choose the team",
+    "input_points": "Enter edited points",
+    "input_points_btn": "Edit points",
     "please_choose": "Please choose",
 
     "team": "Team",

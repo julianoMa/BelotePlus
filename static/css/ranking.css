@@ -1,3 +1,46 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/bg-table.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+header {
+    display: none;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#             LEADERBOARD               #
+#                                       #
+#=======================================#
+
+*/
+
+.card {
+    margin-top: 3vw;
+    background-color: #fff;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -8,6 +51,8 @@
 
     min-height: 5vh;
     max-height: 80vh;
+
+    max-height: none;
     overflow-y: auto;
 
     gap: 15px;
@@ -17,16 +62,61 @@
     font-size: 1.9rem;
 }
 
-.rank {
-    border-width: 0.1rem;
-    border-style: solid;
-    border-color: var(--bg-color);
-    border-radius: 0.5rem;
-    box-shadow: 0px 0px 50px 5px var(--bg-color-shadow);
+.rank-card {
+    background-color: #fff;
 
-    padding: 30px;
+    transition: 0.2s;
+}
+
+.rank {
+    border-width: 0;
+
+    padding: 20px;
 
     width: 40rem;
 
     text-align: center;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                PODIUM                 #
+#                                       #
+#=======================================#
+
+*/
+
+.rank-card:first-child {
+    margin-top: 2vw;
+    background-color: #d4af37
+}
+
+.rank-card:nth-child(2) {
+    background-color: #c0c0c0;
+}
+
+.rank-card:nth-child(3) {
+    background-color: #cd7f32;
+}
+
+.rank-card:last-child {
+    margin-bottom: 2vw;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 ANIM                  #
+#                                       #
+#=======================================#
+
+*/
+
+.rank-card:hover {
+    scale: 1.05;
+    background-color: var(--accent);
+    color: white;
 }
