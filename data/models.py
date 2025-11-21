@@ -41,19 +41,25 @@ class Tournament(Base):
 
 class Team(Base):
     __tablename__ = 'teams'
-    
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    tournament_id = Column(Integer, ForeignKey('tournaments.id', ondelete='CASCADE'), nullable=False)
+
+    tournament_id = Column(
+        Integer,
+        ForeignKey('tournaments.id', ondelete='CASCADE'),
+        primary_key=True
+    )
+
+    team_id = Column(Integer, primary_key=True) 
+
     player1 = Column(String, nullable=False)
     player2 = Column(String, nullable=False)
-    
+
     # relations
     tournament = relationship('Tournament', back_populates='teams')
     rankings = relationship('Ranking', back_populates='team', cascade='all, delete-orphan')
     points = relationship('TeamPoints', back_populates='team', cascade='all, delete-orphan')
-    
+
     def __repr__(self):
-        return f"<Team(id={self.id}, player1='{self.player1}', player2='{self.player2}')>"
+        return f"<Team(tournament_id={self.tournament_id}, team_id={self.team_id}, player1={self.player1}, player2={self.player2})>"
 
 
 class Ranking(Base):
@@ -61,7 +67,7 @@ class Ranking(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     tournament_id = Column(Integer, ForeignKey('tournaments.id', ondelete='CASCADE'), nullable=False)
-    team_id = Column(Integer, ForeignKey('teams.id', ondelete='CASCADE'), nullable=False)
+    team_id = Column(Integer, ForeignKey('teams.team_id', ondelete='CASCADE'), nullable=False)
     points = Column(Integer, nullable=False, default=0)
     
     # relations
@@ -78,7 +84,7 @@ class TeamPoints(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     tournament_id = Column(Integer, ForeignKey('tournaments.id', ondelete='CASCADE'), nullable=False)
     round_id = Column(Integer, nullable=False)
-    team_id = Column(Integer, ForeignKey('teams.id', ondelete='CASCADE'), nullable=False)
+    team_id = Column(Integer, ForeignKey('teams.team_id', ondelete='CASCADE'), nullable=False)
     points = Column(Integer, default=0)
     
     # relations
