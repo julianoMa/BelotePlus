@@ -37,6 +37,9 @@
     "input_tables_number": "Nombre de tables",
     "create_tournament_button": "Créer le concours",
 
+    "add_team": "Créer l'équipe",
+    "start_tournament": "Commencer le concours",
+
     "open": "Ouvrir",
     "delete": "Supprimer",
 
@@ -53,6 +56,7 @@
     "input_points_btn": "Corriger les points",
     "please_choose": "Merci de choisir",
 
+    "player": "Joueur",
     "team": "Equipe",
     "round": "Partie",
     "table": "Table", 
@@ -96,6 +100,9 @@
     "input_tables_number": "Number of tables",
     "create_tournament_button": "Create tournament",
 
+    "add_team": "Create team",
+    "start_tournament": "Start the tournament",
+
     "open": "Open",
     "delete": "Delete",
 
@@ -112,6 +119,7 @@
     "input_points_btn": "Edit points",
     "please_choose": "Please choose",
 
+    "player": "Player",
     "team": "Team",
     "round": "Round",
     "table": "Table", 
