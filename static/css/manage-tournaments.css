@@ -33,6 +33,42 @@
 
 .list {
     padding: 5rem;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+.card-label {
+    display: block;
+    cursor: pointer;
+}
+
+.card {
+    border-radius: 12px;
+    padding: 15px;
+
+    cursor: pointer;
+    transition: .2s;
+    margin-bottom: 10px;
+}
+
+.card h1 {
+    font-size: 1.3rem;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label wired-card {
+    background-color: var(--bg-color);
+}
+
+.card-label:has(input[type="radio"]:checked) wired-card { 
+    scale: 1.05;
+    background-color: var(--accent) !important;
+    color: white;
 }
 
 .btn {
@@ -63,6 +99,6 @@
     border-color: var(--accent);
     background-color: var(--accent-dark);
     scale: 1.05;
-    color: var(--text-color);
+    color: var(--hover-color);
     transform: rotate(2deg);
 }

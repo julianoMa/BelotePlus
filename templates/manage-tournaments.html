@@ -13,11 +13,19 @@
     <div class="tournament-list-container">
         <form method="POST" action="/manage-tournaments">
             <div class="list">
-                <wired-card>
+                
                 {% for name in tournaments %}
-                    <input type="radio" name="tournament" value="{{ name }}" required> {{ name }}<br>
+                <label class="card-label">
+                    <wired-card>
+                    <input type="radio" name="tournament" value="{{ name }}" required>
+                    <div class="card">
+                        <div><h1>{{ name }}</h1></div>
+                        <div><p>Lorem ipsum fsdferz</p></div>
+                    </div>
+                    </wired-card>
+                </label>
                 {% endfor %}
-                </wired-card>
+
             </div>
 
             <div class="form-buttons" align="center">
