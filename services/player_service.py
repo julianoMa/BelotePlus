@@ -16,6 +16,7 @@
 
 from common import *
 from data import *
+from core.belote import generate_leaderboard
 
 def get_players_screen_data(tournament, round_selected):
     """
@@ -24,6 +25,8 @@ def get_players_screen_data(tournament, round_selected):
     round_selected: int, current round
     """
 
+    leaderboard = generate_leaderboard(tournament)
+    print(leaderboard)
     teams_points = []
 
     if tournament and round_selected:
@@ -45,5 +48,6 @@ def get_players_screen_data(tournament, round_selected):
 
     return {
         "teams_points": teams_points,
-        "repartition": r
+        "repartition": r,
+        "leaderboard": leaderboard
     }

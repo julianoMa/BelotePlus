@@ -46,4 +46,4 @@ def players():
 
             data = get_players_screen_data(tournament, round_selected)
                 
-    return render_template("players-screen.html", tournaments=tournaments, tournament=tournament, rounds=int(rounds), round=int(round_selected), teams_points=data["teams_points"], repartition=data["repartition"])
+    return render_template("players-screen.html", tournaments=tournaments, tournament=tournament, rounds=int(rounds), round=int(round_selected), teams_points=data["teams_points"], repartition=data["repartition"], leaderboard=data["leaderboard"])

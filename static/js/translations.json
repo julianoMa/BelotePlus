@@ -60,7 +60,8 @@
     "team": "Equipe",
     "round": "Partie",
     "table": "Table", 
-    "points": "Points totaux"
+    "points": "Points totaux",
+    "position": "Position"
   },
   "en": {
     "nav_home": "Home",
@@ -123,6 +124,7 @@
     "team": "Team",
     "round": "Round",
     "table": "Table", 
-    "points": "Total points"
+    "points": "Total points",
+    "position": "Position"
   }
 }
