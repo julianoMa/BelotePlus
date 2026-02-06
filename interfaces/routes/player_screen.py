@@ -27,6 +27,7 @@ def players():
     rounds = 0
     round_selected = 0 
     data = {"teams_points": [], "repartition": [], "leaderboard": []}
+    ranking = []
 
     if request.method == "POST":
         action = request.form.get("action")
