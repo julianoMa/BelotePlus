@@ -26,7 +26,7 @@ def players():
     tournament = "none"
     rounds = 0
     round_selected = 0 
-    data = {"teams_points": [], "repartition": []}
+    data = {"teams_points": [], "repartition": [], "leaderboard": []}
 
     if request.method == "POST":
         action = request.form.get("action")
@@ -45,5 +45,7 @@ def players():
             rounds = request.form.get('rounds-a', 0)
 
             data = get_players_screen_data(tournament, round_selected)
-                
-    return render_template("players-screen.html", tournaments=tournaments, tournament=tournament, rounds=int(rounds), round=int(round_selected), teams_points=data["teams_points"], repartition=data["repartition"], leaderboard=data["leaderboard"])
+
+            ranking = {team_id: index + 1 for index, (team_id, score) in enumerate(data["leaderboard"])}
+
+    return render_template("players-screen.html", tournaments=tournaments, tournament=tournament, rounds=int(rounds), round=int(round_selected), teams_points=data["teams_points"], repartition=data["repartition"], ranking=ranking)

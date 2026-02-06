@@ -26,7 +26,6 @@ def get_players_screen_data(tournament, round_selected):
     """
 
     leaderboard = generate_leaderboard(tournament)
-    print(leaderboard)
     teams_points = []
 
     if tournament and round_selected:
