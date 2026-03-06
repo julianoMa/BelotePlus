@@ -47,7 +47,7 @@
         <select name="team-select" id="team-select">
             <option value="">-- {{ t.please_choose }} --</option>
             {% for team in teams %}
-                <option value="{{ team }}">{{ team }}</option>
+                <option value="{{ team[0] }}">{{ team[0] }} - {{ team[1] }} & {{ team[2] }}</option>
             {% endfor %}
         </select>
 
@@ -59,7 +59,7 @@
     </form>
     {% endif %}
 
-    {% if team_selected != [] %}
+    {% if team_selected != "" %}
     <form method="POST" action="/edit-points">
         <label for="point-input">{{ t.input_points }}</label>
 
