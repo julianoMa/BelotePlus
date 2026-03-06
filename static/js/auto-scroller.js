@@ -1,21 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const wrapper = document.querySelector(".teams-wrapper");
+    const wrappers = document.querySelectorAll("#scroll");
 
-    const step = 100;
-    const interval = 1000;
-    let direction = 1;
+    const step = 150;
+    const interval = 5000;
 
-    setInterval(() => {
-        const maxScroll = wrapper.scrollHeight - wrapper.clientHeight;
+    wrappers.forEach(wrapper => {
+        let direction = 1;
 
-        wrapper.scrollTop += step * direction;
+        setInterval(() => {
+            const maxScroll = wrapper.scrollHeight - wrapper.clientHeight;
 
-        if (wrapper.scrollTop >= maxScroll) {
-            direction = -1;
-        }
+            wrapper.scrollTop += step * direction;
 
-        if (wrapper.scrollTop <= 0) {
-            direction = 1;
-        }
-    }, interval);
+            if (wrapper.scrollTop >= maxScroll) {
+                direction = -1;
+            }
+
+            if (wrapper.scrollTop <= 0) {
+                direction = 1;
+            }
+        }, interval);
+    });
 });
