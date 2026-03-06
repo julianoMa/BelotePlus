@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-from sqlalchemy import create_engine, inspect
+from sqlalchemy import create_engine, inspect, func
 from sqlalchemy.orm import sessionmaker, scoped_session
 from contextlib import contextmanager
 from .models import Base, Tournament, Team, Ranking, TeamPoints, Repartition
@@ -147,7 +147,11 @@ def get_teams(tournament_name):
         teams = session.query(Team).filter_by(tournament_id=tournament.id).all()
         # convert to tuples for compatibility with previous implementation
         return [(t.team_id, tournament_name, t.player1, t.player2) for t in teams]
-
+    
+def get_teams_number(tournament_name):
+    """Retourne le nombre total d'équipe"""
+    with get_session() as session:
+        return session.query(func.count(Team.team_id)).join(Tournament).filter(Tournament.name == tournament_name).scalar() or 0
 
 def add_team(tournament_name, player1, player2):
     """Ajoute une équipe à un tournoi (team_id unique par tournoi)"""

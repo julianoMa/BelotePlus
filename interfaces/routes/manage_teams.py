@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from data.db import get_teams, add_team, delete_team, update_step
+from data.db import get_teams, add_team, delete_team, update_step, get_teams_number
 
 teams_bp = Blueprint("teams", __name__)
 
@@ -51,6 +51,11 @@ def teams():
         
         if action == "start":
             tournament_name = request.form['tournament']
+            teams_number = get_teams_number
+
+            # Add a team in case of odd amount
+            if teams_number % 2:
+                add_team(tournament_name, "IMPAIR", "IMPAIR")
 
             update_step(tournament_name, 1)
 

@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from data.db import get_rounds, get_step, delete_tournament, get_tournaments_names
+from data.db import get_rounds, get_step, delete_tournament, get_tournaments_names, get_teams_number
 
 manage_tournaments_bp = Blueprint("tournaments", __name__)
 

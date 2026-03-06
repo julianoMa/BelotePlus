@@ -43,6 +43,7 @@
     "open": "Ouvrir",
     "delete": "Supprimer",
 
+    "odd_team": "L'équipe ne jouant pas pour cause de nombre impair, et obtenant 1200 points d'office est la n°",
     "next_round": "Prochaine partie",
     "players_screen": "Ecran des joueurs",
 
@@ -107,6 +108,7 @@
     "open": "Open",
     "delete": "Delete",
 
+    "odd_team": "The team who's not playing because of an odd amount of team, and getting 1200 points is the n°",
     "next_round": "Next round",
     "players_screen": "Players's screen",
 
