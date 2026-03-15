@@ -6,6 +6,12 @@
     "nav_edit": "Rectification",
     "nav_rules": "Règlement",
     "nav_settings": "Paramètres",
+
+    "warning": "Avertissement",
+    "warning_text": "La version actuelle du logiciel est obsolète. Afin d'obtenir les dernières fonctionnalités, installez la dernière version.",
+    "warning_current": "Version actuelle :",
+    "warning_latest": "Dernière version :",
+    "warning_close": "Fermer le message",
     
     "page_title_home": "BelotePlus - Accueil",
     "page_title_new": "BelotePlus - Créer un concours",
@@ -71,6 +77,12 @@
     "nav_edit": "Edit points",
     "nav_rules": "Rules",
     "nav_settings": "Settings",
+
+    "warning": "Warning",
+    "warning_text": "The current version of the app is outdated. In order to get the latest features, download the latest version.",
+    "warning_current": "Current version :",
+    "warning_latest": "Latest version :",
+    "warning_close": "Close the pop-up",
 
     "page_title_home": "BelotePlus - Home",
     "page_title_new": "BelotePlus - Create tournament",
