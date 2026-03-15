@@ -69,6 +69,13 @@ wired-card {
     background-color: var(--hover-color);
 }
 
+.odd-team {
+    background-color: var(--hover-color);
+    padding: 2rem;
+
+    margin-bottom: 2rem;
+}
+
 p span {
     font-size: 1.25rem;
 }

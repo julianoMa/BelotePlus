@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from data.db import get_rounds, update_step, check_repartition, get_repartition, get_tournament_id
+from data.db import get_rounds, update_step, check_repartition, get_repartition, get_tournament_id, get_odd, get_teams_number, save_points
 from common.utils import repartition_ast
 from core.belote import generate_repartition, process_points
 
@@ -48,6 +48,8 @@ def rounds():
     tournament_name = request.args.get("tournament")
     total_rounds = get_rounds(tournament_name)
     check = check_repartition(tournament_name)
+    odd = get_odd(tournament_name)
+    odd_match = None
     r = []
 
     if check is None:
@@ -59,5 +61,15 @@ def rounds():
    
     if int(current_round) > int(total_rounds):
         return redirect(url_for("ranking.ranking", tournament=tournament_name))
+
+    # Removes the match that will not be played from the list, and put it in another variable
+    if odd:
+        odd_team = str(get_teams_number(tournament_name))
+        match = next(m for m in r if odd_team in (m['team1'], m['team2']))
+        team = match['team2'] if match['team1'] == odd_team else match['team1']
+        r = [m for m in r if m != match]
+
+        save_points(tournament_name, current_round, odd_team, 0)
+        save_points(tournament_name, current_round, team, 1200)
         
-    return render_template("concours.html", tournament=tournament_name, round=current_round, repartition=r)
+    return render_template("concours.html", tournament=tournament_name, round=current_round, repartition=r, odd=team)

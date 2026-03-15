@@ -21,6 +21,21 @@
     </a></wired-button>
 </div>
 
+{% if not compare %}
+<div id="welcome-popup" class="popup">
+    <div class="popup-content">
+        <h4 style="color: black">{{ t.warning }}</h4>
+        <p style="color: black">{{ t.warning_text }}</p>
+        <p>{{ t.warning_current }} <strong>{{ current }}</strong></p>
+        <p style="color: green">{{ t.warning_latest }} <strong>{{ latest }}</strong></p>
+
+        <button onclick="closePopup()" style="color: black">
+            <img src="../static/img/icon-deletelink.svg" alt="">
+        {{ t.warning_close }}</button>
+    </div>
+</div>
+{% endif %}
+
 <wired-divider elevation="2" style="margin-top: 10vh; z-index: 0; position: relative;"></wired-divider>
 
 <h1 class="quick-title"><wired-link elevation="1">{{ t.quick_access }}</wired-link></h1>
@@ -66,5 +81,11 @@
         <!-- Players per tournament for X previous -->
     </div>
 </div>
+
+<script>
+function closePopup() {
+    document.getElementById("welcome-popup").style.display = "none";
+}
+</script>
 
 {% endblock %}

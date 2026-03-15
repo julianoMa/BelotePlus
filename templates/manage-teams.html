@@ -7,22 +7,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
     <div class="team-create-container">
+        <wired-card elevation="2">
         <form method="POST" action="/manage-teams">
-            <p>{{ t.player1 }}</p>
+            <p>{{ t.player }} 1</p>
             <input class="input" type="text" name="player1" id="player1" required>
-            <p>{{ t.player2 }}</p>
+            <p>{{ t.player }} 2</p>
             <input class="input" type="text" name="player2" id="player2" required>
             <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-            <button type="submit" class="button-4" name="action" value="create">{{ t.add_team }}</button>
+            <button type="submit" class="btn" name="action" value="create"><wired-button>{{ t.add_team }}</wired-button></button>
         </form>
         <form method="POST" action="/manage-teams">
             <input type="text" name="tournament" style="display: none" value="{{ tournament }}">
-            <button type="submit" name="action" value="start" class="button-4" id="startBtn">{{ t.start_tournament }}</button>
+            <button type="submit" name="action" value="start" class="btn" id="startBtn"><wired-button elevation="2">{{ t.start_tournament }}</wired-button></button>
         </form>
+        </wired-card>
     </div>
+    
     <div>
+        <wired-card>
         <form method="POST" action="/manage-teams">
             <div class="teams-list-container">
                 <br>
@@ -33,9 +36,11 @@
                     </label>
                     <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
                 {% endfor %}
+                </wired-card>
             </div>
-            <button type="submit" name="action" value="delete" class="button-4" id="startBtn">{{ t.delete }}</button>
+            <button type="submit" name="action" value="delete" class="btn" id="startBtn"><wired-button>{{ t.delete }}</wired-button></button>
         </form>
+        </wired-card>
     </div>
 </div>
 {% endblock %}

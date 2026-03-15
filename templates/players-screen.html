@@ -8,15 +8,16 @@
 
 {% block content %}
 <div class="container">
-    <div class="teams-wrapper">
+    <div class="teams-wrapper" id="scroll">
         <table class="teams-table">
             <thead>
             <tr>
                 <th scope="col">{{ t.team }}</th>
-                {% for i in range(1, round + 1) %}
+                {% for i in range(1, round) %}
                     <th scope="col"><span>{{ t.round }} {{ i }}</span></th>
                 {% endfor %}
                 <th scope="col">{{ t.points }}</th>
+                <th scope="col">{{ t.position }}</th>
             </tr>
             </thead>
 
@@ -28,13 +29,17 @@
                         <td>{{ pts[0] }}</td>
                     {% endfor %}
                     <td>{{ team.total }}</td>
+
+                    <td>
+                        {{ ranking[team.team_id] }}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <div class="repartition-wrapper">
+    <div class="repartition-wrapper" id="scroll">
         <table class="repartition-table">
             <thead>
                 <th scope="col">{{ t.team }}</th>
@@ -88,4 +93,9 @@
         {% endif %}
     </div>
 </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auto-scroller.js') }}"></script>
 {% endblock %}

@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-from sqlalchemy import create_engine, inspect
+from sqlalchemy import create_engine, inspect, func
 from sqlalchemy.orm import sessionmaker, scoped_session
 from contextlib import contextmanager
 from .models import Base, Tournament, Team, Ranking, TeamPoints, Repartition
@@ -132,6 +132,18 @@ def get_rounds(tournament_name):
         tournament = session.query(Tournament).filter_by(name=tournament_name).first()
         return tournament.rounds_number if tournament else 0
 
+def get_odd(tournament_name):
+    """Récupère si le tournois a un nombre pair ou impair d'équipes"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        return tournament.odd 
+    
+def set_odd(tournament_name, odd): 
+    """Change le nombre d'équipe en pair ou impair"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            tournament.odd = odd
 
 # ======================
 # TEAMS
@@ -146,20 +158,39 @@ def get_teams(tournament_name):
         
         teams = session.query(Team).filter_by(tournament_id=tournament.id).all()
         # convert to tuples for compatibility with previous implementation
-        return [(t.id, tournament_name, t.player1, t.player2) for t in teams]
-
+        return [(t.team_id, tournament_name, t.player1, t.player2) for t in teams]
+    
+def get_teams_number(tournament_name):
+    """Retourne le nombre total d'équipe"""
+    with get_session() as session:
+        return session.query(func.count(Team.team_id)).join(Tournament).filter(Tournament.name == tournament_name).scalar() or 0
 
 def add_team(tournament_name, player1, player2):
-    """Ajoute une équipe à un tournoi"""
+    """Ajoute une équipe à un tournoi (team_id unique par tournoi)"""
     with get_session() as session:
         tournament = session.query(Tournament).filter_by(name=tournament_name).first()
-        if tournament:
-            team = Team(
-                tournament_id=tournament.id,
-                player1=player1,
-                player2=player2
-            )
-            session.add(team)
+        if not tournament:
+            print("Tournament not found")
+            return None
+
+        last_team = (
+            session.query(Team.team_id)
+            .filter(Team.tournament_id == tournament.id)
+            .order_by(Team.team_id.desc())
+            .first())
+
+        next_team_id = 1 if last_team is None else last_team[0] + 1
+
+        team = Team(
+            tournament_id=tournament.id,
+            team_id=next_team_id,
+            player1=player1,
+            player2=player2
+        )
+
+        session.add(team)
+        session.commit()
+        return team
 
 
 def delete_team(team_id, tournament_name):
@@ -168,7 +199,7 @@ def delete_team(team_id, tournament_name):
         tournament = session.query(Tournament).filter_by(name=tournament_name).first()
         if tournament:
             team = session.query(Team).filter_by(
-                id=team_id,
+                team_id=team_id,
                 tournament_id=tournament.id
             ).first()
             if team:

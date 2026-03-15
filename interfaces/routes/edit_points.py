@@ -26,7 +26,7 @@ def edit():
     rounds = 0
     round_selected = 0
     teams = []
-    team_selected = []
+    team_selected = ""
 
     if request.method == "POST":
         action = request.form.get("action")
@@ -37,25 +37,26 @@ def edit():
         
         elif action == "rounds":
             tournament = request.form.get("tournament")
-            rounds = request.form.get("rounds-a")
-            round_selected = request.form.get("rounds-select")
-
+            rounds = request.form.get("rounds-a") or 0
+            round_selected = request.form.get("rounds-select") or 0
             teams = get_teams(tournament)
             teams = [(team[0], team[2], team[3]) for team in teams]
 
         elif action == "team":
             tournament = request.form.get("tournament")
-            rounds = request.form.get("rounds-a")
-            round_selected = request.form.get("round_selected")
-            team_selected = request.form.get("team-select")
+            rounds = request.form.get("rounds-a") or 0
+            round_selected = request.form.get("round_selected") or 0
+            team_selected = request.form.get("team-select") 
+            
+
+            teams = get_teams(tournament)
+            teams = [(team[0], team[2], team[3]) for team in teams]
 
         elif action == "points":
             tournament = request.form.get("tournament")
             round_selected = request.form.get("round_selected")
-            team_selected = request.form.get("team_selected")
+            team_id = request.form.get("team_selected") 
             points = request.form.get("point-input")
-
-            team_id = team_selected[1]
 
             save_points(tournament, int(round_selected), int(team_id), int(points))
             

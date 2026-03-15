@@ -190,6 +190,64 @@ header * {
     z-index: 2;
 }
 
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+
+    border: 1px solid rgb(255, 0, 0);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3), 0 0 40px rgba(255, 0, 0, 0.1), inset 0 0 20px rgba(255, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    padding: 2rem;
+    border-radius: 8px;
+
+    color: red;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+
+    width: 50vw;
+}
+
+.popup-content h4 {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 20px;
+}
+
+.popup-content p {
+    line-height: 2rem;
+}
+
+.popup-content button {
+    gap: 4px;
+    display: inline-flex;
+    align-items: center;
+
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 4px;
+
+    font-family: 'Inter';
+    
+    margin-top: 15px;
+    padding: 4px;
+    padding-right: 5px;
+}
+
+.popup-content button img{
+    height: 24px
+}
+
 ul {
     list-style: none;
     display: flex;

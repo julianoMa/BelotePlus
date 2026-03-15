@@ -6,6 +6,12 @@
     "nav_edit": "Rectification",
     "nav_rules": "Règlement",
     "nav_settings": "Paramètres",
+
+    "warning": "Avertissement",
+    "warning_text": "La version actuelle du logiciel est obsolète. Afin d'obtenir les dernières fonctionnalités, installez la dernière version.",
+    "warning_current": "Version actuelle :",
+    "warning_latest": "Dernière version :",
+    "warning_close": "Fermer le message",
     
     "page_title_home": "BelotePlus - Accueil",
     "page_title_new": "BelotePlus - Créer un concours",
@@ -37,9 +43,13 @@
     "input_tables_number": "Nombre de tables",
     "create_tournament_button": "Créer le concours",
 
+    "add_team": "Créer l'équipe",
+    "start_tournament": "Commencer le concours",
+
     "open": "Ouvrir",
     "delete": "Supprimer",
 
+    "odd_team": "L'équipe ne jouant pas pour cause de nombre impair, et obtenant 1200 points d'office est la n°",
     "next_round": "Prochaine partie",
     "players_screen": "Ecran des joueurs",
 
@@ -53,10 +63,12 @@
     "input_points_btn": "Corriger les points",
     "please_choose": "Merci de choisir",
 
+    "player": "Joueur",
     "team": "Equipe",
     "round": "Partie",
     "table": "Table", 
-    "points": "Points totaux"
+    "points": "Points totaux",
+    "position": "Position"
   },
   "en": {
     "nav_home": "Home",
@@ -65,6 +77,12 @@
     "nav_edit": "Edit points",
     "nav_rules": "Rules",
     "nav_settings": "Settings",
+
+    "warning": "Warning",
+    "warning_text": "The current version of the app is outdated. In order to get the latest features, download the latest version.",
+    "warning_current": "Current version :",
+    "warning_latest": "Latest version :",
+    "warning_close": "Close the pop-up",
 
     "page_title_home": "BelotePlus - Home",
     "page_title_new": "BelotePlus - Create tournament",
@@ -96,9 +114,13 @@
     "input_tables_number": "Number of tables",
     "create_tournament_button": "Create tournament",
 
+    "add_team": "Create team",
+    "start_tournament": "Start the tournament",
+
     "open": "Open",
     "delete": "Delete",
 
+    "odd_team": "The team who's not playing because of an odd amount of team, and getting 1200 points is the n°",
     "next_round": "Next round",
     "players_screen": "Players's screen",
 
@@ -112,9 +134,11 @@
     "input_points_btn": "Edit points",
     "please_choose": "Please choose",
 
+    "player": "Player",
     "team": "Team",
     "round": "Round",
     "table": "Table", 
-    "points": "Total points"
+    "points": "Total points",
+    "position": "Position"
   }
 }
