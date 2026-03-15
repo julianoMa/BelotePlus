@@ -67,7 +67,7 @@ class Ranking(Base):
         'Team', 
         back_populates='rankings', 
         foreign_keys=[tournament_id, team_id],
-        overlaps="rankings"
+        overlaps="rankings,tournament"
     )
 
 class TeamPoints(Base):
@@ -92,7 +92,7 @@ class TeamPoints(Base):
         'Team', 
         back_populates='points', 
         foreign_keys=[tournament_id, team_id],
-        overlaps="points"
+        overlaps="teams_points,tournament"
     )
 
 class Repartition(Base):
