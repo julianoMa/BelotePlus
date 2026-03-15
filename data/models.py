@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, ForeignKeyConstraint
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, ForeignKeyConstraint
 from sqlalchemy.orm import relationship, declarative_base
 
 Base = declarative_base()
@@ -10,6 +10,7 @@ class Tournament(Base):
     name = Column(String, nullable=False, unique=True)
     rounds_number = Column(Integer, nullable=False)
     tables_number = Column(Integer, nullable=False)
+    odd = Column(Boolean, default=False, nullable=False)
     step = Column(Integer, default=0, nullable=False)
     
     teams = relationship('Team', back_populates='tournament', cascade='all, delete-orphan')

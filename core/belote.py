@@ -51,7 +51,12 @@ def generate_repartition(tournament_name):
 def process_points(tournament, round, points1, points2):
     """Sauvegarde les points d'une partie"""
     repartition = get_repartition(get_tournament_id(tournament), round)
-    n = -1
+    odd = get_odd(tournament)
+
+    if odd:
+        n = -2
+    else:
+        n = -1
 
     for _, _, _, teams in repartition:
         n += 1

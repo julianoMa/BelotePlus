@@ -132,6 +132,18 @@ def get_rounds(tournament_name):
         tournament = session.query(Tournament).filter_by(name=tournament_name).first()
         return tournament.rounds_number if tournament else 0
 
+def get_odd(tournament_name):
+    """Récupère si le tournois a un nombre pair ou impair d'équipes"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        return tournament.odd 
+    
+def set_odd(tournament_name, odd): 
+    """Change le nombre d'équipe en pair ou impair"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            tournament.odd = odd
 
 # ======================
 # TEAMS

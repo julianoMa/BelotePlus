@@ -8,9 +8,11 @@
 
 {% block content %}
 <div class="container">
-    <div class="odd-team" style="display: none">
-        <p>{{ t.odd_team }}</p>
+    {% if odd %}
+    <div class="odd-team">
+        <p>{{ t.odd_team }}{{ odd }}</p>
     </div>
+    {% endif %}
 
     <form method="POST" action="/rounds">
         {% for team in repartition %}
