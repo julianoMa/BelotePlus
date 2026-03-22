@@ -98,7 +98,7 @@ py app.py
 ```
 
 ## Terms of Use
-This project is distributed under the **GNU GPL v3 license**.
+This project is distributed under the **GNU GPL v3** license.
 You are free to modify, redistribute, or use the code, as long as derivative versions remain open source.
 See the [LICENSE file](https://github.com/julianoMa/BelotePlus/blob/main/LICENSE) for more information.
 
