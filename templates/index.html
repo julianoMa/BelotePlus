@@ -7,19 +7,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="home-container">
-    <wired-link elevation="2"><h1>{{ t.home_title }}</h1></wired-link>
+<div class="hero">
+    <h1>{{ t.home_title }} <span class="accent">{{ t.beloteplus }}</span></h1>
     <p>{{ t.home_description }}</p>
 
-    <wired-button class="home-github"><a href="https://github.com/julianoMa/BelotePlus" target="_blank">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height=20px alt="Github">
-        {{ t.github_button }}
-    </a></wired-button>
-    <wired-button class="home-coffee"><a href="https://buymeacoffee.com/julianoma?new=1" target="_blank">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/coffeescript/coffeescript-original.svg" height=20px alt="">
-        {{ t.coffee_button }}
-    </a></wired-button>
+    <div class="hero-buttons">
+        <a href="https://github.com/julianoMa/BelotePlus" target="_blank" class="btn-github">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height=20px alt="Github">
+            {{ t.github_button }}
+        </a>
+        <a href="https://buymeacoffee.com/julianoma?new=1" target="_blank" class="btn-coffee">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/coffeescript/coffeescript-original.svg" height=20px alt="">
+            {{ t.coffee_button }}
+        </a>
+    </div>
 </div>
+
+<hr class="divider">
 
 {% if not compare %}
 <div id="welcome-popup" class="popup">
@@ -36,50 +40,38 @@
 </div>
 {% endif %}
 
-<wired-divider elevation="2" style="margin-top: 10vh; z-index: 0; position: relative;"></wired-divider>
-
-<h1 class="quick-title"><wired-link elevation="1">{{ t.quick_access }}</wired-link></h1>
-<div class="quick-container">
-    <div class="actions"><wired-button elevation="3"><a href="/new-tournament">
-        <img src="../static/img/plus.svg" alt="">
+<h1 class="section-title">{{ t.quick_access }}</h1>
+<div class="actions-grid">
+    <a href="/new-tournament" class="action-card action-card-primary">
+        <div class="action-card-icon">
+            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" x2="12" y1="5" y2="19"></line>
+                <line x1="5" x2="19" y1="12" y2="12"></line>
+            </svg>
+        </div>
         {{ t.nav_create_tournaments }}
-    </a></wired-button></div>
+    </a>
 
-    <div class="right-group">
-        <div class="actions"><wired-button elevation="4"><a href="" class="disabled"> <!-- Last ranking -->
-            <img src="../static/img/graph.svg" alt="">
-            {{ t.quick_last_ranking }}
-        </a></wired-button></div>
-        <div class="actions"><wired-button elevation="2"><a href="/edit-points">
-            <img src="../static/img/edit.svg" alt="">
-            {{ t.quick_edit_points }}
-        </a></wired-button></div>
-    </div>
-</div>
+    <a href="" class="action-card action-card-disabled"> <!-- Last ranking -->
+        <div class="action-card-icon action-card-icon-2">
+            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" x2="12" y1="20" y2="10"></line>
+                <line x1="18" x2="18" y1="20" y2="4"></line>
+                <line x1="6" x2="6" y1="20" y2="16"></line>
+            </svg>
+        </div>
+        {{ t.quick_last_ranking }}
+    </a>
 
-<wired-divider elevation="2" style="margin-top: 10vh; z-index: 0; position: relative;"></wired-divider>
-
-<h1 align="center" class="stats-title"><wired-link elevation="1">{{ t.stats_title }}</wired-link></h1>
-<div class="stats-container">
-    <div class="right-group">
-        <div class="stats"><wired-button><a href="#">
-            <img src="../static/img/people.svg" alt="">
-            ~X {{ t.stats_players }}
-        </a></div></wired-button>
-        <div class="stats"><wired-button><a href="#">
-            <img src="../static/img/card.svg" alt="">
-            ~X {{ t.stats_tables }}
-        </a></div></wired-button>
-    </div>
-
-    <div class="stats"><wired-button><a href="#" class="disabled">
-        <img src="../static/img/money.svg" alt="">
-        X {{ t.stats_money }}
-    </a></div></wired-button>
-
-    <div class="graph">
-        <!-- Players per tournament for X previous -->
-    </div>
+    <a href="/edit-points" class="action-card">
+        <div class="action-card-icon action-card-icon-2">
+            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+        </div>
+        {{ t.quick_edit_points }}
+    </a>
 </div>
 
 <script>

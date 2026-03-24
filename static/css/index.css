@@ -2,201 +2,179 @@
 
 #=======================================#
 #                                       #
-#                TITLE                  #
+#                HERO                   #
 #                                       #
 #=======================================#
 
 */
 
-wired-link {
-    transition: 0.2s;
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 20vh;
 }
 
-.home-container {
-    padding-top: 10vh;
+.hero h1 {
+    font-size: 3rem;
+
+    font-family: 'PoppinsBold';
+}
+
+.hero p {
+    font-size: 1.125rem;
     text-align: center;
+
+    max-width: 29vw;
+
+    color: var(--text-color-2);
 }
 
-.home-container p {
-    margin-top: 1vh;
+.hero-buttons {
+    flex-direction: column;
+
+    margin-top: 24px;
 }
 
-.home-github {
-    background-color: var(--btn-bg);
-    border: 1px solid var(--hover-color);
-    transition: 0.2s;
-
-    margin-top: 1rem;
-    margin-right: 2rem;
+.hero-buttons a {
+    color: var(--text-color);
 }
 
-.home-coffee {
-    background-color: #FFDD00;
-    border: 1px solid #ccb100;
-    transition: 0.2s;
+.hero-buttons a:first-child {
+    margin-right: 24px;
 }
 
-.home-github a, .home-coffee a {
+.btn-github {
     display: inline-flex;
     align-items: center;
     gap: 8px;
 
-    padding: 8px;
+    border: solid 1px var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+
+    padding: 10px 20px;
+
+    font-size: 14px;
 }
 
-.home-github a {
-    color: var(--text-color);
-}
-
-/* 
-
-#=======================================#
-#                                       #
-#              QUICK ACCESS             #
-#                                       #
-#=======================================#
-
-*/
-
-.quick-title {
-    margin-top: 4vh;
-    text-align: center;
-}
-
-.quick-container > .actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.quick-container {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: 1rem;
-
-    margin-top: 4vh;
-}
-
-.actions a, .stats a {
-    display: flex;
+.btn-coffee {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    padding: 8px 14px;
-    border-radius: 1.5rem;
+
+    border: solid 1px var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color-3);
+
+    padding: 10px 20px;
+
+    font-size: 14px;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#               QUICK                   #
+#                                       #
+#=======================================#
+
+*/
+
+.divider {
+    display: block;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    color: #d9d4cc;
+    opacity: 0.6;
+    unicode-bidi: isolate;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+
+    margin: 48px 0;
+}
+
+.section-title {
+    font-size: 1.25rem;
     color: var(--text-color);
-    text-decoration: none;
-    transition: 0.2s;
 
-    width: 10rem;
+    margin-bottom: 16px;
 }
 
-.actions wired-button {
-    background-color: var(--btn-bg);
-    transition: 0.2s;
+.actions-grid {
+    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
-.stats wired-button {
-    background-color: var(--btn-bg);
-    transition: 0.2s;
+.action-card {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 16px;
+    gap: 12px;
+
+    color: var(--text-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+
+    transition: all .2s;
 }
 
-.right-group {
+.action-card-icon {
+    height: 40px;
+    width: 40px;
+
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    background-color: var(--bg-icon);
+    border-radius: 8px;
 }
 
-.actions img {
-    height: 3rem;
+.action-card-icon-2 {
+    background-color: var(--bg-color-3);
 }
 
-a.disabled {
-    text-decoration: line-through;
+.action-card-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
     pointer-events: none;
-    cursor: default;
-    opacity: 50%;
-    animation: none;
+}
+
+.action-card-primary {
+    color: var(--bg-color);
+
+    background-color: var(--accent);
+    border-color: var(--accent);
+
+    box-shadow: var(--accent-shadow), 0 0 0 4px #8b3a3a26;
 }
 
 /* 
 
 #=======================================#
 #                                       #
-#                STATS                  #
+#                ANIM                   #
 #                                       #
 #=======================================#
 
 */
 
-.stats-title {
-    margin-top: 4vh;
+.action-card:hover {
+    border-color: var(--accent)
 }
 
-.stats-container > .stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.stats-container {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: 1rem;
-
-    margin-top: 4vh;
-}
-
-.stats a {
-    width: 20rem;
-
-    transition: 0.2s;
-}
-
-.stats img {
-    height: 3rem;
-}
-
-/* 
-
-#=======================================#
-#                                       #
-#                 ANIM                  #
-#                                       #
-#=======================================#
-
-*/
-
-.home-github:hover {
-    scale: 1.03;
-    background-color: var(--btn-bg);
-}
-
-.home-coffee:hover {
-    scale: 1.03;
-    background-color: var(--btn-coffee);
-    
-}
-
-wired-link:hover {
-    --wired-link-decoration-color: var(--accent)
-}
-
-.actions wired-button:hover {
-    border-color: var(--accent);
-    background-color: var(--accent-dark);
-    scale: 1.05;
-    transform: rotate(-2deg);
-}
-
-.actions a:hover {
-    color: var(--hover-color);
-}
-
-.stats wired-button:hover {
-    border-color: var(--accent);
-    scale: 1.05;
+.action-card-primary:hover {
+    box-shadow: none;
+    background-color: var(--accent-2);
 }

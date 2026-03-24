@@ -20,7 +20,11 @@ from config.settings import VERSION
 
 def get_newest_tag():
     url = f"https://api.github.com/repos/julianoMa/BelotePlus/releases/latest"
-    tag = requests.get(url).json()["tag_name"]
+
+    try:
+        tag = requests.get(url).json()["tag_name"]
+    except KeyError:
+        return VERSION
 
     return tag
 

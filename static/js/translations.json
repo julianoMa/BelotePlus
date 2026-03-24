@@ -7,6 +7,8 @@
     "nav_rules": "Règlement",
     "nav_settings": "Paramètres",
 
+    "beloteplus": "BelotePlus",
+
     "warning": "Avertissement",
     "warning_text": "La version actuelle du logiciel est obsolète. Afin d'obtenir les dernières fonctionnalités, installez la dernière version.",
     "warning_current": "Version actuelle :",
@@ -21,8 +23,8 @@
     "page_title_round": "BelotePlus - Partie",
     "page_title_edit": "BelotePlus - Modifier les points",
 
-    "home_title": "Bienvenue sur BelotePlus !",
-    "home_description": "Gérez vos tournois de belote, suivez les scores, les équipes et le classement facilement !",
+    "home_title": "Bienvenue sur",
+    "home_description": "Le meilleur gestionnaire de tournois pour le jeu de carte de belote. Créez, gérez, et suivez vos concours avec facilité.",
     "github_button": "Voir sur Github",
     "coffee_button": "Soutenez moi",
 
@@ -78,6 +80,8 @@
     "nav_rules": "Rules",
     "nav_settings": "Settings",
 
+    "beloteplus": "BelotePlus",
+
     "warning": "Warning",
     "warning_text": "The current version of the app is outdated. In order to get the latest features, download the latest version.",
     "warning_current": "Current version :",
@@ -92,8 +96,8 @@
     "page_title_round": "BelotePlus - Round",
     "page_title_edit": "BelotePlus - Edit points",
 
-    "home_title": "Welcome to BelotePlus !",
-    "home_description": "Manage your belote tournaments, follow up scores, teams and ranking easily !",
+    "home_title": "Welcome to",
+    "home_description": "The ultimate tournament management system for the belote card game. Create, manage, and track your tournaments with ease.",
     "github_button": "See on Github",
     "coffee_button": "Buy me a coffee",
 
