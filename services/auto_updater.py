@@ -25,6 +25,8 @@ def get_newest_tag():
         tag = requests.get(url).json()["tag_name"]
     except KeyError:
         return VERSION
+    except requests.exceptions.ConnectionError:
+        return VERSION
 
     return tag
 
