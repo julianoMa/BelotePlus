@@ -14,9 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from common import *
-from data import *
-from core.belote import generate_leaderboard
+import common
+import data
+import core
 
 def get_players_screen_data(tournament, round_selected):
     """
@@ -25,14 +25,14 @@ def get_players_screen_data(tournament, round_selected):
     round_selected: int, current round
     """
 
-    leaderboard = generate_leaderboard(tournament)
+    leaderboard = core.generate_leaderboard(tournament)
     teams_points = []
 
     if tournament and round_selected:
-        teams = get_teams(tournament)
+        teams = data.get_teams(tournament)
         for team in teams:
             team_id = team[0]
-            points = get_points(tournament, team_id)
+            points = data.get_points(tournament, team_id)
             selected_points = points[:int(round_selected)]
             total = sum(p[0] for p in selected_points)
             teams_points.append({
@@ -41,9 +41,9 @@ def get_players_screen_data(tournament, round_selected):
                 "total": total
             })
 
-        repartition = get_repartition(get_tournament_id(tournament), round_selected)
+        repartition = data.get_repartition(data.get_tournament_id(tournament), round_selected)
         
-        r = repartition_ast(repartition)
+        r = common.repartition_ast(repartition)
 
     return {
         "teams_points": teams_points,

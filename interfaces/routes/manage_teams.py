@@ -15,7 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from data.db import get_teams, add_team, delete_team, update_step, get_teams_number, set_odd
+
+import data
 
 teams_bp = Blueprint("teams", __name__)
 
@@ -26,7 +27,7 @@ def teams():
     if request.method == "POST":
         action = request.form.get("action")
         tournament = request.form['tournament']
-        teams_list = get_teams(tournament)
+        teams_list = data.get_teams(tournament)
 
         if (action in ["start", "delete"] and not teams_list):
             flash("Vous devez créer une équipe avant d utiliser ce bouton", "error")
@@ -37,7 +38,7 @@ def teams():
             player2 = request.form['player2']
             tournament = request.form['tournament']
 
-            add_team(tournament, player1, player2)
+            data.add_team(tournament, player1, player2)
 
             return redirect(url_for("teams.teams", tournament=tournament))
         
@@ -45,26 +46,26 @@ def teams():
             id = request.form['team']
             tournament_name = request.form['tournament']
             
-            delete_team(id, tournament_name)
+            data.delete_team(id, tournament_name)
 
             return redirect(url_for("teams.teams", tournament=tournament_name))
         
         if action == "start":
             tournament_name = request.form['tournament']
-            teams_number = get_teams_number(tournament_name)
+            teams_number = data.get_teams_number(tournament_name)
             odd = False
 
             # Add a team in case of odd amount
             if teams_number % 2:
-                add_team(tournament_name, "IMPAIR", "IMPAIR")
+                data.add_team(tournament_name, "IMPAIR", "IMPAIR")
                 odd = True
 
-            update_step(tournament_name, 1)
-            set_odd(tournament_name, odd)
+            data.update_step(tournament_name, 1)
+            data.set_odd(tournament_name, odd)
 
             return redirect(url_for("rounds.rounds", tournament=tournament_name, round=1))
 
-    teams_list = get_teams(tournament)
+    teams_list = data.get_teams(tournament)
     teams = []
 
     for id, tournament, player1, player2 in teams_list:

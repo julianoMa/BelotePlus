@@ -15,7 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from data.db import get_rounds, get_step, delete_tournament, get_tournaments_names, get_teams_number
+
+import data
 
 manage_tournaments_bp = Blueprint("tournaments", __name__)
 
@@ -28,10 +29,10 @@ def tournaments():
         if tournament_name == None:
             return redirect(url_for("tournaments.tournaments"))
 
-        total_rounds = get_rounds(tournament_name)
+        total_rounds = data.get_rounds(tournament_name)
 
         if action == "open":
-            step = get_step(tournament_name)
+            step = data.get_step(tournament_name)
             if step == 0:
                 return redirect(url_for("teams.teams", tournament=tournament_name))
             elif step <= total_rounds:
@@ -40,10 +41,10 @@ def tournaments():
                 return redirect(url_for("ranking.ranking", tournament=tournament_name))
 
         elif action == "delete":
-            delete_tournament(tournament_name) 
+            data.delete_tournament(tournament_name) 
 
     try:
-        tournament_names = get_tournaments_names()
+        tournament_names = data.get_tournaments_names()
         return render_template("manage-tournaments.html", tournaments=tournament_names)
     except Exception:
         return redirect(url_for("index.index"))

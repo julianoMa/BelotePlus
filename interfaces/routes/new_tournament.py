@@ -15,7 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from data.db import create_tournament
+
+import data
 
 register_bp = Blueprint("register", __name__)
 
@@ -26,7 +27,7 @@ def register():
         rounds_number = request.form['rounds_number']
         table_number = request.form['table_number']
 
-        create_tournament(tournament_name, rounds_number, table_number)
+        data.create_tournament(tournament_name, rounds_number, table_number)
         return redirect(url_for("tournaments.tournaments"))
 
     return render_template("new-tournament.html")

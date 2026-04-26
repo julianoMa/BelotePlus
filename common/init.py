@@ -17,7 +17,7 @@
 import os
 import time
 
-from data import *
+import data
 
 def start_server(app):
     """Démarre le serveur"""
@@ -35,15 +35,15 @@ def start_server(app):
 
 def db_checks():
     """Crée la base de donnée si elle n'existe pas et l'initialise avec les tables"""
-    if not os.path.exists(DB_PATH):
-        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-        open(DB_PATH, "x")
+    if not os.path.exists(data.DB_PATH):
+        os.makedirs(os.path.dirname(data.DB_PATH), exist_ok=True)
+        open(data.DB_PATH, "x")
         time.sleep(0.8)
         print("⏳ Creating Database...")
 
-    if len(get_tables()) == 0:
+    if len(data.get_tables()) == 0:
         time.sleep(0.9)
         print("⏳ Initializing Database...")
-        init_db()
+        data.init_db()
 
     return True

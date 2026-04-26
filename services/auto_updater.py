@@ -16,7 +16,7 @@
 
 import requests
 
-from config.settings import VERSION
+import config
 
 def get_newest_tag():
     url = f"https://api.github.com/repos/julianoMa/BelotePlus/releases/latest"
@@ -24,16 +24,16 @@ def get_newest_tag():
     try:
         tag = requests.get(url).json()["tag_name"]
     except KeyError:
-        return VERSION
+        return config.VERSION
     except requests.exceptions.ConnectionError:
-        return VERSION
+        return config.VERSION
 
     return tag
 
 def compare_versions():
     latest = get_newest_tag()
 
-    if latest != VERSION:
+    if latest != config.VERSION:
         return False
     else:
         return True

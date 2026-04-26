@@ -15,13 +15,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template
-import requests
 
-from services import get_newest_tag, compare_versions
-from config.settings import VERSION
+import services
+import config
 
 index_bp = Blueprint("index", __name__)
 
 @index_bp.route("/")
 def index():
-    return render_template("index.html", current=VERSION, latest=get_newest_tag(), compare=compare_versions())
+    return render_template("index.html", current=config.VERSION, latest=services.get_newest_tag(), compare=services.compare_versions())

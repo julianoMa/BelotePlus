@@ -14,17 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from data import *
-from common import *
 from random import shuffle
-import ast
+
+import data
+import common
 
 def generate_repartition(tournament_name):
     """Crée la répartition des équipes pour un tournois entier"""
-    teams = get_teams(tournament_name)
+    teams = data.get_teams(tournament_name)
     shuffle(teams)
     
-    rounds_number = get_rounds(tournament_name)
+    rounds_number = data.get_rounds(tournament_name)
 
     team_names = [f"{t[0]}" for t in teams]
     n = len(team_names)
@@ -42,22 +42,22 @@ def generate_repartition(tournament_name):
 
         team_names = [team_names[-1]] + team_names[:-1]
 
-    clear_repartition()
+    data.clear_repartition()
     for i in range(len(rounds)): 
         for t in range(table_needed):
-            update_repartition(tournament_name, i+1, t+1, str(rounds[i][t]))
+            data.update_repartition(tournament_name, i+1, t+1, str(rounds[i][t]))
 
     return True
 
 def process_points(tournament, round, points1, points2):
     """Sauvegarde les points d'une partie"""
-    repartition = get_repartition(get_tournament_id(tournament), round)
-    r = repartition_ast(repartition)
+    repartition = data.get_repartition(data.get_tournament_id(tournament), round)
+    r = common.repartition_ast(repartition)
     n = -1
-    odd = get_odd(tournament)
+    odd = data.get_odd(tournament)
 
     if odd:
-        odd_team = str(get_teams_number(tournament))
+        odd_team = str(data.get_teams_number(tournament))
         match = next(m for m in r if odd_team in (m['team1'], m['team2']))
         r = [m for m in r if m != match]
 
@@ -67,26 +67,26 @@ def process_points(tournament, round, points1, points2):
         team1 = match["team1"]
         team2 = match["team2"]
 
-        save_points(tournament, round, team1, points1[n])
-        save_points(tournament, round, team2, points2[n])
+        data.save_points(tournament, round, team1, points1[n])
+        data.save_points(tournament, round, team2, points2[n])
 
     return
 
 def generate_leaderboard(tournament_name):
     """Calcule le classement d'un tournois"""
-    teams = len(get_teams(tournament_name))
+    teams = len(data.get_teams(tournament_name))
 
-    clear_previous_ranking(tournament_name)
+    data.clear_previous_ranking(tournament_name)
     
     for i in range(teams):
-        points = get_points(tournament_name, i+1)
+        points = data.get_points(tournament_name, i+1)
         total = 0
 
         for point in points:
             total = total + point[0]
 
-        save_ranking(tournament_name, i+1, total)
+        data.save_ranking(tournament_name, i+1, total)
     
-    leaderboard = get_ranking(tournament_name)
+    leaderboard = data.get_ranking(tournament_name)
 
     return leaderboard

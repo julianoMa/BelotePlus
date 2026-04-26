@@ -17,14 +17,14 @@
 import json
 import os
 
-from common.utils import *
+import common
 
 translations_data = {}
 
 def load_translations():
     """load translations from json file"""
     global translations_data
-    translations_path = ressource_path(os.path.join('static', 'js', 'translations.json'))
+    translations_path = common.ressource_path(os.path.join('static', 'js', 'translations.json'))
     try:
         with open(translations_path, 'r', encoding='utf-8') as f:
             translations_data = json.load(f)

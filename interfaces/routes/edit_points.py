@@ -15,13 +15,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from data.db import get_tournaments_names, get_rounds, get_teams, save_points
+
+import data
 
 edit_bp = Blueprint("edit", __name__)
 
 @edit_bp.route("/edit-points", methods=["GET", "POST"])
 def edit():
-    tournaments = get_tournaments_names()
+    tournaments = data.get_tournaments_names()
     tournament = "none"
     rounds = 0
     round_selected = 0
@@ -33,13 +34,13 @@ def edit():
 
         if action == "tournaments":
             tournament = request.form.get("tournaments")
-            rounds = get_rounds(tournament)
+            rounds = data.get_rounds(tournament)
         
         elif action == "rounds":
             tournament = request.form.get("tournament")
             rounds = request.form.get("rounds-a") or 0
             round_selected = request.form.get("rounds-select") or 0
-            teams = get_teams(tournament)
+            teams = data.get_teams(tournament)
             teams = [(team[0], team[2], team[3]) for team in teams]
 
         elif action == "team":
@@ -49,7 +50,7 @@ def edit():
             team_selected = request.form.get("team-select") 
             
 
-            teams = get_teams(tournament)
+            teams = data.get_teams(tournament)
             teams = [(team[0], team[2], team[3]) for team in teams]
 
         elif action == "points":
@@ -58,7 +59,7 @@ def edit():
             team_id = request.form.get("team_selected") 
             points = request.form.get("point-input")
 
-            save_points(tournament, int(round_selected), int(team_id), int(points))
+            data.save_points(tournament, int(round_selected), int(team_id), int(points))
             
             return redirect(url_for("edit.edit"))
 

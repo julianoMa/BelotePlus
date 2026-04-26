@@ -15,9 +15,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for
-from data.db import get_rounds, update_step, check_repartition, get_repartition, get_tournament_id, get_odd, get_teams_number, save_points
-from common.utils import repartition_ast
-from core.belote import generate_repartition, process_points
+
+
+import data
+import common
+import core
 
 rounds_bp = Blueprint("rounds", __name__)
 
@@ -29,13 +31,13 @@ def rounds():
         current_round = request.form.get("round")
 
         tournament_name = request.form.get("tournament")
-        total_rounds = get_rounds(tournament_name)
+        total_rounds = data.get_rounds(tournament_name)
 
-        process_points(tournament_name, current_round, points1, points2)
+        core.process_points(tournament_name, current_round, points1, points2)
 
         current_round = int(current_round) + 1
 
-        update_step(tournament_name, current_round)
+        data.update_step(tournament_name, current_round)
 
         if int(current_round) > int(total_rounds):
             return redirect(url_for("ranking.ranking", tournament=tournament_name))
@@ -46,30 +48,30 @@ def rounds():
     current_round = request.args.get("round")
 
     tournament_name = request.args.get("tournament")
-    total_rounds = get_rounds(tournament_name)
-    check = check_repartition(tournament_name)
-    odd = get_odd(tournament_name)
+    total_rounds = data.get_rounds(tournament_name)
+    check = data.check_repartition(tournament_name)
+    odd = data.get_odd(tournament_name)
     odd_match = None
     r = []
 
     if check is None:
-        generate_repartition(tournament_name)
+        core.generate_repartition(tournament_name)
 
-    repartition = get_repartition(get_tournament_id(tournament_name), current_round)
+    repartition = data.get_repartition(data.get_tournament_id(tournament_name), current_round)
 
-    r = repartition_ast(repartition)
+    r = common.repartition_ast(repartition)
    
     if int(current_round) > int(total_rounds):
         return redirect(url_for("ranking.ranking", tournament=tournament_name))
 
     # Removes the match that will not be played from the list, and put it in another variable
     if odd:
-        odd_team = str(get_teams_number(tournament_name))
+        odd_team = str(data.get_teams_number(tournament_name))
         match = next(m for m in r if odd_team in (m['team1'], m['team2']))
         team = match['team2'] if match['team1'] == odd_team else match['team1']
         r = [m for m in r if m != match]
 
-        save_points(tournament_name, current_round, odd_team, 0)
-        save_points(tournament_name, current_round, team, 1200)
+        data.save_points(tournament_name, current_round, odd_team, 0)
+        data.save_points(tournament_name, current_round, team, 1200)
         
     return render_template("concours.html", tournament=tournament_name, round=current_round, repartition=r, odd=team)

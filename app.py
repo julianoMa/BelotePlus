@@ -20,21 +20,23 @@ sys.dont_write_bytecode = True
 import logging
 logging.getLogger('waitress.queue').setLevel(logging.CRITICAL) # To prevent queue error message to flood the console
 
+import os
+
 from flask import Flask, request, redirect, url_for, make_response
 
-from common import *
-from core import *
-from interfaces import *
+import common
+import core
+import interfaces
 
-app = Flask(__name__, template_folder=ressource_path("templates"))
+app = Flask(__name__, template_folder=common.ressource_path("templates"))
 app.secret_key = os.urandom(24)
 app.debug = True
 
 # Register routes
-register_bps(app)
+interfaces.register_bps(app)
 
 # Load multi-languages support
-load_translations()
+core.load_translations()
 
 @app.context_processor
 def inject_language():
@@ -42,7 +44,7 @@ def inject_language():
     lang = request.cookies.get('language', 'fr')
     return {
         'current_lang': lang,
-        't': get_all_translations(lang)
+        't': core.get_all_translations(lang)
     }
 
 @app.route("/set-language/<lang>")
@@ -59,7 +61,7 @@ def set_language(lang):
 # Starting server
 if __name__ == "__main__":
     print("🛠️  Starting checks...")
-    if db_checks() == True:
+    if common.db_checks() == True:
         print("✅ Database ")
         
-    start_server(app)
+    common.start_server(app)
