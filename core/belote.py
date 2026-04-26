@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from data import *
+from common import *
 from random import shuffle
 import ast
 
@@ -51,19 +52,23 @@ def generate_repartition(tournament_name):
 def process_points(tournament, round, points1, points2):
     """Sauvegarde les points d'une partie"""
     repartition = get_repartition(get_tournament_id(tournament), round)
+    r = repartition_ast(repartition)
+    n = -1
     odd = get_odd(tournament)
 
     if odd:
-        n = -2
-    else:
-        n = -1
+        odd_team = str(get_teams_number(tournament))
+        match = next(m for m in r if odd_team in (m['team1'], m['team2']))
+        r = [m for m in r if m != match]
 
-    for _, _, _, teams in repartition:
+    for match in r:
         n += 1
-        if isinstance(teams, str):
-            teams = ast.literal_eval(teams)
-            save_points(tournament, round, teams[0], points1[n])
-            save_points(tournament, round, teams[1], points2[n])
+
+        team1 = match["team1"]
+        team2 = match["team2"]
+
+        save_points(tournament, round, team1, points1[n])
+        save_points(tournament, round, team2, points2[n])
 
     return
 
