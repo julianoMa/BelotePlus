@@ -270,3 +270,6 @@ setup.iss
 compile/
 setup/
 .vscode/
+
+tests/
+pytest.ini

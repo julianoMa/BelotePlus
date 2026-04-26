@@ -17,10 +17,10 @@
 from flask import Blueprint, render_template
 
 import services
-import config
+from config.settings import VERSION
 
 index_bp = Blueprint("index", __name__)
 
 @index_bp.route("/")
 def index():
-    return render_template("index.html", current=config.VERSION, latest=services.get_newest_tag(), compare=services.compare_versions())
+    return render_template("index.html", current=VERSION, latest=services.get_newest_tag(), compare=services.compare_versions())
