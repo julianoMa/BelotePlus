@@ -15,7 +15,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-import time
 
 import data
 
@@ -38,11 +37,9 @@ def db_checks():
     if not os.path.exists(data.DB_PATH):
         os.makedirs(os.path.dirname(data.DB_PATH), exist_ok=True)
         open(data.DB_PATH, "x")
-        time.sleep(0.8)
         print("⏳ Creating Database...")
 
     if len(data.get_tables()) == 0:
-        time.sleep(0.9)
         print("⏳ Initializing Database...")
         data.init_db()
 

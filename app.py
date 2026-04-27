@@ -22,6 +22,8 @@ logging.getLogger('waitress.queue').setLevel(logging.CRITICAL) # To prevent queu
 
 import os
 
+import pytest
+
 from flask import Flask, request, redirect, url_for, make_response
 
 import common
@@ -61,6 +63,9 @@ def set_language(lang):
 # Starting server
 if __name__ == "__main__":
     print("🛠️  Starting checks...")
+    
+    pytest.main(["-q"])
+
     if common.db_checks() == True:
         print("✅ Database ")
         
