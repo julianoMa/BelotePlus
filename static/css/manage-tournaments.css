@@ -65,7 +65,7 @@ label wired-card {
     background-color: var(--bg-color);
 }
 
-.card-label:has(input[type="radio"]:checked) wired-card { 
+.card-label:has(input[type="radio"]:checked) { 
     scale: 1.05;
     background-color: var(--accent) !important;
     color: white;

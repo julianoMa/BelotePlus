@@ -29,8 +29,11 @@
     "coffee_button": "Soutenez moi",
 
     "quick_access": "Accès rapide",
+    "quick_create_tournament_description": "Démarrez un nouveau tournoi en quelques clics.",
     "quick_last_ranking": "Dernier classement",
+    "quick_last_ranking_description": "Voir le classement du dernier tournoi terminé.",
     "quick_edit_points": "Modifier des points",
+    "quick_edit_points_description": "Ajustez les scores et gérez les corrections facilement",
 
     "stats_title": "Statistiques",
     "stats_players": "joueurs par tournois",
@@ -102,8 +105,11 @@
     "coffee_button": "Buy me a coffee",
 
     "quick_access": "Quick actions",
+    "quick_create_tournament_description": "Start a new tournament in a few clicks.",
     "quick_last_ranking": "Last ranking",
-    "quick_edit_points": "Edit some points",
+    "quick_last_ranking_description": "See the ranking of the last ended tournament.",
+    "quick_edit_points": "Edit points",
+    "quick_edit_points_description": "Adjust scores and manage corrections easily.",
 
     "stats_title": "Statistics",
     "stats_players": "players per tournament",

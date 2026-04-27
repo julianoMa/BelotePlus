@@ -58,7 +58,7 @@ a {
 
 :root {
     --bg-color: #ffffff;
-    --bg-color-2: #f5f1eb;
+    --bg-color-2: #f3efeb;
     --bg-color-3: #f0ebe4;
     --bg-icon: #FFFFFF33;
 
@@ -71,6 +71,7 @@ a {
 
     --accent: #8b3a3a;
     --accent-2: #974e4e;
+    --accent-3: #f5e8e7;
     --accent-shadow: 0 10px 15px -3px #0000001a;
 }
 
@@ -89,6 +90,7 @@ body.dark-mode {
 
     --accent: #c45c5c;
     --accent-2: #8a4545;
+    --accent-3: #f5e8e7;
     --accent-shadow: 0 10px 15px -3px #0000001a;
 }
 
@@ -104,6 +106,7 @@ body.dark-mode {
 
 nav {
     background-color: var(--bg-color);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.05);
 }
 
 ul {
@@ -133,5 +136,62 @@ nav img {
 }
 
 .accent {
-    color: var(--accent)
+    color: var(--accent);
+    text-shadow: 0 0 6px rgba(143, 45, 45, 0.25);
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 OTHER                 #
+#                                       #
+#=======================================#
+
+*/
+
+.button {
+    display: inline-flex;
+    align-items: center;
+
+    font-family: 'Poppins';
+
+    padding: 16px;
+    gap: 12px;
+
+    color: var(--text-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+
+    transition: all .2s;
+}
+
+.button-primary {
+    color: var(--bg-color);
+
+    background-color: var(--accent);
+    border-color: var(--accent);
+
+    box-shadow: var(--accent-shadow), 0 0 0 4px #8b3a3a26;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                ANIM                   #
+#                                       #
+#=======================================#
+
+*/
+
+.button:hover {
+    border-color: var(--accent)
+}
+
+.button-primary:hover {
+    box-shadow: none;
+    background-color: var(--accent-2);
 }
