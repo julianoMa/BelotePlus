@@ -15,6 +15,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import requests
+import time
+
+from flask import request, make_response
 
 from config.settings import VERSION
 
@@ -29,6 +32,18 @@ def get_newest_tag():
         return VERSION
 
     return tag
+
+def check_update_timestamp():
+    last_update = request.cookies.get("last_update")
+    current_time = time.time()
+
+    if last_update is None:
+        return None
+    elif current_time - float(last_update) > 21600:
+        print(current_time - float(last_update))
+        return False
+    else:
+        return True
 
 def compare_versions():
     latest = get_newest_tag()
