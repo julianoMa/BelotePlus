@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
+import platform
 from sqlalchemy import create_engine, inspect, func
 from sqlalchemy.orm import sessionmaker, scoped_session
 from contextlib import contextmanager
@@ -22,8 +23,12 @@ from .models import Base, Tournament, Team, Ranking, TeamPoints, Repartition
 
 
 def get_db_path():
-    """Retourne le chemin d'accès à la BDD dans le %AppData%"""
-    appdata_dir = os.path.join(os.environ['APPDATA'], 'BelotePlus')
+    """Retourne le chemin d'accès à la BDD dans les fichiers système"""
+    if platform.system() == "Windows":
+        appdata_dir = os.path.join(os.environ['APPDATA'], 'BelotePlus')
+    else:
+        appdata_dir = os.path.join(os.environ.get('XDG_DATA_HOME', os.path.expanduser('~/.local/share')), 'BelotePlus')
+
     os.makedirs(appdata_dir, exist_ok=True)
     
     return os.path.join(appdata_dir, 'belote.db')
