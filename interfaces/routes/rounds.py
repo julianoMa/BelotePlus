@@ -51,7 +51,7 @@ def rounds():
     total_rounds = data.get_rounds(tournament_name)
     check = data.check_repartition(tournament_name)
     odd = data.get_odd(tournament_name)
-    odd_match = None
+    team = None
     r = []
 
     if check is None:
