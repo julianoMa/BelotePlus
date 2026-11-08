@@ -7,34 +7,40 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="page">
+    <h1 class="page-title">{{ t.round }} {{ round }}</h1>
+    <p class="page-sub">{{ tournament }}</p>
+
     {% if odd %}
     <div class="odd-team">
         <p>{{ t.odd_team }}{{ odd }}</p>
     </div>
     {% endif %}
 
-    <form method="POST" action="/rounds">
+    <form method="POST" action="/rounds" class="rounds-form" data-enter-next>
         {% for team in repartition %}
-        <wired-card>
-        <div class="round-line">
-            <div class="team">
-                <p><span>{{ t.team }}</span> {{ team.team1 }}</p><wired-card><input type="number" name="points1[]" required></wired-card>
-            </div>
-            <div class="table">
-                <p><span>{{ t.table }}</span> {{ team.table }}</p>
-            </div>
-            <div class="team">
-                <wired-card><input type="number" name="points2[]" required></wired-card><p><span>{{ t.team }}</span> {{ team.team2 }}</p>
-            </div>
+        <div class="match">
+            <div class="match-table">{{ t.table }} {{ team.table }}</div>
+
+            <label class="side">
+                <span class="side-name">{{ t.team }} {{ team.team1 }}</span>
+                <input class="input points" type="number" inputmode="numeric" name="points1[]" required {% if loop.first %}autofocus{% endif %}>
+            </label>
+
+            <label class="side">
+                <span class="side-name">{{ t.team }} {{ team.team2 }}</span>
+                <input class="input points" type="number" inputmode="numeric" name="points2[]" required>
+            </label>
         </div>
-        <input type="text" name="round" style="display: none" value="{{ team.round }}">
-        </wired-card>
         {% endfor %}
 
-        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-        <button type="submit" class="btn"><wired-button elevation="1">{{ t.next_round }}</wired-button></button>
-        <a href="/players-screen" target="_blank">{{ t.players_screen }}</a>
+        <input type="hidden" name="round" value="{{ round }}">
+        <input type="hidden" name="tournament" value="{{ tournament }}">
+
+        <div class="form-actions">
+            <button type="submit" class="button button-primary">{{ t.next_round }}</button>
+            <a href="/players-screen" target="_blank" rel="noopener" class="button">{{ t.players_screen }}</a>
+        </div>
     </form>
 </div>
 {% endblock %}

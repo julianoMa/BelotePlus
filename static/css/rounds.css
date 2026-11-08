@@ -2,135 +2,92 @@
 
 #=======================================#
 #                                       #
-#                 FORM                  #
+#                 ROUNDS                #
 #                                       #
 #=======================================#
 
 */
 
-form {
+.rounds-form {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 12px;
+
+    max-width: 860px;
+    margin: 0 auto;
 }
 
-form > .btn {
-    align-self: center;
-    width: auto;
+.match {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr 1fr;
+    align-items: center;
+    gap: 16px 24px;
+
+    padding: 14px 20px;
+
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
 }
 
-form a {
-    color: var(--text-color);
-    padding: 8px;
-    background-color: var(--btn-bg);
-    transition: 0.2s;
-
-    width: 10rem;
+.match:focus-within {
+    border-color: var(--accent);
 }
 
-.container {
-    padding-top: 2rem;
+.match-table {
+    font-family: 'PoppinsBold', sans-serif;
+    color: var(--text-color-2);
+}
+
+.side {
     display: flex;
-    
-    flex-direction: column; 
-    justify-content: flex-start;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
 
-input {
-    outline: none;
-    border-width: 0px;
+.side-name {
+    font-family: 'PoppinsBold', sans-serif;
+}
 
+.points {
+    width: 6.5rem;
+
+    text-align: center;
     font-size: 1.25rem;
-    font-family: 'Poppins';
-
-    background-color: var(---btn-bg);
-    color: var(--text-color);
-
-    height: 1rem;
-    width: 6rem;
-}
-
-.container > wired-card {
-    margin-top: 5vh;
-    padding: 5rem;
-
-    background-color: var(---btn-bg);
-}
-
-.round-line {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 10px 20px;
-}
-
-wired-card {
-    background-color: var(--hover-color);
 }
 
 .odd-team {
-    background-color: var(--hover-color);
-    padding: 2rem;
+    max-width: 860px;
+    margin: 0 auto 16px;
+    padding: 14px 20px;
 
-    margin-bottom: 2rem;
+    font-size: .9375rem;
+    color: var(--accent);
+    background-color: var(--accent-3);
+    border: 1px solid var(--accent);
+    border-radius: var(--border-radius);
 }
 
-p span {
-    font-size: 1.25rem;
+.odd-team p {
+    margin: 0;
 }
 
-.btn {
-    border-width: 0;
+@media (max-width: 640px) {
+    .match {
+        grid-template-columns: 1fr 1fr;
+    }
 
-    margin-top: 5vh;
-    transition: 0.2s;
+    .match-table {
+        grid-column: 1 / -1;
+    }
 
-    background-color: var(--btn-bg);
-    color: var(--text-color);
-}
+    .side {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-.team, .table {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.table {
-    margin-left: 10rem;
-    margin-right: 10rem;
-}
-
-wired-input {
-    width: 5vw
-}
-
-input[type="number"] {
-    text-align: center;
-}
-
-/* 
-
-#=======================================#
-#                                       #
-#                 ANIM                  #
-#                                       #
-#=======================================#
-
-*/
-
-.btn:hover {
-    border-color: var(--accent);
-    background-color: var(--accent-dark);
-    scale: 1.05;
-    color: var(--text-color);
-    transform: rotate(2deg);
-}
-
-form > a:hover {
-    border-color: var(--accent);
-    background-color: var(--accent-dark);
-    scale: 1.05;
-    color: var(--text-color);
-    transform: rotate(-2deg);
+    .points {
+        width: 100%;
+    }
 }

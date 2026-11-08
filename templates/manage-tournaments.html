@@ -7,33 +7,28 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>{{ t.manage_tournaments_title }}</h1>
-    <wired-card elevation="2">
-    <div class="tournament-list-container">
-        <form method="POST" action="/manage-tournaments">
-            <div class="list">
-                
-                {% for name in tournaments %}
-                <label class="card-label">
-                    <wired-card>
-                    <input type="radio" name="tournament" value="{{ name }}" required>
-                    <div class="card">
-                        <div><h1>{{ name }}</h1></div>
-                        <div><p>Lorem ipsum fsdferz</p></div>
-                    </div>
-                    </wired-card>
-                </label>
-                {% endfor %}
+<div class="page narrow-wide">
+    <h1 class="page-title">{{ t.manage_tournaments_title }}</h1>
 
-            </div>
+    {% if tournaments %}
+    <ul class="t-list">
+        {% for name in tournaments %}
+        <li class="t-row">
+            <span class="t-name">{{ name }}</span>
 
-            <div class="form-buttons" align="center">
-                <button type="submit" name="action" value="open" class="btn"><wired-button elevation="2">{{ t.open }}</wired-button></button>
-                <button type="submit" name="action" value="delete" class="btn"><wired-button elevation="1">{{ t.delete }}</wired-button></button>
-            </div>
-        </form>
+            <form method="POST" action="/manage-tournaments" class="t-actions">
+                <input type="hidden" name="tournament" value="{{ name }}">
+                <button type="submit" name="action" value="open" class="button button-sm button-primary">{{ t.open }}</button>
+                <button type="submit" name="action" value="delete" class="button button-sm button-danger" data-confirm="{{ t.confirm_delete_tournament }}">{{ t.delete }}</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="panel t-empty">
+        <p>{{ t.no_tournaments }}</p>
+        <a href="/new-tournament" class="button button-primary">{{ t.nav_create_tournaments }}</a>
     </div>
-    </wired-card>
+    {% endif %}
 </div>
 {% endblock %}

@@ -7,72 +7,82 @@
 {% endblock %}
 
 {% block content %}
-<div class="container" align="center">
-    <wired-card elevation="2">
-    <form method="POST" action="/edit-points">
-        <label for="tournament-select">{{ t.choose_tournament }}</label>
+<div class="page narrow">
+    <h1 class="page-title">{{ t.nav_edit }}</h1>
 
-        <select name="tournaments" id="tournament-select">
-            <option value="">-- {{ t.please_choose }} --</option>
-            {% for tournament in tournaments %}
-                <option value="{{ tournament }}">{{ tournament }}</option>
-            {% endfor %}
-        </select>
+    <ol class="steps panel">
+        <li class="step">
+            <form method="POST" action="/edit-points" class="field" data-autosubmit>
+                <label class="form-label" for="tournament-select">{{ t.choose_tournament }}</label>
 
-        <button type="submit" name="action" value="tournaments"><wired-button>{{ t.choose_tournament_btn }}</wired-button></button>
-    </form>
+                <select class="select" name="tournaments" id="tournament-select" required>
+                    <option value="">-- {{ t.please_choose }} --</option>
+                    {% for name in tournaments %}
+                    <option value="{{ name }}" {% if name == tournament %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
 
-    {% if tournament != "none" and tournament != "" %}
-    <form method="POST" action="/edit-points">
-        <label for="round-select">{{ t.choose_round }}</label>
+                <button type="submit" name="action" value="tournaments" class="button button-primary">{{ t.choose_tournament_btn }}</button>
+            </form>
+        </li>
 
-        <select name="rounds-select" id="round-select">
-            <option value="">-- {{ t.please_choose }} --</option>
-            {% for i in range(rounds) %}
-                <option value="{{ i + 1 }}">{{ t.round }} {{ i + 1 }}</option>
-            {% endfor %}
-        </select>
-            
-        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-        <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
+        {% if tournament != "none" and tournament != "" %}
+        <li class="step">
+            <form method="POST" action="/edit-points" class="field" data-autosubmit>
+                <label class="form-label" for="round-select">{{ t.choose_round }}</label>
 
-        <button type="submit" name="action" value="rounds"><wired-button>{{ t.choose_round_btn }}</wired-button></button>
-    </form>
-    {% endif %}
+                <select class="select" name="rounds-select" id="round-select" required>
+                    <option value="">-- {{ t.please_choose }} --</option>
+                    {% for i in range(rounds) %}
+                    <option value="{{ i + 1 }}" {% if i + 1 == round_selected %}selected{% endif %}>{{ t.round }} {{ i + 1 }}</option>
+                    {% endfor %}
+                </select>
 
-    {% if round_selected != 0 %}
-    <form method="POST" action="/edit-points">
-        <label for="team-select">{{ t.choose_team }}</label>
+                <input type="hidden" name="tournament" value="{{ tournament }}">
+                <input type="hidden" name="rounds-a" value="{{ rounds }}">
 
-        <select name="team-select" id="team-select">
-            <option value="">-- {{ t.please_choose }} --</option>
-            {% for team in teams %}
-                <option value="{{ team[0] }}">{{ team[0] }} - {{ team[1] }} & {{ team[2] }}</option>
-            {% endfor %}
-        </select>
+                <button type="submit" name="action" value="rounds" class="button button-primary">{{ t.choose_round_btn }}</button>
+            </form>
+        </li>
+        {% endif %}
 
-        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-        <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
-        <input type="number" name="round_selected" id="round_selected" style="display: none" value="{{ round_selected }}">
+        {% if round_selected != 0 %}
+        <li class="step">
+            <form method="POST" action="/edit-points" class="field" data-autosubmit>
+                <label class="form-label" for="team-select">{{ t.choose_team }}</label>
 
-        <button type="submit" name="action" value="team"><wired-button>{{ t.choose_team_btn }}</wired-button></button>
-    </form>
-    {% endif %}
+                <select class="select" name="team-select" id="team-select" required>
+                    <option value="">-- {{ t.please_choose }} --</option>
+                    {% for team in teams %}
+                    <option value="{{ team[0] }}" {% if team[0]|string == team_selected %}selected{% endif %}>{{ team[0] }} - {{ team[1] }} &amp; {{ team[2] }}</option>
+                    {% endfor %}
+                </select>
 
-    {% if team_selected != "" %}
-    <form method="POST" action="/edit-points">
-        <label for="point-input">{{ t.input_points }}</label>
+                <input type="hidden" name="tournament" value="{{ tournament }}">
+                <input type="hidden" name="rounds-a" value="{{ rounds }}">
+                <input type="hidden" name="round_selected" value="{{ round_selected }}">
 
-        <input type="number" name="point-input" id="point-input">
+                <button type="submit" name="action" value="team" class="button button-primary">{{ t.choose_team_btn }}</button>
+            </form>
+        </li>
+        {% endif %}
 
-        <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-        <input type="number" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
-        <input type="number" name="round_selected" id="round_selected" style="display: none" value="{{ round_selected }}">
-        <input type="text" name="team_selected" id="team_selected" style="display: none" value="{{ team_selected }}">
+        {% if team_selected != "" %}
+        <li class="step">
+            <form method="POST" action="/edit-points" class="field">
+                <label class="form-label" for="point-input">{{ t.input_points }}</label>
 
-        <button type="submit" name="action" value="points"><wired-button>{{ t.input_points_btn }}</wired-button></button>
-    </form>
-    {% endif %}
-    </wired-card>
+                <input class="input" type="number" inputmode="numeric" name="point-input" id="point-input" required autofocus>
+
+                <input type="hidden" name="tournament" value="{{ tournament }}">
+                <input type="hidden" name="rounds-a" value="{{ rounds }}">
+                <input type="hidden" name="round_selected" value="{{ round_selected }}">
+                <input type="hidden" name="team_selected" value="{{ team_selected }}">
+
+                <button type="submit" name="action" value="points" class="button button-primary">{{ t.input_points_btn }}</button>
+            </form>
+        </li>
+        {% endif %}
+    </ol>
 </div>
 {% endblock %}

@@ -7,11 +7,13 @@
 {% endblock %}
 
 {% block content %}
-<wired-card class="card" elevation="2">
-<div class="container">
+<div class="leaderboard panel">
     {% for i in ranking %}
-        <wired-card class="rank-card"><div class="rank"><span>{{ t.position }}</span> n°{{ loop.index }} - <span>{{ t.team }}</span> n°{{ i[0] }} - {{ i[1] }} points</div></wired-card>
+    <div class="rank-card">
+        <span class="rank-position"><span>{{ t.position }}</span> n°{{ loop.index }}</span>
+        <span class="rank-team"><span>{{ t.team }}</span> n°{{ i[0] }}</span>
+        <span class="rank-points">{{ i[1] }} points</span>
+    </div>
     {% endfor %}
 </div>
-</wired-card>
 {% endblock %}

@@ -1,104 +1,78 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: column;
-
-    height: 100vh;
-}
-
-.container > wired-card {
-    margin-top: 5vh;
-
-    background-color: var(--hover-color);
-}
-
 /* 
 
 #=======================================#
 #                                       #
-#                 FORM                  #
+#                  LIST                 #
 #                                       #
 #=======================================#
 
 */
 
-.tournament-list-container {
-    display: flex;
-    justify-content: center;
+.t-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-    padding: 3rem;
-}
-
-.list {
-    padding: 5rem;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px;
-}
-
-.card-label {
-    display: block;
-    cursor: pointer;
-}
-
-.card {
-    border-radius: 12px;
-    padding: 15px;
-
-    cursor: pointer;
-    transition: .2s;
-    margin-bottom: 10px;
-}
-
-.card h1 {
-    font-size: 1.3rem;
-}
-
-input[type="radio"] {
-    display: none;
-}
-
-label wired-card {
     background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
 }
 
-.card-label:has(input[type="radio"]:checked) { 
-    scale: 1.05;
-    background-color: var(--accent) !important;
-    color: white;
+.t-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 12px 16px 12px 20px;
+
+    transition: background-color .15s;
 }
 
-.btn {
-    border-width: 0;
-
-    margin-top: 5vh;
-    transition: 0.2s;
-
-    background-color: var(--btn-bg);
-    color: var(--text-color);
+.t-row + .t-row {
+    border-top: 1px solid var(--border-color);
 }
 
-.btn:first-child {
-    margin-right: 3rem;
+.t-row:hover {
+    background-color: var(--bg-color-2);
 }
 
-/* 
+.t-name {
+    min-width: 0;
 
-#=======================================#
-#                                       #
-#                 ANIM                  #
-#                                       #
-#=======================================#
+    font-family: 'PoppinsBold', sans-serif;
+    overflow-wrap: anywhere;
+}
 
-*/
+.t-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
 
-.btn:hover {
-    border-color: var(--accent);
-    background-color: var(--accent-dark);
-    scale: 1.05;
-    color: var(--hover-color);
-    transform: rotate(2deg);
+.t-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    text-align: center;
+    color: var(--text-color-2);
+}
+
+.t-empty p {
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    .t-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .t-actions .button {
+        flex: 1;
+        justify-content: center;
+    }
 }

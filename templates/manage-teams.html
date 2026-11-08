@@ -7,40 +7,64 @@
 {% endblock %}
 
 {% block content %}
-    <div class="team-create-container">
-        <wired-card elevation="2">
-        <form method="POST" action="/manage-teams">
-            <p>{{ t.player }} 1</p>
-            <input class="input" type="text" name="player1" id="player1" required>
-            <p>{{ t.player }} 2</p>
-            <input class="input" type="text" name="player2" id="player2" required>
-            <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
-            <button type="submit" class="btn" name="action" value="create"><wired-button>{{ t.add_team }}</wired-button></button>
-        </form>
-        <form method="POST" action="/manage-teams">
-            <input type="text" name="tournament" style="display: none" value="{{ tournament }}">
-            <button type="submit" name="action" value="start" class="btn" id="startBtn"><wired-button elevation="2">{{ t.start_tournament }}</wired-button></button>
-        </form>
-        </wired-card>
-    </div>
-    
-    <div>
-        <wired-card>
-        <form method="POST" action="/manage-teams">
-            <div class="teams-list-container">
-                <br>
+<div class="page">
+    <h1 class="page-title">{{ tournament }}</h1>
+
+    <div class="teams-layout">
+        <section class="panel">
+            <h2 class="panel-title">{{ t.add_team_title }}</h2>
+
+            <form method="POST" action="/manage-teams" class="add-form" data-enter-next>
+                <div class="field">
+                    <label class="form-label" for="player1">{{ t.player }} 1</label>
+                    <input class="input" type="text" name="player1" id="player1" autocomplete="off" required autofocus>
+                </div>
+
+                <div class="field">
+                    <label class="form-label" for="player2">{{ t.player }} 2</label>
+                    <input class="input" type="text" name="player2" id="player2" autocomplete="off" required>
+                </div>
+
+                <input type="hidden" name="tournament" value="{{ tournament }}">
+
+                <button type="submit" class="button button-primary" name="action" value="create">{{ t.add_team }}</button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2 class="panel-title">{{ t.teams_title }} <span class="count">{{ teams|length }}</span></h2>
+
+            {% if teams %}
+            <ul class="teams-list">
                 {% for team in teams %}
-                    <label>
-                        <input type="radio" name="team" value="{{ team.id }}" required>
-                        {{ team.id }} - {{ team.player1 }} , {{ team.player2 }}
-                    </label>
-                    <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
+                <li class="team-row">
+                    <span class="team-id">{{ team.id }}</span>
+                    <span class="team-names">{{ team.player1 }} &amp; {{ team.player2 }}</span>
+
+                    <form method="POST" action="/manage-teams">
+                        <input type="hidden" name="tournament" value="{{ tournament }}">
+                        <input type="hidden" name="team" value="{{ team.id }}">
+                        <button type="submit" name="action" value="delete" class="icon-btn" title="{{ t.delete }}" aria-label="{{ t.delete }} {{ team.player1 }} &amp; {{ team.player2 }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                    </form>
+                </li>
                 {% endfor %}
-                </wired-card>
-            </div>
-            <button type="submit" name="action" value="delete" class="btn" id="startBtn"><wired-button>{{ t.delete }}</wired-button></button>
-        </form>
-        </wired-card>
+            </ul>
+            {% else %}
+            <p class="hint">{{ t.no_teams }}</p>
+            {% endif %}
+
+            <form method="POST" action="/manage-teams" class="start-form">
+                <input type="hidden" name="tournament" value="{{ tournament }}">
+
+                {% if teams|length < 2 %}
+                <p class="hint">{{ t.start_hint }}</p>
+                {% elif teams|length is odd %}
+                <p class="hint">{{ t.odd_notice }}</p>
+                {% endif %}
+
+                <button type="submit" name="action" value="start" class="button button-primary" {% if teams|length < 2 %}disabled{% endif %}>{{ t.start_tournament }}</button>
+            </form>
+        </section>
     </div>
 </div>
 {% endblock %}

@@ -2,110 +2,84 @@
 
 #=======================================#
 #                                       #
-#                 FORM                  #
+#                 TEAMS                 #
 #                                       #
 #=======================================#
 
 */
 
-.team-create-container,
-.team-create-container + div {
-    display: flex;
-    justify-content: center;
+.teams-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 24px;
+    align-items: start;
 }
 
-.team-create-container {
-    padding-top: 3rem;
-}
-
-div > wired-card {
-    width: 30vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-form {
-    width: 20rem;
-    height: 25rem;
-
+.add-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 16px;
 }
 
-.teams-list-container {
-    border-width: 0.1rem;
-    border-style: solid;
-    border-color: var(--bg-color);
-    border-radius: 0.5rem;
-    box-shadow: 0px 0px 50px 5px var(--bg-color-shadow);
+.add-form .button {
+    align-self: flex-start;
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.count {
+    margin-left: 4px;
 
-    height: 100%;
-    width: 20rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: .875rem;
+    color: var(--text-color-2);
+}
 
-    padding: 1rem;
+.teams-list {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
 
+    max-height: 52vh;
     overflow-y: auto;
+
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
 }
 
-.team-create-container {
-    border-width: 0.1rem;
-    border-style: solid;
-    border-color: var(--bg-color);
-    border-radius: 0.5rem;
-    box-shadow: 0px 0px 50px 5px var(--bg-color-shadow);
+.team-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
+    padding: 8px 8px 8px 14px;
+}
+
+.team-row + .team-row {
+    border-top: 1px solid var(--border-color);
+}
+
+.team-id {
+    min-width: 1.5rem;
+
+    font-size: .875rem;
+    color: var(--text-color-2);
+}
+
+.team-names {
+    flex: 1;
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+}
+
+.start-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
 }
 
-.team-create-container form {
-    height: auto;
-    margin-bottom: 1rem;
-}
-
-.container {
-    width: 50rem;
-}
-
-label {
-    margin-bottom: 1rem;
-}
-
-.btn {
-    border-width: 0;
-
-    margin-top: 5vh;
-    transition: 0.2s;
-
-    background-color: var(--btn-bg);
-    color: var(--text-color);
-}
-
-/* 
-
-#=======================================#
-#                                       #
-#                 ANIM                  #
-#                                       #
-#=======================================#
-
-*/
-
-.btn:hover {
-    border-color: var(--accent);
-    background-color: var(--accent-dark);
-    scale: 1.05;
-    color: var(--text-color);
-    transform: rotate(2deg);
+@media (max-width: 800px) {
+    .teams-layout {
+        grid-template-columns: 1fr;
+    }
 }

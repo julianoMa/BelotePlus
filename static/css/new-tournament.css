@@ -1,46 +1,9 @@
-.container {
+.new-form {
     display: flex;
-    justify-content: center;
-    align-items: center;
-
     flex-direction: column;
-
-    height: 100vh;
+    gap: 20px;
 }
 
-h1 {
-    margin-bottom: 2rem;
-}
-
-/* 
-
-#=======================================#
-#                                       #
-#                 FORM                  #
-#                                       #
-#=======================================#
-
-*/
-
-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 16px;
-
-    padding: 32px;
-
-    background-color: var(--bg-color);
-    border-radius: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-}
-
-.input {
-    background-color: var(--bg-color-2);
-    border: 1px solid var(--border-color);
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-
-    min-width: 400px;
-    padding: 12px;
+.new-form .form-actions {
+    margin-top: 4px;
 }

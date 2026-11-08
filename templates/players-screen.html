@@ -60,25 +60,25 @@
     </div>
 
     <div class="options">
-        <form method="POST" action="/players-screen">
+        <form method="POST" action="/players-screen" class="form-stack">
             <label for="tournament-select">{{ t.choose_tournament }}</label>
 
-            <select name="tournaments" id="tournament-select">
+            <select class="select" name="tournaments" id="tournament-select">
                 <option value="">-- {{ t.please_choose }} --</option>
                 {% for tournament in tournaments %}
                     <option value="{{ tournament }}">{{ tournament }}</option>
                 {% endfor %}
             </select>
 
-            <button type="submit" name="action" value="tournaments">{{ t.choose_tournament_btn }}</button>
+            <button type="submit" name="action" value="tournaments" class="button button-primary">{{ t.choose_tournament_btn }}</button>
         </form>
 
         {% if tournament != "none" and tournament != "" %}
 
-        <form method="POST" action="/players-screen">
+        <form method="POST" action="/players-screen" class="form-stack">
             <label for="round-select">{{ t.choose_round }}</label>
 
-            <select name="rounds-select" id="round-select">
+            <select class="select" name="rounds-select" id="round-select">
                 <option value="">-- {{ t.please_choose }} --</option>
                 {% for i in range(rounds) %}
                     <option value="{{ i + 1 }}"><span>{{ t.round }}</span> n°{{ i + 1 }}</option>
@@ -88,7 +88,7 @@
             <input type="text" name="tournament" id="tournament" style="display: none" value="{{ tournament }}">
             <input type="text" name="rounds-a" id="rounds-a" style="display: none" value="{{ rounds }}">
 
-            <button type="submit" name="action" value="rounds">{{ t.choose_round_btn }}</button>
+            <button type="submit" name="action" value="rounds" class="button button-primary">{{ t.choose_round_btn }}</button>
         </form>
         {% endif %}
     </div>
