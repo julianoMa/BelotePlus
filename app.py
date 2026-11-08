@@ -55,7 +55,7 @@ def set_language(lang):
     if lang not in ['fr', 'en']:
         lang = 'fr'
     
-    resp = make_response(redirect(request.referrer or url_for('index')))
+    resp = make_response(redirect(request.referrer or url_for('index.index')))
     resp.set_cookie('language', lang, max_age=31536000)
     return resp
 
