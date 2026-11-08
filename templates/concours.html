@@ -17,7 +17,8 @@
     </div>
     {% endif %}
 
-    <form method="POST" action="/rounds" class="rounds-form" data-enter-next>
+    <form method="POST" action="/rounds" class="rounds-form" autocomplete="off" data-enter-next
+          data-persist="scores:{{ tournament }}:{{ round }}:{% for m in repartition %}{{ m.team1 }}-{{ m.team2 }}{% if not loop.last %},{% endif %}{% endfor %}">
         {% for team in repartition %}
         <div class="match">
             <div class="match-table">{{ t.table }} {{ team.table }}</div>

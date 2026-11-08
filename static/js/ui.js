@@ -37,3 +37,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// <form data-persist="unique-key">: keeps what was typed so a refresh (or a closed tab)
+// doesn't lose it. The draft is dropped once the form is submitted.
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('form[data-persist]').forEach((form) => {
+        const key = `draft:${form.dataset.persist}`;
+        const fields = [...form.querySelectorAll('input:not([type="hidden"])')];
+
+        const read = () => {
+            try {
+                return JSON.parse(window.localStorage.getItem(key)) || [];
+            } catch (_) {
+                return [];
+            }
+        };
+
+        const saved = read();
+        fields.forEach((field, i) => {
+            if (saved[i] != null) field.value = saved[i];
+        });
+
+        // Continue where the user left off.
+        const firstEmpty = fields.find((field) => field.value === '');
+        if (firstEmpty) firstEmpty.focus();
+
+        form.addEventListener('input', () => {
+            try {
+                window.localStorage.setItem(key, JSON.stringify(fields.map((field) => field.value)));
+            } catch (_) { /* storage unavailable: the form still works, it just won't be kept */ }
+        });
+
+        form.addEventListener('submit', () => {
+            try {
+                window.localStorage.removeItem(key);
+            } catch (_) {}
+        });
+    });
+});
