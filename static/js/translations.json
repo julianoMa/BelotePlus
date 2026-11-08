@@ -79,6 +79,9 @@
     "no_teams": "Aucune équipe inscrite pour le moment.",
     "start_hint": "Ajoutez au moins 2 équipes pour commencer.",
     "odd_notice": "Nombre d'équipes impair : une équipe « IMPAIR » sera ajoutée automatiquement.",
+    "error_tournament_exists": "Un tournoi porte déjà ce nom. Choisissez-en un autre.",
+    "error_tournament_name_empty": "Le nom du concours ne peut pas être vide.",
+    "error_invalid_number": "Le nombre de parties et de tables doit être un entier supérieur ou égal à 1.",
     "table": "Table", 
     "points": "Points totaux",
     "position": "Position"
@@ -163,6 +166,9 @@
     "no_teams": "No teams registered yet.",
     "start_hint": "Add at least 2 teams to start.",
     "odd_notice": "Odd number of teams: an \"IMPAIR\" team will be added automatically.",
+    "error_tournament_exists": "A tournament with this name already exists. Please choose another one.",
+    "error_tournament_name_empty": "The tournament name cannot be empty.",
+    "error_invalid_number": "The number of rounds and tables must be a whole number of at least 1.",
     "table": "Table", 
     "points": "Total points",
     "position": "Position"

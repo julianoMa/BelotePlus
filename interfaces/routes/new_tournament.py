@@ -15,19 +15,51 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, request, redirect, url_for
+from sqlalchemy.exc import IntegrityError
 
 import data
 
 register_bp = Blueprint("register", __name__)
 
+def _parse_positive_int(value):
+    """Returns the value as an int >= 1, or None if it is not valid."""
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        return None
+
+    return number if number >= 1 else None
+
 @register_bp.route("/new-tournament", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        tournament_name = request.form['tournament_name']
-        rounds_number = request.form['rounds_number']
-        table_number = request.form['table_number']
+        # Keep what the user typed so the form can be shown again with an error
+        values = {
+            "name": request.form.get("tournament_name", "").strip(),
+            "rounds": request.form.get("rounds_number", "").strip(),
+            "tables": request.form.get("table_number", "").strip(),
+        }
 
-        data.create_tournament(tournament_name, rounds_number, table_number)
-        return redirect(url_for("tournaments.tournaments"))
+        rounds_number = _parse_positive_int(values["rounds"])
+        table_number = _parse_positive_int(values["tables"])
 
-    return render_template("new-tournament.html")
+        error = None
+
+        if not values["name"]:
+            error = "error_tournament_name_empty"
+        elif rounds_number is None or table_number is None:
+            error = "error_invalid_number"
+        elif values["name"].casefold() in (name.casefold() for name in data.get_tournaments_names()):
+            error = "error_tournament_exists"
+
+        if error is None:
+            try:
+                data.create_tournament(values["name"], rounds_number, table_number)
+                return redirect(url_for("tournaments.tournaments"))
+            except IntegrityError:
+                # Same name created between the check above and the insert
+                error = "error_tournament_exists"
+
+        return render_template("new-tournament.html", error=error, values=values)
+
+    return render_template("new-tournament.html", error=None, values={})

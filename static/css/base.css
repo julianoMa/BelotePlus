@@ -399,3 +399,23 @@ nav li a svg {
         grid-template-columns: 1fr;
     }
 }
+
+.form-error {
+    margin: 0;
+    padding: 10px 14px;
+
+    font-size: .875rem;
+    color: #b3261e;
+    background-color: #b3261e14;
+    border: 1px solid #b3261e;
+    border-radius: 8px;
+}
+
+body.dark-mode .form-error {
+    color: #f2a39d;
+    border-color: #f2a39d;
+}
+
+.input[aria-invalid="true"] {
+    border-color: #b3261e;
+}
