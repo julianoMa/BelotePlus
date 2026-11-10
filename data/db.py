@@ -257,10 +257,12 @@ def check_repartition(tournament_name):
         return (repartition.round,) if repartition else None
 
 
-def clear_repartition():
-    """Supprime toutes les répartitions"""
+def clear_repartition(tournament_name):
+    """Supprime les répartitions d'un tournoi (les autres tournois ne sont pas touchés)"""
     with get_session() as session:
-        session.query(Repartition).delete()
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            session.query(Repartition).filter_by(tournament_id=tournament.id).delete()
 
 
 def get_repartition(tournament, round_num):

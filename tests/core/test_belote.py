@@ -65,18 +65,19 @@ def test_tables_needed():
 
 def _fake_tournament(monkeypatch, teams_number, rounds_number):
     stored = []
+    cleared = []
     teams = [(i, "T", f"a{i}", f"b{i}") for i in range(1, teams_number + 1)]
 
     monkeypatch.setattr(data, "get_teams", lambda name: list(teams))
     monkeypatch.setattr(data, "get_rounds", lambda name: rounds_number)
-    monkeypatch.setattr(data, "clear_repartition", lambda: None)
+    monkeypatch.setattr(data, "clear_repartition", lambda name: cleared.append(name))
     monkeypatch.setattr(data, "update_repartition", lambda name, r, t, pair: stored.append((r, t, pair)))
 
-    return stored
+    return stored, cleared
 
 
 def test_generate_repartition_never_repeats_a_match(monkeypatch):
-    stored = _fake_tournament(monkeypatch, teams_number=10, rounds_number=9)
+    stored, _ = _fake_tournament(monkeypatch, teams_number=10, rounds_number=9)
 
     core.generate_repartition("T")
 
@@ -86,8 +87,16 @@ def test_generate_repartition_never_repeats_a_match(monkeypatch):
 
 
 def test_generate_repartition_caps_rounds(monkeypatch):
-    stored = _fake_tournament(monkeypatch, teams_number=6, rounds_number=20)
+    stored, _ = _fake_tournament(monkeypatch, teams_number=6, rounds_number=20)
 
     core.generate_repartition("T")
 
     assert {r for r, _, _ in stored} == {1, 2, 3, 4, 5}
+
+
+def test_generate_repartition_only_clears_its_own_tournament(monkeypatch):
+    _, cleared = _fake_tournament(monkeypatch, teams_number=4, rounds_number=3)
+
+    core.generate_repartition("T")
+
+    assert cleared == ["T"]

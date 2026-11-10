@@ -70,7 +70,7 @@ def generate_repartition(tournament_name):
 
     rounds = build_schedule(team_names, rounds_number)
 
-    data.clear_repartition()
+    data.clear_repartition(tournament_name)
     for i, pairs in enumerate(rounds):
         for t, pair in enumerate(pairs):
             data.update_repartition(tournament_name, i+1, t+1, str(pair))
