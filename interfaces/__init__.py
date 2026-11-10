@@ -13,3 +13,4 @@ def register_bps(app):
     app.register_blueprint(players_bp)
     app.register_blueprint(ranking_bp)
     app.register_blueprint(rounds_bp)
+    app.register_blueprint(settings_bp)

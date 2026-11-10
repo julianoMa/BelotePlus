@@ -342,3 +342,18 @@ def clear_previous_ranking(tournament_name):
         tournament = session.query(Tournament).filter_by(name=tournament_name).first()
         if tournament:
             session.query(Ranking).filter_by(tournament_id=tournament.id).delete()
+
+
+# ======================
+# RESET
+# ======================
+
+def reset_database():
+    """Supprime toutes les données (tournois, équipes, points, classements, répartitions).
+
+    Tout se fait dans une seule transaction : en cas d'erreur, rien n'est supprimé.
+    """
+    with get_session() as session:
+        # Children first, so foreign keys are never violated
+        for table in reversed(Base.metadata.sorted_tables):
+            session.execute(table.delete())

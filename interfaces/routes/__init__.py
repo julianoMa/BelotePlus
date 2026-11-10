@@ -8,3 +8,4 @@ from .new_tournament import *
 from .player_screen import *
 from .ranking import *
 from .rounds import *
+from .settings import *

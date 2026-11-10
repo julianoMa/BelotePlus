@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% set title_key = "page_title_settings" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page narrow-wide">
+    <h1 class="page-title">{{ t.nav_settings }}</h1>
+
+    {% if reset_done %}
+    <p class="form-success" role="status">{{ t.reset_done }}</p>
+    {% endif %}
+
+    <section class="panel setting-group">
+        <div class="setting">
+            <div class="setting-text">
+                <p class="setting-name" id="language-label">{{ t.settings_language }}</p>
+                <p class="setting-desc">{{ t.settings_language_desc }}</p>
+            </div>
+
+            <div class="segmented" role="group" aria-labelledby="language-label">
+                <a href="/set-language/fr" lang="fr" class="segmented-item" {% if current_lang == 'fr' %}aria-current="true"{% endif %}>Français</a>
+                <a href="/set-language/en" lang="en" class="segmented-item" {% if current_lang == 'en' %}aria-current="true"{% endif %}>English</a>
+            </div>
+        </div>
+
+        <div class="setting">
+            <div class="setting-text">
+                <p class="setting-name" id="theme-label">{{ t.settings_theme }}</p>
+                <p class="setting-desc">{{ t.settings_theme_desc }}</p>
+            </div>
+
+            <div class="segmented" role="group" aria-labelledby="theme-label">
+                <button type="button" class="segmented-item" data-theme-value="light" aria-pressed="false">{{ t.theme_light }}</button>
+                <button type="button" class="segmented-item" data-theme-value="dark" aria-pressed="false">{{ t.theme_dark }}</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel setting-group danger-zone">
+        <h2 class="panel-title">{{ t.settings_data }}</h2>
+
+        <div class="setting">
+            <div class="setting-text">
+                <p class="setting-name">{{ t.settings_reset }}</p>
+                <p class="setting-desc">{{ t.settings_reset_desc }}</p>
+            </div>
+
+            <button type="button" class="button button-danger" data-open-dialog="reset-step-1" {% if not tournaments_count %}disabled{% endif %}>{{ t.settings_reset_btn }}</button>
+        </div>
+
+        {% if not tournaments_count %}
+        <p class="hint">{{ t.settings_reset_empty }}</p>
+        {% endif %}
+    </section>
+</div>
+
+<dialog id="reset-step-1" class="modal" aria-labelledby="reset-1-title">
+    <div class="modal-body">
+        <h2 id="reset-1-title">{{ t.reset_modal1_title }}</h2>
+        <p>{{ t.reset_modal1_text }}</p>
+
+        <div class="modal-actions">
+            <button type="button" class="button" data-close-dialog autofocus>{{ t.cancel }}</button>
+            <button type="button" class="button button-danger" data-next-dialog="reset-step-2">{{ t.continue }}</button>
+        </div>
+    </div>
+</dialog>
+
+<dialog id="reset-step-2" class="modal modal-danger" aria-labelledby="reset-2-title">
+    <form method="POST" action="/settings/reset" class="modal-body">
+        <input type="hidden" name="confirm" value="reset">
+
+        <h2 id="reset-2-title">{{ t.reset_modal2_title }}</h2>
+        <p>
+            {% if tournaments_count == 1 %}
+                {{ t.reset_modal2_one }}
+            {% else %}
+                {{ t.reset_modal2_many|replace('{n}', tournaments_count|string) }}
+            {% endif %}
+        </p>
+
+        <div class="modal-actions">
+            <button type="button" class="button" data-close-dialog autofocus>{{ t.cancel }}</button>
+            <button type="submit" class="button button-danger-solid">{{ t.reset_confirm_btn }}</button>
+        </div>
+    </form>
+</dialog>
+{% endblock %}

@@ -75,3 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Dialogs: data-open-dialog="id" opens one, data-close-dialog closes the current one,
+// data-next-dialog="id" closes the current one and opens another (multi-step confirmations).
+// Clicking the backdrop (the <dialog> element itself) closes it too.
+document.addEventListener('click', (e) => {
+    const open = e.target.closest('[data-open-dialog]');
+    if (open) document.getElementById(open.dataset.openDialog).showModal();
+
+    const close = e.target.closest('[data-close-dialog]');
+    if (close) close.closest('dialog').close();
+
+    const next = e.target.closest('[data-next-dialog]');
+    if (next) {
+        next.closest('dialog').close();
+        document.getElementById(next.dataset.nextDialog).showModal();
+    }
+
+    if (e.target.tagName === 'DIALOG') e.target.close();
+});

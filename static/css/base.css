@@ -86,7 +86,7 @@ a {
     --accent-shadow: 0 10px 15px -3px #0000001a;
 }
 
-body.dark-mode {
+:root.dark-mode {
     --bg-color: #242120;
     --bg-color-2: #1a1816;
     --bg-color-3: #3d3935;
@@ -411,11 +411,93 @@ nav li a svg {
     border-radius: 8px;
 }
 
-body.dark-mode .form-error {
+:root.dark-mode .form-error {
     color: #f2a39d;
     border-color: #f2a39d;
 }
 
 .input[aria-invalid="true"] {
     border-color: #b3261e;
+}
+
+.form-success {
+    margin: 0 0 24px;
+    padding: 10px 14px;
+
+    font-size: .875rem;
+    color: #2e7d32;
+    background-color: #2e7d3214;
+    border: 1px solid #2e7d32;
+    border-radius: 8px;
+}
+
+:root.dark-mode .form-success {
+    color: #8fd19a;
+    border-color: #8fd19a;
+}
+
+.button-danger-solid {
+    color: #fff;
+    background-color: #b3261e;
+    border-color: #b3261e;
+}
+
+.button-danger-solid:hover {
+    background-color: #8c1d18;
+    border-color: #8c1d18;
+}
+
+/* 
+
+#=======================================#
+#                                       #
+#                 MODAL                 #
+#                                       #
+#=======================================#
+
+*/
+
+.modal {
+    width: min(440px, calc(100vw - 32px));
+    padding: 0;
+
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--accent-shadow);
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-danger {
+    border-color: #b3261e;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 24px;
+}
+
+.modal-body h2 {
+    font-family: 'PoppinsBold', sans-serif;
+    font-size: 1.2rem;
+}
+
+.modal-body p {
+    line-height: 1.5;
+    color: var(--text-color-2);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    margin-top: 8px;
 }

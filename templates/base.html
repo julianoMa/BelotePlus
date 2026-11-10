@@ -6,6 +6,7 @@
 
     <title>{% if title_key %}{{ t[title_key] }}{% else %}{% block title %}BelotePlus{% endblock %}{% endif %}</title>
 
+    <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-mode'); } catch (e) {}</script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     {% block extra_css %}{% endblock %}
 
