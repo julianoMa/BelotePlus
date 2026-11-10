@@ -137,6 +137,21 @@ def get_rounds(tournament_name):
         tournament = session.query(Tournament).filter_by(name=tournament_name).first()
         return tournament.rounds_number if tournament else 0
 
+def set_rounds(tournament_name, rounds_number):
+    """Change le nombre de rounds d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        if tournament:
+            tournament.rounds_number = rounds_number
+
+
+def get_tables_number_available(tournament_name):
+    """Récupère le nombre de tables disponibles d'un tournoi"""
+    with get_session() as session:
+        tournament = session.query(Tournament).filter_by(name=tournament_name).first()
+        return tournament.tables_number if tournament else 0
+
+
 def get_odd(tournament_name):
     """Récupère si le tournois a un nombre pair ou impair d'équipes"""
     with get_session() as session:

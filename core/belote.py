@@ -19,33 +19,61 @@ from random import shuffle
 import data
 import common
 
+def max_rounds(teams_number):
+    """Nombre maximum de parties où aucune paire d'équipes ne se rencontre deux fois.
+
+    Avec n équipes (une équipe « IMPAIR » est ajoutée si n est impair), chaque équipe
+    ne peut affronter que les n-1 autres : au-delà, des rencontres se répètent.
+    """
+    total = teams_number + teams_number % 2
+    return max(total - 1, 0)
+
+def tables_needed(teams_number):
+    """Nombre de tables nécessaires pour jouer une partie (l'équipe « IMPAIR » ne joue pas)"""
+    return teams_number // 2
+
+def build_schedule(team_ids, rounds_number):
+    """Calcule les rencontres de chaque partie avec la méthode du cercle (round-robin).
+
+    Une équipe reste fixe, les autres tournent autour : sur n-1 parties, chaque équipe
+    rencontre exactement une fois toutes les autres. Renvoie une liste de parties,
+    chaque partie étant une liste de tuples (equipe1, equipe2).
+    """
+    teams = list(team_ids)
+    n = len(teams)
+
+    if n % 2:
+        raise ValueError("Le nombre d'équipes doit être pair")
+    if rounds_number > max_rounds(n):
+        raise ValueError(f"Impossible de jouer {rounds_number} parties avec {n} équipes sans rencontre en double (maximum : {max_rounds(n)})")
+
+    fixed = teams[0]
+    rotating = teams[1:]
+    rounds = []
+
+    for _ in range(rounds_number):
+        line = [fixed] + rotating
+        rounds.append([(line[i], line[n - 1 - i]) for i in range(n // 2)])
+        rotating = [rotating[-1]] + rotating[:-1]
+
+    return rounds
+
 def generate_repartition(tournament_name):
     """Crée la répartition des équipes pour un tournois entier"""
     teams = data.get_teams(tournament_name)
     shuffle(teams)
-    
-    rounds_number = data.get_rounds(tournament_name)
 
     team_names = [f"{t[0]}" for t in teams]
-    n = len(team_names)
 
-    table_needed = n // 2
-    rounds = []
+    # Securité : on ne peut pas dépasser n-1 parties sans rencontre en double
+    rounds_number = min(data.get_rounds(tournament_name), max_rounds(len(team_names)))
 
-    for r in range(rounds_number):
-        pairs = []
-        for i in range(table_needed):
-            t1 = team_names[i]
-            t2 = team_names[-i - 1]
-            pairs.append((t1, t2))
-        rounds.append(pairs)
-
-        team_names = [team_names[-1]] + team_names[:-1]
+    rounds = build_schedule(team_names, rounds_number)
 
     data.clear_repartition()
-    for i in range(len(rounds)): 
-        for t in range(table_needed):
-            data.update_repartition(tournament_name, i+1, t+1, str(rounds[i][t]))
+    for i, pairs in enumerate(rounds):
+        for t, pair in enumerate(pairs):
+            data.update_repartition(tournament_name, i+1, t+1, str(pair))
 
     return True
 

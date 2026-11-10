@@ -16,9 +16,15 @@
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 
+import core
 import data
 
 teams_bp = Blueprint("teams", __name__)
+
+def _message(key, **values):
+    """Renvoie un message traduit dans la langue de l'utilisateur"""
+    lang = request.cookies.get("language", "fr")
+    return core.get_translation(key, lang).format(**values)
 
 @teams_bp.route("/manage-teams", methods=["GET", "POST"])
 def teams():
@@ -55,6 +61,22 @@ def teams():
             teams_number = data.get_teams_number(tournament_name)
             odd = False
 
+            # Not enough tables to play a whole round at once
+            tables_available = data.get_tables_number_available(tournament_name)
+            tables_required = core.tables_needed(teams_number)
+
+            if tables_available < tables_required:
+                flash(_message("error_not_enough_tables", tables=tables_available, needed=tables_required), "error")
+                return redirect(url_for("teams.teams", tournament=tournament_name))
+
+            # More rounds than possible without two teams meeting twice: cap them
+            rounds_number = data.get_rounds(tournament_name)
+            rounds_max = core.max_rounds(teams_number)
+
+            if rounds_number > rounds_max:
+                data.set_rounds(tournament_name, rounds_max)
+                flash(_message("notice_rounds_capped", rounds=rounds_number, max=rounds_max), "info")
+
             # Add a team in case of odd amount
             if teams_number % 2:
                 data.add_team(tournament_name, "IMPAIR", "IMPAIR")
@@ -71,4 +93,12 @@ def teams():
     for id, tournament, player1, player2 in teams_list:
         teams.append({"id": id, "player1": player1, "player2": player2})
 
-    return render_template("manage-teams.html", tournament=tournament, teams=teams)
+    return render_template(
+        "manage-teams.html",
+        tournament=tournament,
+        teams=teams,
+        tables_number=data.get_tables_number_available(tournament),
+        tables_needed=core.tables_needed(len(teams)),
+        rounds_number=data.get_rounds(tournament),
+        rounds_max=core.max_rounds(len(teams)),
+    )

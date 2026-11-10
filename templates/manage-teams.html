@@ -62,7 +62,15 @@
                 <p class="hint">{{ t.odd_notice }}</p>
                 {% endif %}
 
-                <button type="submit" name="action" value="start" class="button button-primary" {% if teams|length < 2 %}disabled{% endif %}>{{ t.start_tournament }}</button>
+                {% if tables_needed > tables_number %}
+                <p class="hint">{{ t.tables_limit_hint.format(tables=tables_number, needed=tables_needed) }}</p>
+                {% endif %}
+
+                {% if teams|length >= 2 and rounds_number > rounds_max %}
+                <p class="hint">{{ t.rounds_limit_hint.format(rounds=rounds_number, max=rounds_max) }}</p>
+                {% endif %}
+
+                <button type="submit" name="action" value="start" class="button button-primary" {% if teams|length < 2 or tables_needed > tables_number %}disabled{% endif %}>{{ t.start_tournament }}</button>
             </form>
         </section>
     </div>
