@@ -16,7 +16,7 @@
 
 import time
 
-from flask import Blueprint, render_template, request, make_response
+from flask import Blueprint, render_template, make_response
 
 import services
 from config.settings import VERSION
@@ -25,21 +25,18 @@ index_bp = Blueprint("index", __name__)
 
 @index_bp.route("/")
 def index():
-    check_update = services.check_update_timestamp()
-    tag = VERSION
+    latest, refreshed = services.get_latest_version()
 
-    if check_update is None: # Not yet created
-        tag = services.get_newest_tag()
-    if check_update is False: # Created more than 6hr ago
-        tag = services.get_newest_tag()
+    response = make_response(render_template(
+        "index.html",
+        current=VERSION,
+        latest=latest or VERSION,
+        compare=services.compare_versions(latest),
+    ))
 
-    response = make_response(render_template("index.html", current=VERSION, latest=tag, compare=services.compare_versions()))
-
-    if check_update is None: # Not yet created
+    if refreshed:
         response.set_cookie("last_update", str(time.time()), max_age=31536000, path="/")
-        response.set_cookie("last_version", tag, max_age=31536000, path="/")
-    elif check_update is False: # Created more than 6hr ago
-        response.set_cookie("last_update", str(time.time()), max_age=31536000, path="/")
-        response.set_cookie("last_version", tag, max_age=31536000, path="/")
+        if latest:
+            response.set_cookie("last_version", latest, max_age=31536000, path="/")
 
     return response

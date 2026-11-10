@@ -14,41 +14,59 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import requests
+import re
 import time
 
-from flask import request, make_response
+import requests
+from flask import request
 
 from config.settings import VERSION
 
+RELEASES_URL = "https://api.github.com/repos/julianoMa/BelotePlus/releases/latest"
+CHECK_INTERVAL = 6 * 60 * 60  # seconds between two checks on GitHub
+REQUEST_TIMEOUT = 3  # seconds, so the home page never hangs when offline
+
 def get_newest_tag():
-    url = f"https://api.github.com/repos/julianoMa/BelotePlus/releases/latest"
+    """Renvoie le tag de la dernière release GitHub, ou None si on n'a pas pu le récupérer"""
+    try:
+        response = requests.get(RELEASES_URL, timeout=REQUEST_TIMEOUT)
+        tag = response.json()["tag_name"]
+    except (requests.exceptions.RequestException, ValueError, KeyError, TypeError):
+        # No connection, timeout, rate limit, invalid answer...
+        return None
+
+    return tag if isinstance(tag, str) else None
+
+def get_latest_version():
+    """Renvoie (dernière version connue, vérification faite maintenant ?).
+
+    La version est lue dans le cookie tant que la dernière vérification date de moins de
+    6h ; sinon GitHub est interrogé. En cas d'échec, l'ancienne version connue est gardée
+    (ou None) et la prochaine tentative n'aura lieu que dans 6h.
+    """
+    cached = request.cookies.get("last_version")
 
     try:
-        tag = requests.get(url).json()["tag_name"]
-    except KeyError:
-        return VERSION
-    except requests.exceptions.ConnectionError:
-        return VERSION
+        age = time.time() - float(request.cookies.get("last_update"))
+    except (TypeError, ValueError):
+        age = None
 
-    return tag
+    if cached and age is not None and 0 <= age <= CHECK_INTERVAL:
+        return cached, False
 
-def check_update_timestamp():
-    last_update = request.cookies.get("last_update")
-    current_time = time.time()
+    return get_newest_tag() or cached, True
 
-    if last_update is None:
-        return None
-    elif current_time - float(last_update) > 21600:
-        print(current_time - float(last_update))
-        return False
-    else:
-        return True
+def parse_version(tag):
+    """Convertit un tag comme 'v0.3.1' en (0, 3, 1), ou None si ce n'est pas une version"""
+    numbers = re.findall(r"\d+", tag or "")
+    return tuple(int(n) for n in numbers) if numbers else None
 
-def compare_versions():
-    latest = get_newest_tag()
+def compare_versions(latest, current=VERSION):
+    """True si la version actuelle est à jour (ou plus récente que la dernière release)"""
+    latest_parsed = parse_version(latest)
+    current_parsed = parse_version(current)
 
-    if latest != VERSION:
-        return False
-    else:
-        return True
+    if latest_parsed is None or current_parsed is None:
+        return True  # Unknown latest version: do not bother the user
+
+    return current_parsed >= latest_parsed
